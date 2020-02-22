@@ -25,7 +25,7 @@ const mapStateToProps = ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  userLogOut: () => dispatch(actions.userLogOut()),
+  // userLogOut: () => dispatch(actions.userLogOut()),
 });
 
 const Wrapper = props => (
