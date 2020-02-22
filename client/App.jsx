@@ -10,6 +10,7 @@
  */
 
 import React, { Component } from 'react';
+import Wrapper from './containers/Wrapper'
 
 // IMPORT CONTAINERS AND COMPONENTS HERE
 
@@ -21,8 +22,7 @@ class App extends Component {
   render() {
     return(
       <div>
-        <h1>Snapdesk</h1>
-        under construction... 
+        <Wrapper />
       </div>
     )
   }
