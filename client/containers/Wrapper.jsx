@@ -14,6 +14,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 import LeftNav from '../components/LeftNav';
 import RightNav from '../components/RightNav';
+import FeedContainer from './FeedContainer'
 
 
 const mapStateToProps = ({
@@ -35,7 +36,7 @@ const Wrapper = props => (
         <LeftNav />
       </div>
       <div className="col">
-        {/* render feed container component here */}
+        <FeedContainer />
       </div>
       <div className="col">
         <RightNav />
