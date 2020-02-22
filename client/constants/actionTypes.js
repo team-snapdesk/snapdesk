@@ -2,8 +2,8 @@
  * ************************************
  *
  * @module  actionTypes.js
- * @author
- * @date
+ * @author team snapdesk
+ * @date 02/21/2020
  * @description Action Type Constants
  *
  * ************************************
@@ -15,5 +15,5 @@ export const ACCEPT_TICKET = 'ACCEPT_TICKET';
 export const DELETE_TICKET = 'DELETE_TICKET';
 export const RESOLVE_TICKET = 'RESOLVE_TICKET';
 export const CANCEL_ACCEPT = 'CANCEL_ACCEPT';
-export const LOGIN = 'LOGIN';
-export const LOGOUT = 'LOGOUT';
+export const USER_LOGIN = 'LOGIN';
+export const USER_LOGOUT = 'LOGOUT';
