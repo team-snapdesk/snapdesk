@@ -13,17 +13,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/actions';
+import TicketBox from '../components/TicketBox';
 
 const mapStateToProps = ({ tickets }) => ({
-  tickets: tickets.text,
-  messageInput,
-  messageRating,
-  messageTopic
+  messageInput: tickets.messageInput,
+  messageRating: tickets.messageRating,
+  messageTopic: tickets.messageTopic
 });
 
-const mapDispatchToProps = dispatch => ({
-  syncMarkets: () => dispatch(actions.syncMarkets()),
-});
+
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 //function to render individual textBox with props
 const buildFeed = () => {
