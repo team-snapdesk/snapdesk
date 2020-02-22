@@ -1,10 +1,10 @@
 /**
  * ************************************
  *
- * @module  marketsReducer
+ * @module  ticketsReducer
  * @author
  * @date
- * @description reducer for market data
+ * @description reducer for ticket data
  *
  * ************************************
  */
@@ -12,13 +12,29 @@
 import * as types from '../constants/actionTypes';
 
 const initialState = {
-  placeholder: 0
+  totalSnaps: 0,
+  messageInput: '',
+  messageRating: 0,
+  messageTopic: '',
 };
 
-const mainReducer = (state=initialState, action) => {
+const ticketsReducer = (state=initialState, action) => {
 
   switch(action.type) {
-    // add cases here
+    case types.POST_TICKET:
+      return { ...state };
+
+    case types.ACCEPT_TICKET:
+      return { ...state };
+
+    case types.CANCEL_ACCEPT:
+      return { ...state };
+
+    case types.DELETE_TICKET:
+      return { ...state };
+
+    case types.RESOLVE_TICKET:
+      return { ...state };
 
     default: 
       return state

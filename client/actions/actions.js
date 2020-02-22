@@ -19,10 +19,18 @@ export const postTicket = event => (dispatch, getState) => {
     messageRating: getState().tickets.messageRating,
     messageTopic: getState().tickets.messageTopic
   }
-  if (ticket) {
+  if (ticket.messageInput && ticket.messageRating && ticket.messageTopic) {
     dispatch({
       type: types.POST_TICKET,
       payload: ticket,
     });
   }
 };
+
+// export const acceptTicket = event => (dispatch, getState) => {
+//   event.preventDefault();
+//   dispatch({
+//     type: types.ACCEPT_TICKET,
+//     payload: ticket,
+//   })
+// }
