@@ -1,8 +1,10 @@
 const express = require('express');
 const loginRouter = express.Router();
+const path = require('path');
 
 // import controllers
 const githubController = require('../controllers/githubController');
+const jwtsController = require('../controllers/jwtsController');
 
 // import secrets
 const githubSecret = require('../_secret/githubSecret');
@@ -22,8 +24,9 @@ loginRouter.get('/callback',
   githubController.token,
   githubController.userData,
   githubController.createUser,
+  jwtsController.loginUser,
   (req, res) => {
-    res.status(200).json(res.locals.userData)
+    res.sendFile(path.resolve(__dirname, '../../index.html'));
   }
 )
 

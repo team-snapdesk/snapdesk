@@ -1,7 +1,6 @@
 const axios = require('axios').default;
 
 // import secret
-const jwtSecret = require('../_secret/jwtSecret');
 const githubSecret = require('../_secret/githubSecret');
 
 // import access to database
@@ -45,7 +44,7 @@ githubController.userData = (req, res, next) => {
     res.locals.userData = { bio, id, name, avatar_url, email };
     return next();
   })
-  .catch(err => next(err));
+  .catch(err => ({ log: `Error in middleware loginController.userData axios to github: ${err}` }));
 }
 
 githubController.createUser = (req, res, next) => {
