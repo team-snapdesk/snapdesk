@@ -41,4 +41,4 @@ const ticketsReducer = (state=initialState, action) => {
   }
 }
 
-export default mainReducer;
+export default ticketsReducer;
