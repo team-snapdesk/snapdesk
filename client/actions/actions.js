@@ -2,8 +2,8 @@
  * ************************************
  *
  * @module  actions.js
- * @author
- * @date
+ * @author team snapdesk
+ * @date 02/22/2020
  * @description Action Creators
  *
  * ************************************
