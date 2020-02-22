@@ -2,7 +2,7 @@ const express = require('express');
 const loginRouter = express.Router();
 
 // import controllers
-const loginController = require('../controllers/loginController');
+const githubController = require('../controllers/githubController');
 
 // import secrets
 const githubSecret = require('../_secret/githubSecret');
@@ -19,9 +19,9 @@ loginRouter.get('/', (req, res) => {
 
 // redirect from github including the temporary code from user
 loginRouter.get('/callback',
-  loginController.token,
-  loginController.userData,
-  loginController.createUser,
+  githubController.token,
+  githubController.userData,
+  githubController.createUser,
   (req, res) => {
     res.status(200).json(res.locals.userData)
   }
