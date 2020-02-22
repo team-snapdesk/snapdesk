@@ -37,8 +37,8 @@ app.use('/login', loginRouter);
 if (process.env.NODE_ENV = 'production') {
   app.get('/',
     jwtsController.isLoggedIn,
-    (req, res) => 
-    res.status(200).sendFile(path.resolve(__dirname, '../index.html'))
+    (req, res) =>
+      res.status(200).sendFile(path.resolve(__dirname, '../index.html'))
   );
 }
 

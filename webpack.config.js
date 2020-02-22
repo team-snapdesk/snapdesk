@@ -20,7 +20,8 @@ module.exports = {
       '/api/': 'http://localhost:3000',
       '/login/': 'http://localhost:3000'
     },
-    hot: true
+    hot: true,
+    index: 'login.html'
   },
   resolve: {
     extensions: ['.js', '.jsx'],

@@ -63,7 +63,6 @@ try {
   // query data
   db.query(checkUser)
     .then(user => {
-      console.log(user);
       // if user doesn't exist in database, add to db
       if(user.rowCount === 0) {
         db.query(addUser)

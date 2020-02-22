@@ -21,9 +21,19 @@ jwtsController.loginUser = (req, res, next) => {
     const token = jwt.sign(payload, jwtSecret.secret);
     res.cookie("jwt_token", token, { httpOnly: true });
     return next()
-  } catch(err) {
-    return next ({ log: `Error in middleware jwtsController.loginUser: ${err}` });
+  } catch (err) {
+    return next({ log: `Error in middleware jwtsController.loginUser: ${err}` });
   }
-}
+};
+jwtsController.isLoggedIn = (req, res, next) => {
+  try {
+    jwt.verify(req.cookies.jwt_token, jwtSecret.secret, (err, data) => {
+      if (err) return res.redirect('/login');
+      return next();
+    })
+  } catch (err) {
+    return next({ log: `Error in middleware jwtsController.isLoggedIn: ${err}` });
+  }
+};
 
 module.exports = jwtsController;
