@@ -3,7 +3,7 @@ CREATE TABLE "users" (
 	"name" varchar(255) NOT NULL UNIQUE,
 	"email" varchar(255) NOT NULL UNIQUE,
 	"bio" TEXT NOT NULL,
-	"github_pic" bytea(255) NOT NULL UNIQUE,
+	"github_pic" bytea NOT NULL,
 	CONSTRAINT "users_pk" PRIMARY KEY ("_id")
 ) WITH (
   OIDS=FALSE
