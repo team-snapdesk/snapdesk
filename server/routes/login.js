@@ -9,8 +9,12 @@ const jwtsController = require('../controllers/jwtsController');
 // import secrets
 const githubSecret = require('../_secret/githubSecret');
 
-// first step of github oauth, direct user to github login page
 loginRouter.get('/', (req, res) => {
+  res.sendfile(path.resolve(__dirname, '../../login.html'))
+});
+
+// first step of github oauth, direct user to github login page
+loginRouter.get('/oauth', (req, res) => {
   const url = 'https://github.com/login/oauth/authorize?' + 
     'scope=user&' +
     'redirect_uri=http://localhost:3000/login/callback&' +
@@ -26,7 +30,7 @@ loginRouter.get('/callback',
   githubController.createUser,
   jwtsController.loginUser,
   (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../../index.html'));
+    res.redirect('/');
   }
 )
 

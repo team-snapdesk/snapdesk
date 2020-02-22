@@ -4,13 +4,20 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const app = express();
 
+// server port
+const PORT = 3000;
+
+
 /**
  * REQUIRE IN ROUTERS HERE
  */
 const apiRouter = require('./routes/api');
 const loginRouter = require('./routes/login');
 
-const PORT = 3000;
+/**
+ * REQUIRE IN MIDDLEWARE HERE
+ */
+const jwtsController = require('./controllers/jwtsController');
 
 /** 
  * Handle parsing of the body and cookies
@@ -28,8 +35,10 @@ app.use('/login', loginRouter);
 
 // response with main app
 if (process.env.NODE_ENV = 'production') {
-  app.get('/', (req, res) => 
-    res.status(200).sendFile(path.resolve(__dirname, '../login.html'))
+  app.get('/',
+    jwtsController.isLoggedIn,
+    (req, res) => 
+    res.status(200).sendFile(path.resolve(__dirname, '../index.html'))
   );
 }
 
