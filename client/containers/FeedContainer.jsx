@@ -28,6 +28,9 @@ const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 //function to render individual textBox with props
 const buildFeed = () => {
   /*
+  if (tickets array is empty) {
+    return nothing or <div>No tickets to respond to!</div>
+  }
   if (userId matches message User id) {
 
     <MenteeTicketBox
