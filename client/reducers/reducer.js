@@ -36,7 +36,7 @@ const ticketsReducer = (state=initialState, action) => {
     case types.RESOLVE_TICKET:
       return { ...state };
 
-    default: 
+    default:
       return state
   }
 }
