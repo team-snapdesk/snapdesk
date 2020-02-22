@@ -15,6 +15,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/actions';
 import MenteeTicketBox from '../components/MenteeTicketBox';
 import BystanderTicketBox from '../components/BystanderTicketBox';
+import TicketCreator from '../components/TicketCreator';
 
 const mapStateToProps = ({ tickets }) => ({
   // messageInput: tickets.messageInput,
@@ -51,8 +52,11 @@ const FeedContainer = props => {
     <h1>FeedContainer works</h1>
     <div className="ticketDisplay">
       {/* map buildFeed to tickets array */}
+      <BystanderTicketBox />
+      <MenteeTicketBox />
     </div>
     <div className="ticketCreator">
+      <TicketCreator />
       {/* render ticketCreator. Pass down...
       newMessage,
       updatedMessage (onChange),
