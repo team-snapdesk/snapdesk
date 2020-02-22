@@ -1,7 +1,7 @@
 /**
  * ************************************
  *
- * @module  marketsReducer
+ * @module  ticketsReducer
  * @author
  * @date
  * @description reducer for market data
@@ -15,14 +15,14 @@ const initialState = {
   placeholder: 0
 };
 
-const mainReducer = (state=initialState, action) => {
+const ticketsReducer = (state = initialState, action) => {
 
-  switch(action.type) {
+  switch (action.type) {
     // add cases here
 
-    default: 
+    default:
       return state
   }
 }
 
-export default mainReducer;
+export default ticketsReducer;
