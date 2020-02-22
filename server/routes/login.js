@@ -27,7 +27,4 @@ loginRouter.get('/callback',
   }
 )
 
-
-// ADD API ROUTES HERE
-
 module.exports = loginRouter; 
