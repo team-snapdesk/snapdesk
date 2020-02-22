@@ -12,6 +12,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
+import LeftNav from '../components/LeftNav';
+import RightNav from '../components/RightNav';
+
 
 const mapStateToProps = ({
   tickets: totalSnaps, leaderBoard, activeTickets
@@ -26,7 +29,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const Wrapper = props => {
-  
+  <LeftNav />
+  <RightNav />
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wrapper);
