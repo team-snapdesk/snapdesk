@@ -20,9 +20,10 @@ loginRouter.get('/', (req, res) => {
 // redirect from github including the temporary code from user
 loginRouter.get('/callback',
   loginController.token,
-  // loginController.createUser,
+  loginController.userData,
+  loginController.createUser,
   (req, res) => {
-    res.status(200).json(res.locals.token)
+    res.status(200).json(res.locals.userData)
   }
 )
 

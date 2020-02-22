@@ -1,9 +1,10 @@
 CREATE TABLE "users" (
 	"_id" serial NOT NULL,
 	"name" varchar(255) NOT NULL UNIQUE,
-	"email" varchar(255) NOT NULL UNIQUE,
+	"email" varchar(255),
 	"bio" TEXT NOT NULL,
-	"github_pic" bytea NOT NULL,
+	"github_id" integer NOT NULL UNIQUE,
+	"avatar_url" varchar(255) NOT NULL UNIQUE,
 	CONSTRAINT "users_pk" PRIMARY KEY ("_id")
 ) WITH (
   OIDS=FALSE
