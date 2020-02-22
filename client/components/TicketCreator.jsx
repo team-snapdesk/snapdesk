@@ -12,21 +12,22 @@
 import React from 'react';
 
 const TicketCreator = ({
- newMessage,
- updatedMessage,
- expectedStars,
- postTicket,
+//  newMessage,
+//  updatedMessage,
+//  expectedStars,
+//  postTicket,
 }) => (
  <div>
-   <form onSubmit={postTicket}>
+   <h1>Congrats! The TicketCreator works.</h1>
+   {/* <form onSubmit={postTicket}>
      <input
        id="new-message"
        value={newMessage}
        onChange={e => updateMessage(e.target.value)}
      />
      <button className="primary" type="submit">Add Market</button>
-   </form>
+   </form> */}
  </div>
 );
 
-export default MarketCreator;
+export default TicketCreator;
