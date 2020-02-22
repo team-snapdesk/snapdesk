@@ -29,7 +29,7 @@ app.use('/login', loginRouter);
 // response with main app
 if (process.env.NODE_ENV = 'production') {
   app.get('/', (req, res) => 
-    res.status(200).sendFile(path.resolve(__dirname, '../login.html'))
+    res.status(200).sendFile(path.resolve(__dirname, '../index.html'))
   );
 }
 
