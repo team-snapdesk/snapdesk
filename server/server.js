@@ -7,7 +7,7 @@ const app = express();
 /**
  * REQUIRE IN ROUTERS HERE
  */
-// const apiRouter = require('./routes/api');
+const apiRouter = require('./routes/api');
 
 const PORT = 3000;
 
@@ -21,7 +21,7 @@ app.use(cookieParser());
 /**
  *  Route handlers
  */
-// app.use('/api', apiRouter);
+app.use('/api', apiRouter);
 
 
 // response with main app
