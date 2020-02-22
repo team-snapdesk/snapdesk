@@ -12,6 +12,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
+import LeftNav from '../components/LeftNav';
+import RightNav from '../components/RightNav';
+
 
 const mapStateToProps = ({
   tickets: totalSnaps, leaderBoard, activeTickets
@@ -22,11 +25,23 @@ const mapStateToProps = ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  userLogOut: () => dispatch(actions.userLogOut()),
+  // userLogOut: () => dispatch(actions.userLogOut()),
 });
 
-const Wrapper = props => {
-  
-}
+const Wrapper = props => (
+  <div className="wrapper">
+    <div className="row align-items-start">
+      <div className="col">
+        <LeftNav />
+      </div>
+      <div className="col">
+        {/* render feed container component here */}
+      </div>
+      <div className="col">
+        <RightNav />
+      </div>
+    </div>
+  </div>
+)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wrapper);
