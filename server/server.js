@@ -32,12 +32,12 @@ app.use(cookieParser());
 app.use('/api', apiRouter);
 app.use('/login', loginRouter);
 
+// handle static files
+app.use('/build', express.static(path.join(__dirname, '../build')))
 
 // response with main app
 if (process.env.NODE_ENV = 'production') {
-  app.get('/',
-    jwtsController.isLoggedIn,
-    (req, res) => 
+  app.get('/', (req, res) =>
     res.status(200).sendFile(path.resolve(__dirname, '../index.html'))
   );
 }

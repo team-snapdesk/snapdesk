@@ -12,7 +12,8 @@
 import { createStore } from 'redux';
 import reducers from './reducers/index';
 import { composeWithDevTools } from 'redux-devtools-extension';
- 
+import { verifyLogin } from './actions/actions';
+
 
 
 // we are adding composeWithDevTools here to get easy access to the Redux dev tools
@@ -21,5 +22,7 @@ const store = createStore(
   reducers,
   composeWithDevTools()
 );
+
+store.dispatch(verifyLogin());
 
 export default store;

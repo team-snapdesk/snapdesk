@@ -15,5 +15,5 @@ export const ACCEPT_TICKET = 'ACCEPT_TICKET';
 export const DELETE_TICKET = 'DELETE_TICKET';
 export const RESOLVE_TICKET = 'RESOLVE_TICKET';
 export const CANCEL_ACCEPT = 'CANCEL_ACCEPT';
-export const USER_LOGIN = 'LOGIN';
-export const USER_LOGOUT = 'LOGOUT';
+export const USER_LOGIN = 'USER_LOGIN';
+export const USER_LOGOUT = 'USER_LOGOUT';

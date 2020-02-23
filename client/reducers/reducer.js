@@ -10,17 +10,22 @@
  */
 
 import * as types from '../constants/actionTypes';
+import axios from 'axios';
 
 const initialState = {
   totalSnaps: 0,
   messageInput: '',
   messageRating: 0,
   messageTopic: '',
+  isLoggedIn: false,
 };
 
 const ticketsReducer = (state=initialState, action) => {
 
   switch(action.type) {
+    case types.USER_LOGIN:
+      return { ...state };
+
     case types.POST_TICKET:
       return { ...state };
 
