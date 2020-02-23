@@ -18,31 +18,43 @@ import FeedContainer from './FeedContainer'
 
 
 const mapStateToProps = ({
-  tickets: totalSnaps, leaderBoard, activeTickets
+  mainReducer: { totalSnaps, leaderBoard, activeTickets, isLoggedIn }
 }) => ({
   totalSnaps,
   leaderBoard,
-  activeTickets
+  activeTickets,
+  isLoggedIn
 })
 
 const mapDispatchToProps = dispatch => ({
   // userLogOut: () => dispatch(actions.userLogOut()),
 });
 
-const Wrapper = props => (
-  <div className="wrapper">
-    <div className="row align-items-start">
-      <div className="col">
-        <LeftNav />
-      </div>
-      <div className="col">
-        <FeedContainer />
-      </div>
-      <div className="col">
-        <RightNav />
+const Wrapper = props => {
+
+  if (!props.isLoggedIn) {
+    return (
+      <form method="GET" action="/login/oauth">
+        <button type="submit">GitHub Login</button>
+      </form>
+    )
+  }
+
+  return (
+    <div className="wrapper">
+      <div className="row align-items-start">
+        <div className="col">
+          <LeftNav />
+        </div>
+        <div className="col">
+          <FeedContainer />
+        </div>
+        <div className="col">
+          <RightNav />
+        </div>
       </div>
     </div>
-  </div>
-)
+  )
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wrapper);

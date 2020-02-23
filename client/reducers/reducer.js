@@ -16,11 +16,20 @@ const initialState = {
   messageInput: '',
   messageRating: 0,
   messageTopic: '',
+  isLoggedIn: false,
 };
 
 const ticketsReducer = (state=initialState, action) => {
 
   switch(action.type) {
+    case types.USER_LOGIN:
+      console.log(action);
+      const isLoggedIn = action.payload.isLoggedIn;
+      return { 
+        ...state,
+        isLoggedIn
+      };
+
     case types.POST_TICKET:
       return { ...state };
 

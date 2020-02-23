@@ -1,15 +1,14 @@
 const axios = require('axios').default;
 
 // import secret
-const jwtSecret = require('../_secret/jwtSecret');
 const githubSecret = require('../_secret/githubSecret');
 
 // import access to database
 const db = require('../models/userModel');
 
-const loginController = {};
+const githubController = {};
 
-loginController.token = (req, res, next) => {
+githubController.token = (req, res, next) => {
   axios.post('https://github.com/login/oauth/access_token', {
     client_id: githubSecret.clientId,
     client_secret: githubSecret.clientSecret,
@@ -29,7 +28,7 @@ loginController.token = (req, res, next) => {
     }))
 };
 
-loginController.userData = (req, res, next) => {
+githubController.userData = (req, res, next) => {
   axios.get('https://api.github.com/user', {
     headers: {
       Accept: 'application/vnd.github.v3+json',
@@ -45,10 +44,10 @@ loginController.userData = (req, res, next) => {
     res.locals.userData = { bio, id, name, avatar_url, email };
     return next();
   })
-  .catch(err => next(err));
+  .catch(err => ({ log: `Error in middleware loginController.userData axios to github: ${err}` }));
 }
 
-loginController.createUser = (req, res, next) => {
+githubController.createUser = (req, res, next) => {
 try {
   const checkUser = `SELECT * FROM users WHERE github_id = ${res.locals.userData.id};`;
   const addUser = `
@@ -64,7 +63,6 @@ try {
   // query data
   db.query(checkUser)
     .then(user => {
-      console.log(user);
       // if user doesn't exist in database, add to db
       if(user.rowCount === 0) {
         db.query(addUser)
@@ -81,4 +79,4 @@ try {
 }
 }
 
-module.exports = loginController;
+module.exports = githubController;

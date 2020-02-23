@@ -11,6 +11,23 @@
 
 // import actionType constants
 import * as types from '../constants/actionTypes';
+import axios from 'axios';
+
+/**
+ * 
+ *  NEEDS WORK
+ * 
+ */
+export const verifyLogin = () => (dispatch) => {
+  return axios.get('/login/verify')
+    .then(({ data }) => {
+      return dispatch({
+        type: types.USER_LOGIN,
+        payload: data
+      });
+    })
+    .catch(err => console.log(err))
+}
 
 export const postTicket = event => (dispatch, getState) => {
   event.preventDefault();
