@@ -32,6 +32,13 @@ loginRouter.get('/callback',
   (req, res) => {
     res.redirect('/');
   }
-)
+);
+
+loginRouter.get('/verify',
+  jwtsController.isLoggedIn,
+  (req, res) => {
+    res.status(200).json(res.locals);
+  }
+);
 
 module.exports = loginRouter; 

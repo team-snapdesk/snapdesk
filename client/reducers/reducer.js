@@ -10,17 +10,20 @@
  */
 
 import * as types from '../constants/actionTypes';
+import axios from 'axios';
 
 const initialState = {
-  placeholder: 0
+  placeholder: 0,
+  isLoggedIn: false
 };
 
-const mainReducer = (state=initialState, action) => {
+const mainReducer = (state = initialState, action) => {
 
-  switch(action.type) {
+  switch (action.type) {
     // add cases here
+    case types.USER_LOGIN:
 
-    default: 
+    default:
       return state
   }
 }

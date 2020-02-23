@@ -28,7 +28,8 @@ jwtsController.loginUser = (req, res, next) => {
 jwtsController.isLoggedIn = (req, res, next) => {
   try {
     jwt.verify(req.cookies.jwt_token, jwtSecret.secret, (err, data) => {
-      if (err) return res.redirect('/login');
+      if (err) return res.locals.isLoggedIn = false;
+      res.locals.isLoggedIn = true;
       return next();
     })
   } catch (err) {
