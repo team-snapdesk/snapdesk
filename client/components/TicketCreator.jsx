@@ -19,7 +19,8 @@ const TicketCreator = props => (
      props.postTicket()}}>
     <Form.Group controlId="exampleForm.ControlTextarea1" onChange={props.updateMessage}>
       <Form.Label>What do you need help with?</Form.Label>
-      <Form.Control as="textarea" rows="3" />
+      <Form.Control as="textarea" rows="3"
+      value={props.messageInput} />
     </Form.Group>
     <Form.Group onChange={props.updateRating}>
       <Form.Check inline label='1' type='radio' id='snap-1' name="snap-form" value={1} />

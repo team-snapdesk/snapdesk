@@ -23,13 +23,15 @@ const ticketsReducer = (state=initialState, action) => {
 
   switch(action.type) {
     case types.POST_TICKET:
+      //build new ticket object to be inserted into activeTickets array (use props from FeedContainer)
       const newTicket = {
         messageInput: state.messageInput,
         messageRating: state.messageRating,
       };
+      //make a shallow copy of existing array and push new ticket to it
       const updatedTickets = state.activeTickets.slice();
       updatedTickets.push(newTicket);
-
+      //return updated state and reset message input/ratings to blank
       return { ...state,
        activeTickets: updatedTickets,
        ticketsCount: state.ticketsCount + 1,

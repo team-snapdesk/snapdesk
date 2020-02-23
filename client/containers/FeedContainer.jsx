@@ -35,22 +35,25 @@ class FeedContainer extends Component {
   }
   
   render() { 
+    // if there are no active tickets, display a message in the background saying nothing here
+    // do not render it when a ticket is added
+    
+    //build activeTickets list
+    //later add conditionals to check which box should be rendered based on the posterId vs logged in user
+    const activeTickets = [];
 
-    if (!this.props.activeTickets) {
-      return (<div>No tickets to respond to!</div>)
+    for (let i = 0; i < this.props.activeTickets.length; i++) {
+      activeTickets.push(<MenteeTicketBox 
+        messageInput={this.props.activeTickets[i].messageInput}
+        messageRating={this.props.activeTickets[i].messageRating} />)
     }
-  
-    this.props.activeTickets.forEach(ticket => {
-      <MenteeTicketBox { ...this.props } />
-    })
     
     return(
       <div>
-      <h1>FeedContainer works</h1>
       <div className="ticketDisplay">
         {/* map buildFeed to tickets array */}
-        <BystanderTicketBox />
-        <MenteeTicketBox />
+        {/* <BystanderTicketBox /> */}
+        {activeTickets}
       </div>
       <div className="ticketCreator">
         <TicketCreator {...this.props} />

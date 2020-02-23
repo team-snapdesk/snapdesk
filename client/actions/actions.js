@@ -15,7 +15,6 @@ import * as types from '../constants/actionTypes';
 export const postTicket = () => {
   return {
       type: types.POST_TICKET,
-      payload: 'test'
     }
 };
 

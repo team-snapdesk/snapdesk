@@ -23,7 +23,8 @@ const mapStateToProps = state => {
     leaderBoard: state.tickets.leaderBoard,
     activeTickets: state.tickets.activeTickets,
     messageInput: state.tickets.messageInput,
-    messageRating: state.tickets.messageRating
+    messageRating: state.tickets.messageRating,
+    ticketsCount: state.tickets.ticketsCount
   }
 }
 
@@ -41,7 +42,7 @@ const Wrapper = props => (
         <FeedContainer {...props}/>
       </div>
       <div className="col">
-        <RightNav />
+        <RightNav ticketsCount={props.ticketsCount}/>
       </div>
     </div>
   </div>
