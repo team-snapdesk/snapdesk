@@ -14,7 +14,7 @@ import * as types from '../constants/actionTypes';
 const initialState = {
   totalSnaps: 0,
   messageInput: '',
-  messageRating: 1,
+  messageRating: '',
   activeTickets: [],
   ticketsCount: 0,
 };
@@ -24,15 +24,17 @@ const ticketsReducer = (state=initialState, action) => {
   switch(action.type) {
     case types.POST_TICKET:
       const newTicket = {
-        messageInput: action.payload.ticket.messageInput,
-        messageRating: action.payload.ticket.messageRating,
+        messageInput: state.messageInput,
+        messageRating: state.messageRating,
       };
       const updatedTickets = state.activeTickets.slice();
-      updatedTickets.concat(newTicket);
+      updatedTickets.push(newTicket);
 
       return { ...state,
        activeTickets: updatedTickets,
-       ticketsCount: ticketsCount + 1,
+       ticketsCount: state.ticketsCount + 1,
+       messageInput: '',
+       messageRating: ''
       };
 
     case types.ACCEPT_TICKET:

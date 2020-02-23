@@ -17,15 +17,15 @@ import RightNav from '../components/RightNav';
 import FeedContainer from './FeedContainer'
 
 
-const mapStateToProps = ({
-  tickets: totalSnaps, leaderBoard, activeTickets, messageInput, messageRating
-}) => ({
-  totalSnaps,
-  leaderBoard,
-  activeTickets,
-  messageInput,
-  messageRating
-})
+const mapStateToProps = state => {
+  return {
+    totalSnaps: state.tickets.totalSnaps,
+    leaderBoard: state.tickets.leaderBoard,
+    activeTickets: state.tickets.activeTickets,
+    messageInput: state.tickets.messageInput,
+    messageRating: state.tickets.messageRating
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
   // userLogOut: () => dispatch(actions.userLogOut()),
