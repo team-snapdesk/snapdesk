@@ -9,10 +9,6 @@ const jwtsController = require('../controllers/jwtsController');
 // import secrets
 const githubSecret = require('../_secret/githubSecret');
 
-loginRouter.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../../login.html'))
-});
-
 // first step of github oauth, direct user to github login page
 loginRouter.get('/oauth', (req, res) => {
   const url = 'https://github.com/login/oauth/authorize?' +

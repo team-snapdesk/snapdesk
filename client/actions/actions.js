@@ -13,6 +13,11 @@
 import * as types from '../constants/actionTypes';
 import axios from 'axios';
 
+/**
+ * 
+ *  NEEDS WORK
+ * 
+ */
 export const verifyLogin = () => (
   axios.get('/login/verify')
     .then(({ isLoggedIn }) => ({
