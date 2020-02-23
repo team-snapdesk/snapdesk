@@ -12,13 +12,13 @@
 import { combineReducers } from 'redux';
 
 // import all reducers here
-import mainReducer from './reducer';
+import ticketsReducer from './reducer';
 
 
 // combine reducers
 const reducers = combineReducers({
   // if we had other reducers, they would go here
-  mainReducer,
+  tickets: ticketsReducer,
 });
 
 // make the combined reducers available for import

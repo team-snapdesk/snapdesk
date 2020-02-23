@@ -17,14 +17,18 @@ import RightNav from '../components/RightNav';
 import FeedContainer from './FeedContainer'
 
 
-const mapStateToProps = ({
-  mainReducer: { totalSnaps, leaderBoard, activeTickets, isLoggedIn }
-}) => ({
-  totalSnaps,
-  leaderBoard,
-  activeTickets,
-  isLoggedIn
-})
+
+const mapStateToProps = state => {
+  return {
+    totalSnaps: state.tickets.totalSnaps,
+    leaderBoard: state.tickets.leaderBoard,
+    activeTickets: state.tickets.activeTickets,
+    messageInput: state.tickets.messageInput,
+    messageRating: state.tickets.messageRating,
+    ticketsCount: state.tickets.ticketsCount,
+    isLoggedIn: state.tickets.isLoggedIn
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
   // userLogOut: () => dispatch(actions.userLogOut()),
@@ -47,11 +51,10 @@ const Wrapper = props => {
           <LeftNav />
         </div>
         <div className="col">
-          <FeedContainer />
+          <FeedContainer {...props}/>
         </div>
         <div className="col">
-          <RightNav />
-        </div>
+          <RightNav ticketsCount={props.ticketsCount}/>
       </div>
     </div>
   )
