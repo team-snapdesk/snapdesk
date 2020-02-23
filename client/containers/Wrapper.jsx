@@ -55,6 +55,7 @@ const Wrapper = props => {
         </div>
         <div className="col">
           <RightNav ticketsCount={props.ticketsCount}/>
+        </div>
       </div>
     </div>
   )
