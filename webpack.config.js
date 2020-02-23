@@ -16,12 +16,11 @@ module.exports = {
   // dev server settings
   devServer: {
     publicPath: '/build/',
-    proxy: {
-      '/api/': 'http://localhost:3000',
-      '/login/': 'http://localhost:3000'
-    },
+    proxy: [{
+      context: ['/api', '/login'],
+      target: 'http://localhost:3000'
+    }],
     hot: true,
-    index: 'login.html'
   },
   resolve: {
     extensions: ['.js', '.jsx'],

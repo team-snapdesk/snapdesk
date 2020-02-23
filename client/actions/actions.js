@@ -18,15 +18,16 @@ import axios from 'axios';
  *  NEEDS WORK
  * 
  */
-export const verifyLogin = () => (
-  axios.get('/login/verify')
-    .then(({ isLoggedIn }) => ({
-      type: types.USER_LOGIN,
-      payload: null,
+export const verifyLogin = () => (dispatch) => {
+  return axios.get('/login/verify')
+    .then(({ data }) => {
+      return dispatch({
+        type: types.USER_LOGIN,
+        payload: data
+      });
     })
-    )
     .catch(err => console.log(err))
-)
+}
 
 export const postTicket = event => (dispatch, getState) => {
   event.preventDefault();

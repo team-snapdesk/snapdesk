@@ -18,11 +18,12 @@ import FeedContainer from './FeedContainer'
 
 
 const mapStateToProps = ({
-  tickets: totalSnaps, leaderBoard, activeTickets
+  mainReducer: { totalSnaps, leaderBoard, activeTickets, isLoggedIn }
 }) => ({
   totalSnaps,
   leaderBoard,
-  activeTickets
+  activeTickets,
+  isLoggedIn
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -31,7 +32,7 @@ const mapDispatchToProps = dispatch => ({
 
 const Wrapper = props => {
 
-  if (!isLoggedIn) {
+  if (!props.isLoggedIn) {
     return (
       <form method="GET" action="/login/oauth">
         <button type="submit">GitHub Login</button>
