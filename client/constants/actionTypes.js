@@ -17,5 +17,5 @@ export const RESOLVE_TICKET = 'RESOLVE_TICKET';
 export const CANCEL_ACCEPT = 'CANCEL_ACCEPT';
 export const UPDATE_MESSAGE = 'UPDATE_MESSAGE';
 export const UPDATE_RATING = 'UPDATE_RATING';
-export const USER_LOGIN = 'LOGIN';
-export const USER_LOGOUT = 'LOGOUT';
+export const USER_LOGIN = 'USER_LOGIN';
+export const USER_LOGOUT = 'USER_LOGOUT';

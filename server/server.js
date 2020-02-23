@@ -4,13 +4,20 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const app = express();
 
+// server port
+const PORT = 3000;
+
+
 /**
  * REQUIRE IN ROUTERS HERE
  */
 const apiRouter = require('./routes/api');
 const loginRouter = require('./routes/login');
 
-const PORT = 3000;
+/**
+ * REQUIRE IN MIDDLEWARE HERE
+ */
+const jwtsController = require('./controllers/jwtsController');
 
 /** 
  * Handle parsing of the body and cookies
@@ -25,10 +32,12 @@ app.use(cookieParser());
 app.use('/api', apiRouter);
 app.use('/login', loginRouter);
 
+// handle static files
+app.use('/build', express.static(path.join(__dirname, '../build')))
 
 // response with main app
 if (process.env.NODE_ENV = 'production') {
-  app.get('/', (req, res) => 
+  app.get('/', (req, res) =>
     res.status(200).sendFile(path.resolve(__dirname, '../index.html'))
   );
 }

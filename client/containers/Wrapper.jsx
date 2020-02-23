@@ -17,6 +17,7 @@ import RightNav from '../components/RightNav';
 import FeedContainer from './FeedContainer'
 
 
+
 const mapStateToProps = state => {
   return {
     totalSnaps: state.tickets.totalSnaps,
@@ -24,7 +25,8 @@ const mapStateToProps = state => {
     activeTickets: state.tickets.activeTickets,
     messageInput: state.tickets.messageInput,
     messageRating: state.tickets.messageRating,
-    ticketsCount: state.tickets.ticketsCount
+    ticketsCount: state.tickets.ticketsCount,
+    isLoggedIn: state.tickets.isLoggedIn
   }
 }
 
@@ -32,20 +34,30 @@ const mapDispatchToProps = dispatch => ({
   // userLogOut: () => dispatch(actions.userLogOut()),
 });
 
-const Wrapper = props => (
-  <div className="wrapper">
-    <div className="row align-items-start">
-      <div className="col">
-        <LeftNav />
-      </div>
-      <div className="col">
-        <FeedContainer {...props}/>
-      </div>
-      <div className="col">
-        <RightNav ticketsCount={props.ticketsCount}/>
+const Wrapper = props => {
+
+  if (!props.isLoggedIn) {
+    return (
+      <form method="GET" action="/login/oauth">
+        <button type="submit">GitHub Login</button>
+      </form>
+    )
+  }
+
+  return (
+    <div className="wrapper">
+      <div className="row align-items-start">
+        <div className="col">
+          <LeftNav />
+        </div>
+        <div className="col">
+          <FeedContainer {...props}/>
+        </div>
+        <div className="col">
+          <RightNav ticketsCount={props.ticketsCount}/>
       </div>
     </div>
-  </div>
-)
+  )
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wrapper);
