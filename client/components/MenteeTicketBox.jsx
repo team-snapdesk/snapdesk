@@ -13,16 +13,14 @@ import React from 'react';
 
 
 const MenteeTicketBox = ({
-  // messageInput, 
-  // messageRating,
-  // messageTopic
+  messageInput, 
+  messageRating,
 }) => (
   <div className="MenteeTicketBox">
-    <h1>Hey from the MenteeTicketBox!</h1>
-    {/* <span>
-      <button></button>
-      <button></button>
-    </span> */}
+    <p>Input:</p>
+    {messageInput}
+    <p>Rating:</p>
+    {messageRating}
   </div>
   );
 

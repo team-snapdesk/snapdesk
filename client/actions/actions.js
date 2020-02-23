@@ -12,21 +12,24 @@
 // import actionType constants
 import * as types from '../constants/actionTypes';
 
-export const postTicket = event => (dispatch, getState) => {
+export const postTicket = (event) => {
   event.preventDefault();
-  const ticket = {
-    messageInput: getState().tickets.messageInput,
-    messageRating: getState().tickets.messageRating,
-    messageTopic: getState().tickets.messageTopic
-  }
-  if (ticket.messageInput && ticket.messageRating && ticket.messageTopic) {
-    dispatch({
+
+  return {
       type: types.POST_TICKET,
-      payload: ticket,
-    });
-  }
+      payload: ticketId
+    }
 };
 
+export const updateMessage = data => ({
+  type: types.UPDATE_MESSAGE,
+  payload: data
+});
+
+export const updateRating = data => ({
+  type: types.UPDATE_RATING,
+  payload: data,
+});
 // export const acceptTicket = event => (dispatch, getState) => {
 //   event.preventDefault();
 //   dispatch({

@@ -18,11 +18,13 @@ import FeedContainer from './FeedContainer'
 
 
 const mapStateToProps = ({
-  tickets: totalSnaps, leaderBoard, activeTickets
+  tickets: totalSnaps, leaderBoard, activeTickets, messageInput, messageRating
 }) => ({
   totalSnaps,
   leaderBoard,
-  activeTickets
+  activeTickets,
+  messageInput,
+  messageRating
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -36,7 +38,7 @@ const Wrapper = props => (
         <LeftNav />
       </div>
       <div className="col">
-        <FeedContainer />
+        <FeedContainer {...props}/>
       </div>
       <div className="col">
         <RightNav />
