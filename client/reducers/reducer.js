@@ -10,7 +10,6 @@
  */
 
 import * as types from '../constants/actionTypes';
-import axios from 'axios';
 
 const initialState = {
   totalSnaps: 0,
