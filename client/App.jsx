@@ -10,17 +10,14 @@
  */
 
 import React, { Component } from 'react';
-import Wrapper from './containers/Wrapper'
 import { connect } from 'react-redux';
-
+import Wrapper from './containers/Wrapper';
 
 const mapStateToProps = ({ user: { isLoggedIn } }) => ({
-  isLoggedIn
+  isLoggedIn,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-
-});
+const mapDispatchToProps = dispatch => ({});
 
 class App extends Component {
   constructor(props) {
@@ -29,20 +26,24 @@ class App extends Component {
 
   render() {
     // conditional rendering of login button
-    if (!this.props.isLoggedIn) {
+    const { isLoggedIn } = this.props;
+    if (!isLoggedIn) {
       return (
         <form method="GET" action="/login/oauth">
           <button type="submit">GitHub Login</button>
         </form>
-      )
+      );
     }
 
-    return(
+    return (
       <div>
         <Wrapper />
       </div>
-    )
+    );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

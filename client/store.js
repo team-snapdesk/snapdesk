@@ -17,7 +17,6 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import reducers from './reducers/reducers';
 import { verifyLogin } from './actions/userActions';
 
-
 // we are adding composeWithDevTools here to get easy access to the Redux dev tools
 const store = createStore(
   // ADD REDUCERS

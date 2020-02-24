@@ -11,12 +11,13 @@
 
 import React from 'react';
 
-
-const BystanderTicketBox = ({
-  // messageInput, 
-  // messageRating,
-  // messageTopic
-}) => (
+const BystanderTicketBox = (
+  {
+    // messageInput,
+    // messageRating,
+    // messageTopic
+  }
+) => (
   <div className="BystanderTicketBox">
     <h1>Hey from the BystanderTicketBox</h1>
     {/* <span>
@@ -24,6 +25,6 @@ const BystanderTicketBox = ({
       <button>CANCEL</button>
     </span> */}
   </div>
-  );
+);
 
 export default BystanderTicketBox;
