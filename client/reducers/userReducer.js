@@ -12,21 +12,21 @@ import * as types from '../constants/actionTypes';
 
 const userState = {
   isLoggedIn: false,
-}
+};
 
-const userReducer = (state=userState, action) => {
-  switch(action.type) {
+const userReducer = (state = userState, action) => {
+  switch (action.type) {
     case types.USER_LOGIN:
       console.log(action);
-      const isLoggedIn = action.payload.isLoggedIn;
-      return { 
+      const { isLoggedIn } = action.payload;
+      return {
         ...state,
-        isLoggedIn
+        isLoggedIn,
       };
 
     default:
       return state;
   }
-}
+};
 
 export default userReducer;

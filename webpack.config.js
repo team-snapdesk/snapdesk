@@ -15,7 +15,7 @@ module.exports = {
     publicPath: '/build/',
     proxy: [
       {
-        context: ['/api', '/login'],
+        context: ['/api', '/login/'],
         target: 'http://localhost:3000',
       },
     ],
