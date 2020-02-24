@@ -36,8 +36,26 @@ ticketsController.addNewTicket = (req, res, next) => {
 
 ticketsController.getActiveTickets = (req, res, next) => {
   const getActiveTickets= `
-
+    SELECT _id, snaps_given, message, status, timestamp, mentee_id FROM tickets
+    WHERE status = 'active'
+    OR status = 'pending';
   `;
+  db.query(getActiveTickets)
+    .then(({ rows }) => {
+      const formatTickets = rows.map(ticket => ({
+        messageInput: ticket.message,
+        messageRating: ticket.snaps_given,
+        messageId: ticket._id,
+        menteeId: ticket.mentee_id,
+        timestamp: ticket.timpestamp,
+        status: ticket.status
+       }))
+      res.locals.activeTickets = formatTickets;
+      return next();
+    })
+    .catch(err => next({
+      log: `Error in middleware ticketsController.addNewTicket: ${err}`
+    }))
 }
 
 module.exports = ticketsController;
