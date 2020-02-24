@@ -13,46 +13,9 @@
 import axios from 'axios';
 import * as types from '../constants/actionTypes';
 
-export const postTicket = () => (dispatch, getState) =>
-  axios
-    .post('/api/tickets', {
-      mentee_id: getState().user.userId,
-      message: getState().tickets.messageInput,
-      status: 'active',
-      snaps_given: getState().tickets.messageRating,
-    })
-    .then(({ data }) => {
-      if (!data.isLoggedIn) {
-        dispatch({
-          type: types.USER_LOGIN,
-          payload: data,
-        })
-      }
-      else {
-        dispatch({
-          type: types.POST_TICKET,
-          payload: data,
-        })
-      }     
-      })
-
-export const getTickets = () => dispatch =>
-  axios
-    .get('/api/tickets')
-    .then(({ data }) => {
-      if (!data.isLoggedIn) {
-        dispatch({
-          type: types.USER_LOGIN,
-          payload: data,
-        })
-      }
-      else {
-        dispatch({
-          type: types.LOAD_USER,
-          payload: data.user,
-        })
-      }     
-      })
+export const postTicket = () => ({
+  type: types.POST_TICKET,
+});
 
 export const updateMessage = data => ({
   type: types.UPDATE_MESSAGE,

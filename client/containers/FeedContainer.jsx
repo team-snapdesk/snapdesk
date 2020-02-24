@@ -15,6 +15,7 @@ import * as actions from '../actions/ticketActions';
 import MenteeTicketBox from '../components/MenteeTicketBox';
 import BystanderTicketBox from '../components/BystanderTicketBox';
 import TicketCreator from '../components/TicketCreator';
+// import { render } from 'node-sass';
 
 const mapStateToProps = state => ({
   messageInput: state.tickets.messageInput,
@@ -23,16 +24,12 @@ const mapStateToProps = state => ({
   messageRating: state.tickets.messageRating,
 });
 
-const mapDispatchToProps = dispatch => {
-  const dispatchFunctions = {
-    postTicket: () => dispatch(actions.postTicket()),
-    updateMessage: event => dispatch(actions.updateMessage(event.target.value)),
-    updateRating: event =>
-      dispatch(actions.updateRating(parseInt(event.target.value))),
-  }
-  const asyncDispatch = bindActionCreators(actions.getTickets, dispatch);
-  return { ...dispatchFunctions, ...asyncDispatch }
-}
+const mapDispatchToProps = dispatch => ({
+  postTicket: () => dispatch(actions.postTicket()),
+  updateMessage: event => dispatch(actions.updateMessage(event.target.value)),
+  updateRating: event =>
+    dispatch(actions.updateRating(parseInt(event.target.value))),
+});
 
 class FeedContainer extends Component {
   constructor(props) {
