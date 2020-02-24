@@ -44,7 +44,8 @@ html {
 }
 .btn-outline-primary:hover {
   /* color: #42ffc1 !important; */
-  background-color: #42ffc1  !important;
+  color: #6c757d !important;
+  background-color: #3beeb2  !important;
   background-image: none !important;
-  border-color: #42ffc1 !important;
+  border-color: #3beeb2   !important;
 }
