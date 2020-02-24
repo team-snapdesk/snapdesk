@@ -33,6 +33,10 @@ class FeedContainer extends Component {
     super(props);
   }
 
+  componentWillMount() {
+    this.props.getTickets();
+  }
+
   componentDidMount() {
     this.interval = setInterval(() => this.props.getTickets(), 5000);
   }

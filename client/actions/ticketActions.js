@@ -49,7 +49,7 @@ export const getTickets = () => dispatch =>
       else {
         dispatch({
           type: types.GET_TICKETS,
-          payload: data.tickets || [],
+          payload: data.activeTickets || [],
         })
       }     
     })
