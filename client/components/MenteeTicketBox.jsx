@@ -11,7 +11,6 @@
 
 import React from 'react';
 
-
 const MenteeTicketBox = props => (
   <div className="MenteeTicketBox">
     <p>Input:</p>
@@ -19,6 +18,6 @@ const MenteeTicketBox = props => (
     <p>Rating:</p>
     <p>{props.messageRating}</p>
   </div>
-  );
+);
 
 export default MenteeTicketBox;

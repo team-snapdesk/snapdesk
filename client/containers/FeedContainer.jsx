@@ -21,47 +21,54 @@ const mapStateToProps = state => ({
   messageInput: state.tickets.messageInput,
   messageRating: state.tickets.messageRating,
   activeTickets: state.tickets.activeTickets,
-  messageRating: state.tickets.messageRating
+  messageRating: state.tickets.messageRating,
 });
 
 const mapDispatchToProps = dispatch => ({
   postTicket: () => dispatch(actions.postTicket()),
-  updateMessage: (event) => dispatch(actions.updateMessage(event.target.value)),
-  updateRating: (event) => dispatch(actions.updateRating(parseInt(event.target.value))),
-})
+  updateMessage: event => dispatch(actions.updateMessage(event.target.value)),
+  updateRating: event =>
+    dispatch(actions.updateRating(parseInt(event.target.value))),
+});
 
 class FeedContainer extends Component {
   constructor(props) {
     super(props);
   }
-  
-  render() { 
+
+  render() {
     // if there are no active tickets, display a message in the background saying nothing here
     // do not render it when a ticket is added
-    
-    //build activeTickets list
-    //later add conditionals to check which box should be rendered based on the posterId vs logged in user
+
+    // build activeTickets list
+    // later add conditionals to check which box should be rendered based on the posterId vs logged in user
     const activeTickets = [];
 
     for (let i = 0; i < this.props.activeTickets.length; i++) {
-      activeTickets.push(<MenteeTicketBox 
-        messageInput={this.props.activeTickets[i].messageInput}
-        messageRating={this.props.activeTickets[i].messageRating} />)
+      activeTickets.push(
+        <MenteeTicketBox
+          messageInput={this.props.activeTickets[i].messageInput}
+          messageRating={this.props.activeTickets[i].messageRating}
+        />
+      );
     }
-    
-    return(
+
+    return (
       <div>
-      <div className="ticketDisplay">
-        {/* map buildFeed to tickets array */}
-        {/* <BystanderTicketBox /> */}
-        {activeTickets}
+        <div className="ticketDisplay">
+          {/* map buildFeed to tickets array */}
+          {/* <BystanderTicketBox /> */}
+          {activeTickets}
+        </div>
+        <div className="ticketCreator">
+          <TicketCreator {...this.props} />
+        </div>
       </div>
-      <div className="ticketCreator">
-        <TicketCreator {...this.props} />
-      </div>
-      </div>
-    )
+    );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FeedContainer); 
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FeedContainer);
