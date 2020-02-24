@@ -63,6 +63,27 @@ export const updateRating = event => ({
   type: types.UPDATE_RATING,
   payload: event.target.value,
 });
+
+export const deleteTicket = id => ({
+  type: types.DELETE_TICKET,
+  payload: id,
+})
+
+export const resolveTicket = id => ({
+  type: types.RESOLVE_TICKET,
+  payload: id,
+})
+
+export const acceptTicket = id => ({
+  type: types.ACCEPT_TICKET,
+  payload: id,
+})
+
+export const cancelAccept = id => ({
+  type: types.CANCEL_ACCEPT,
+  payload: id,
+})
+
 // export const acceptTicket = event => (dispatch, getState) => {
 //   event.preventDefault();
 //   dispatch({

@@ -42,7 +42,7 @@ githubController.userData = (req, res, next) => {
    * then destructing the rest out of data
    */ 
   .then(( { data: { bio, id, name, avatar_url, email } }) => {
-    res.locals.userData = { bio, id, name, avatar_url, email };
+    res.locals.userData = { bio, github_id: id, name, avatar_url, email };
     return next();
   })
   .catch(err => ({ log: `Error in middleware loginController.userData axios to github: ${err}` }));
@@ -50,16 +50,17 @@ githubController.userData = (req, res, next) => {
 
 githubController.createUser = (req, res, next) => {
 try {
-  const checkUser = `SELECT * FROM users WHERE github_id = ${res.locals.userData.id};`;
+  const checkUser = `SELECT * FROM users WHERE github_id = ${res.locals.userData.github_id};`;
   const addUser = `
     INSERT INTO users (name, email, bio, github_id, avatar_url)
     VALUES (
     '${res.locals.userData.name}',
     '${res.locals.userData.email}',
     '${res.locals.userData.bio}',
-    ${res.locals.userData.id},
+    ${res.locals.userData.github_id},
     '${res.locals.userData.avatar_url}'
-    );
+    )
+    RETURNING _id;
   `;
   // query data
   db.query(checkUser)
@@ -70,6 +71,7 @@ try {
         db.query(addUser)
           .then(success => {
             console.log('SUCCESS: ', success);
+            res.locals.userData.id = success.rows[0]._id;
             return next()})
           .catch(err => ({ log: `Error in middleware loginController.createUser db addUser: ${err}` }))
       } else {
