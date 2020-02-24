@@ -15,7 +15,6 @@ import { combineReducers } from 'redux';
 import ticketsReducer from './ticketsReducer';
 import userReducer from './userReducer';
 
-
 // combine reducers
 const reducers = combineReducers({
   // if we had other reducers, they would go here

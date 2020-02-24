@@ -10,16 +10,16 @@
  */
 
 // import actionType constants
-import * as types from '../constants/actionTypes';
 import axios from 'axios';
+import * as types from '../constants/actionTypes';
 
-export const verifyLogin = () => (dispatch) => {
-  return axios.get('/login/verify')
-    .then(({ data }) => {
-      return dispatch({
+export const verifyLogin = () => dispatch =>
+  axios
+    .get('/login/verify')
+    .then(({ data }) =>
+      dispatch({
         type: types.USER_LOGIN,
-        payload: data
-      });
-    })
-    .catch(err => console.log(err))
-}
+        payload: data,
+      })
+    )
+    .catch(err => console.log(err));

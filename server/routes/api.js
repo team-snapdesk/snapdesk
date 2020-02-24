@@ -1,5 +1,4 @@
 const express = require('express');
-const apiRouter = express.Router();
 
 // require in middleware here
 const jwtsController = require('../controllers/jwtsController');
@@ -14,4 +13,4 @@ apiRouter.get('/user',
 
 
 
-module.exports = apiRouter; 
+module.exports = apiRouter;

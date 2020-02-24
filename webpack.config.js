@@ -1,35 +1,35 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const webpack = require('webpack');
 
 module.exports = {
   // mode
   mode: process.env.NODE_ENV,
   // entry
-  entry: [
-    './client/index.js'
-  ],
+  entry: ['./client/index.js'],
   output: {
     path: path.resolve(__dirname, './build'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   // dev server settings
   devServer: {
     publicPath: '/build/',
-    proxy: [{
-      context: ['/api', '/login'],
-      target: 'http://localhost:3000'
-    }],
+    proxy: [
+      {
+        context: ['/api', '/login/'],
+        target: 'http://localhost:3000',
+      },
+    ],
     hot: true,
   },
+  // allow importing without expliciity stating .js and .jsx file extensions
   resolve: {
     extensions: ['.js', '.jsx'],
   },
   // plugins
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'style.css'
-    })
+      filename: 'style.css',
+    }),
   ],
   // loaders
   module: {
@@ -41,9 +41,9 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
       },
       // sass loader
       {
@@ -61,7 +61,7 @@ module.exports = {
           // Compiles Sass to CSS
           'sass-loader',
         ],
-      }
-    ]
-  }
-}
+      },
+    ],
+  },
+};
