@@ -28,6 +28,7 @@ githubController.token = (req, res, next) => {
     }))
 };
 
+// Uses token to retrieve information about current user
 githubController.userData = (req, res, next) => {
   axios.get('https://api.github.com/user', {
     headers: {
