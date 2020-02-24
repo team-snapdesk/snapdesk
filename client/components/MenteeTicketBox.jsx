@@ -9,15 +9,32 @@
  * ************************************
  */
 
-import React from 'react';
+import React, { Component } from 'react';
+import { Form, Button } from 'react-bootstrap';
 
-const MenteeTicketBox = props => (
-  <div className="MenteeTicketBox">
-    <p>Input:</p>
-    <p>{props.messageInput}</p>
-    <p>Rating:</p>
-    <p>{props.messageRating}</p>
-  </div>
-);
+class MenteeTicketBox extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render () {
+    //if (this.props.activeTickets[i].status === 'active') {
+      //   //has not been picked up yet
+      //   //Delete button is active but Resolve is not
+      // } this.props.activeTickets[i].status === 'pending') {
+      //   //your ticket has been picked up. 
+      //   //Resolve is active but Delete is not
+      // }
+    return (
+    <div className="MenteeTicketBox">
+      <p>Request: {this.props.messageInput}</p>
+      <p>Expected Snaps: {this.props.messageRating}</p>
+      <span>
+        <button onClick={() => this.props.resolveTicket(this.props.messageId)}type="button" class="btn btn-success">Resolve</button>
+        <button onClick={() => this.props.deleteTicket(this.props.messageId)} type="button" class="btn btn-warning">Delete</button>
+      </span>
+    </div>
+    )
+  }
+}
 
 export default MenteeTicketBox;
