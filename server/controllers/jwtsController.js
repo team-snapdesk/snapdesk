@@ -25,6 +25,7 @@ jwtsController.loginUser = (req, res, next) => {
     return next({ log: `Error in middleware jwtsController.loginUser: ${err}` });
   }
 };
+
 jwtsController.isLoggedIn = (req, res, next) => {
   try {
     jwt.verify(req.cookies.jwt_token, jwtSecret.secret, (err, data) => {
