@@ -31,6 +31,7 @@ const ticketsReducer = (state = ticketState, action) => {
     case types.GET_TICKETS:
       return { ...state,
         activeTickets: action.payload,
+        ticketsCount: action.payload.length,
       }
 
 
