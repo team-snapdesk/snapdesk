@@ -12,7 +12,7 @@
 import { combineReducers } from 'redux';
 
 // import all reducers here
-import ticketsReducer from './reducer';
+import ticketsReducer from './ticketsReducer';
 
 
 // combine reducers
