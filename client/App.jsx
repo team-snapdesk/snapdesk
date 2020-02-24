@@ -10,8 +10,17 @@
  */
 
 import React, { Component } from 'react';
+import Wrapper from './containers/Wrapper'
+import { connect } from 'react-redux';
 
-// IMPORT CONTAINERS AND COMPONENTS HERE
+
+const mapStateToProps = ({ user: { isLoggedIn } }) => ({
+  isLoggedIn
+});
+
+const mapDispatchToProps = (dispatch) => ({
+
+});
 
 class App extends Component {
   constructor(props) {
@@ -19,13 +28,21 @@ class App extends Component {
   }
 
   render() {
+    // conditional rendering of login button
+    if (!this.props.isLoggedIn) {
+      return (
+        <form method="GET" action="/login/oauth">
+          <button type="submit">GitHub Login</button>
+        </form>
+      )
+    }
+
     return(
       <div>
-        <h1>Snapdesk</h1>
-        under construction... 
+        <Wrapper />
       </div>
     )
   }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);

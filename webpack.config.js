@@ -10,16 +10,17 @@ module.exports = {
     './client/index.js'
   ],
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, './build'),
     filename: 'bundle.js'
   },
   // dev server settings
   devServer: {
     publicPath: '/build/',
-    proxy: {
-      '/api/': 'http://localhost:3000'
-    },
-    hot: true
+    proxy: [{
+      context: ['/api', '/login'],
+      target: 'http://localhost:3000'
+    }],
+    hot: true,
   },
   resolve: {
     extensions: ['.js', '.jsx'],
