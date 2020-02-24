@@ -69,7 +69,7 @@ const TicketCreator = props => (
           value={5}
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button className="btn btn-secondary btn-md" type="submit">
         Post
       </Button>
     </Form>
