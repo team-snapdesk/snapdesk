@@ -20,6 +20,11 @@ apiRouter.post('/tickets',
   (req, res) => res.status(200).json(res.locals)
 );
 
+apiRouter.get('/tickets',
+  jwtsController.isLoggedIn,
+  (req, res) => res.status(200).json(res.locals)
+);
+
 
 
 module.exports = apiRouter;
