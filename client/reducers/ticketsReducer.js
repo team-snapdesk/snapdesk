@@ -18,7 +18,7 @@ const ticketState = {
   activeTickets: [],
   ticketsCount: 0,
   messageTopic: '',
-  nextTicketId: 10000,
+  userId: '',
 };
 
 const ticketsReducer = (state = ticketState, action) => {
@@ -36,7 +36,8 @@ const ticketsReducer = (state = ticketState, action) => {
       const newTicket = {
         messageInput: state.messageInput,
         messageRating: state.messageRating,
-        messageId: state.nextTicketId,
+        messageId: action.payload,
+        userId: state.userId,
         status: 'active'
       };
       // make a shallow copy of existing array and push new ticket to it
