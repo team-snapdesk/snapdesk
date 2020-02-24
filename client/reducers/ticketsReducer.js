@@ -31,6 +31,7 @@ const ticketsReducer = (state = ticketState, action) => {
     case types.GET_TICKETS:
       return { ...state,
         activeTickets: action.payload,
+        ticketsCount: action.payload.length,
       }
 
 
@@ -54,7 +55,6 @@ const ticketsReducer = (state = ticketState, action) => {
         ticketsCount: state.ticketsCount + 1,
         nextTicketId: state.nextTicketId + 1,
         messageInput: '',
-        messageRating: '',
       };
 
     case types.ACCEPT_TICKET:
