@@ -37,6 +37,16 @@ export const resolveTicket = id => ({
   payload: id,
 })
 
+export const acceptTicket = id => ({
+  type: types.ACCEPT_TICKET,
+  payload: id,
+})
+
+export const cancelAccept = id => ({
+  type: types.CANCEL_ACCEPT,
+  payload: id,
+})
+
 // export const acceptTicket = event => (dispatch, getState) => {
 //   event.preventDefault();
 //   dispatch({
