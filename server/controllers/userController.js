@@ -24,7 +24,6 @@ userController.getData = (req, res, next) => {
   const userQuery = `SELECT * FROM users WHERE _id = ${id}`;
   db.query(userQuery)
     .then(user => {
-      console.log(user);
       res.locals.user = user.rows[0];
       return next();
     })

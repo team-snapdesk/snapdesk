@@ -16,7 +16,7 @@ apiRouter.get('/user',
 
 apiRouter.post('/tickets',
   jwtsController.isLoggedIn,
-  
+  ticketsController.addNewTicket,
   (req, res) => res.status(200).json(res.locals)
 );
 
