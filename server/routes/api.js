@@ -5,6 +5,7 @@ const apiRouter = express.Router();
 // require in middleware here
 const jwtsController = require('../controllers/jwtsController');
 const userController = require('../controllers/userController');
+const ticketsController = require('../controllers/ticketsController');
 
 // ADD API ROUTES HERE
 apiRouter.get('/user',
@@ -13,7 +14,10 @@ apiRouter.get('/user',
   (req, res) => res.status(200).json(res.locals)
 );
 
-apiRouter.post('/tickets', (req, res) => res.status(200).json(res.locals)
+apiRouter.post('/tickets',
+  jwtsController.isLoggedIn,
+  
+  (req, res) => res.status(200).json(res.locals)
 );
 
 
