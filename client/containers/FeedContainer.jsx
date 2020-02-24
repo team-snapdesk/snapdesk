@@ -18,16 +18,20 @@ import TicketCreator from '../components/TicketCreator';
 // import { render } from 'node-sass';
 
 const mapStateToProps = state => ({
+  userId: state.user.userId,
   messageInput: state.tickets.messageInput,
   messageRating: state.tickets.messageRating,
   activeTickets: state.tickets.activeTickets,
   messageRating: state.tickets.messageRating,
+
 });
 
 const mapDispatchToProps = dispatch => ({
   postTicket: () => dispatch(actions.postTicket()),
   deleteTicket: () => dispatch(actions.deleteTicket()),
   resolveTicket: () => dispatch(actions.resolveTicket()),
+  acceptTicket: () => dispatch(actions.acceptTicket()),
+  cancelAccept: () => dispatch(actions.cancelAccept()),
   updateMessage: event => dispatch(actions.updateMessage(event.target.value)),
   updateRating: event =>
     dispatch(actions.updateRating(parseInt(event.target.value))),
@@ -44,21 +48,39 @@ class FeedContainer extends Component {
 
     // build activeTickets list
     // later add conditionals to check which box should be rendered based on the posterId vs logged in user
-    const activeTickets = [];
-
-    for (let i = 0; i < this.props.activeTickets.length; i++) {
-      activeTickets.push(
-        <MenteeTicketBox
+    let activeTickets;
+    if (!this.props.activeTickets[0]) {
+      activeTickets = (<p>No active tickets</p>)
+    } else {
+      activeTickets = [];
+      for (let i = 0; i < this.props.activeTickets.length; i++) {
+        activeTickets.push(
+          /*
+          if (this.props.userId !== this.props.activeTickets[i].userId) {
+            //ticket should render bystanderticketbox
+            <BystanderTicketBox 
+            cancelTicket={this.props.cancelTicket}
+            acceptTicket={this.props.acceptTicket}
+            messageInput={this.props.activeTickets[i].messageInput}
+            messageRating={this.props.activeTickets[i].messageRating}
+            messageId={this.props.activeTickets[i].messageId}
+            key={this.props.activeTickets[i].messageId}
+            />
+          }
+          
+          */
+          <MenteeTicketBox
           deleteTicket={this.props.deleteTicket}
           resolveTicket={this.props.resolveTicket}
           messageInput={this.props.activeTickets[i].messageInput}
           messageRating={this.props.activeTickets[i].messageRating}
           messageId={this.props.activeTickets[i].messageId}
           key={this.props.activeTickets[i].messageId}
-        />
-      );
-    }
-
+          />
+          );
+        }
+      }
+        
     return (
       <div>
         <div className="ticketDisplay">
@@ -67,7 +89,7 @@ class FeedContainer extends Component {
           {activeTickets}
         </div>
         <div className="ticketCreator">
-          <TicketCreator {...this.props} />
+          <TicketCreator {...this.props} key={this.props.userId}/>
         </div>
       </div>
     );
