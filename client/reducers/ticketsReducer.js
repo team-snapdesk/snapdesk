@@ -17,8 +17,6 @@ const ticketState = {
   messageRating: '',
   activeTickets: [],
   ticketsCount: 0,
-  messageTopic: '',
-  userId: '',
 };
 
 const ticketsReducer = (state = ticketState, action) => {
@@ -30,14 +28,20 @@ const ticketsReducer = (state = ticketState, action) => {
     //     ...state,
     //     isLoggedIn
     //   };
+    case types.GET_TICKETS:
+      return { ...state,
+        activeTickets: action.payload,
+      }
+
 
     case types.POST_TICKET:
       // build new ticket object to be inserted into activeTickets array (use props from FeedContainer)
       const newTicket = {
         messageInput: state.messageInput,
         messageRating: state.messageRating,
-        messageId: action.payload,
-        userId: state.userId,
+        messageId: action.payload.ticketId,
+        menteeId: action.payload.menteeId,
+        timestamp: action.payload.timestamp,
         status: 'active'
       };
       // make a shallow copy of existing array and push new ticket to it

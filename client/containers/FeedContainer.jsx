@@ -11,6 +11,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import * as actions from '../actions/ticketActions';
 import MenteeTicketBox from '../components/MenteeTicketBox';
 import BystanderTicketBox from '../components/BystanderTicketBox';
@@ -23,23 +24,21 @@ const mapStateToProps = state => ({
   messageRating: state.tickets.messageRating,
   activeTickets: state.tickets.activeTickets,
   messageRating: state.tickets.messageRating,
-
 });
 
-const mapDispatchToProps = dispatch => ({
-  postTicket: () => dispatch(actions.postTicket()),
-  deleteTicket: () => dispatch(actions.deleteTicket()),
-  resolveTicket: () => dispatch(actions.resolveTicket()),
-  acceptTicket: () => dispatch(actions.acceptTicket()),
-  cancelAccept: () => dispatch(actions.cancelAccept()),
-  updateMessage: event => dispatch(actions.updateMessage(event.target.value)),
-  updateRating: event =>
-    dispatch(actions.updateRating(parseInt(event.target.value))),
-});
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 class FeedContainer extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(() => this.props.getTickets(), 5000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   render() {
@@ -49,7 +48,8 @@ class FeedContainer extends Component {
     // build activeTickets list
     // later add conditionals to check which box should be rendered based on the posterId vs logged in user
     let activeTickets;
-    if (!this.props.activeTickets[0]) {
+    console.log('ACTIVE TICKETS: ', this.props.activeTickets);
+    if (!this.props.activeTickets || this.props.activeTickets.length === 0) {
       activeTickets = (<p>No active tickets</p>)
     } else {
       activeTickets = [];
