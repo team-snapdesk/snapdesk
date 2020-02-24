@@ -1,5 +1,7 @@
 const express = require('express');
 
+const apiRouter = express.Router();
+
 // require in middleware here
 const jwtsController = require('../controllers/jwtsController');
 const userController = require('../controllers/userController');
