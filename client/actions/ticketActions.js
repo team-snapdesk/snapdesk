@@ -34,7 +34,7 @@ export const postTicket = () => (dispatch, getState) =>
           payload: data,
         })
       }     
-      })
+    })
 
 export const getTickets = () => dispatch =>
   axios

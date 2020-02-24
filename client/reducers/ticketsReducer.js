@@ -29,6 +29,9 @@ const ticketsReducer = (state = ticketState, action) => {
     //     isLoggedIn
     //   };
     case types.GET_TICKETS:
+      return { ...state,
+        activeTickets: action.payload,
+      }
 
 
     case types.POST_TICKET:
