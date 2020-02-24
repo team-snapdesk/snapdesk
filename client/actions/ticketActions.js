@@ -49,10 +49,10 @@ export const getTickets = () => dispatch =>
       else {
         dispatch({
           type: types.GET_TICKETS,
-          payload: data.tickets,
+          payload: data.tickets || [],
         })
       }     
-      })
+    })
 
 export const updateMessage = event => ({
   type: types.UPDATE_MESSAGE,

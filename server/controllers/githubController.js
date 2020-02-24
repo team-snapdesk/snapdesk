@@ -75,6 +75,7 @@ try {
             return next()})
           .catch(err => ({ log: `Error in middleware loginController.createUser db addUser: ${err}` }))
       } else {
+        res.locals.userData.id = user.rows[0]._id;
         return next();
       }    
     })
