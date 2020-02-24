@@ -25,6 +25,8 @@ const mapStateToProps = state => ({
   messageInput: state.tickets.messageInput,
   messageRating: state.tickets.messageRating,
   ticketsCount: state.tickets.ticketsCount,
+  userAvatar: state.user.userAvatar,
+  userName:state.user.userName,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(userActions, dispatch)
@@ -43,7 +45,7 @@ class Wrapper extends Component {
       <div className="wrapper">
         <div className="row align-items-start">
           <div className="col">
-            <LeftNav />
+            <LeftNav url={this.props.userAvatar} userName={this.props.userName} />
           </div>
           <div className="col">
             <FeedContainer {...this.props} />
