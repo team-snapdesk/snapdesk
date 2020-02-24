@@ -54,7 +54,6 @@ const ticketsReducer = (state = ticketState, action) => {
         ticketsCount: state.ticketsCount + 1,
         nextTicketId: state.nextTicketId + 1,
         messageInput: '',
-        messageRating: '',
       };
 
     case types.ACCEPT_TICKET:
