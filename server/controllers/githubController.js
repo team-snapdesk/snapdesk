@@ -64,10 +64,13 @@ try {
   // query data
   db.query(checkUser)
     .then(user => {
+      
       // if user doesn't exist in database, add to db
       if(user.rowCount === 0) {
         db.query(addUser)
-          .then(success => next())
+          .then(success => {
+            console.log('SUCCESS: ', success);
+            return next()})
           .catch(err => ({ log: `Error in middleware loginController.createUser db addUser: ${err}` }))
       } else {
         return next();
