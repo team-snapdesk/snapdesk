@@ -12,18 +12,32 @@ import * as types from '../constants/actionTypes';
 
 const userState = {
   isLoggedIn: false,
+  userId: '',
+  userName: '',
+  userBio: '',
+  userAvatar: '',
 };
 
 const userReducer = (state = userState, action) => {
   switch (action.type) {
     case types.USER_LOGIN:
-      console.log(action);
+      console.log('USER LOGIN: ', action);
       const { isLoggedIn } = action.payload;
       return {
         ...state,
         isLoggedIn,
       };
-
+    
+    case types.LOAD_USER:
+      console.log('LOAD USER: ', action);
+      return {
+        ...state,
+        userId: action.payload.github_id,
+        userName: action.payload.name,
+        userBio: action.payload.bio,
+        userAvatar: action.payload.avatar_url
+      }
+      
     default:
       return state;
   }
