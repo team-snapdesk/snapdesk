@@ -11,26 +11,25 @@
 
 import * as types from '../constants/actionTypes';
 
-const initialState = {
+const ticketState = {
   totalSnaps: 0,
   messageInput: '',
   messageRating: '',
   activeTickets: [],
   ticketsCount: 0,
   messageTopic: '',
-  isLoggedIn: false,
 };
 
-const ticketsReducer = (state=initialState, action) => {
+const ticketsReducer = (state=ticketState, action) => {
 
   switch(action.type) {
-    case types.USER_LOGIN:
-      console.log(action);
-      const isLoggedIn = action.payload.isLoggedIn;
-      return { 
-        ...state,
-        isLoggedIn
-      };
+    // case types.USER_LOGIN:
+    //   console.log(action);
+    //   const isLoggedIn = action.payload.isLoggedIn;
+    //   return { 
+    //     ...state,
+    //     isLoggedIn
+    //   };
 
     case types.POST_TICKET:
       //build new ticket object to be inserted into activeTickets array (use props from FeedContainer)

@@ -14,8 +14,8 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 // import reducers here
-import reducers from './reducers/index';
-import { verifyLogin } from './actions/actions';
+import reducers from './reducers/reducers';
+import { verifyLogin } from './actions/userActions';
 
 
 // we are adding composeWithDevTools here to get easy access to the Redux dev tools

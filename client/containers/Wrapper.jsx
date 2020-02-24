@@ -11,7 +11,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/actions';
+import * as actions from '../actions/ticketActions';
 import LeftNav from '../components/LeftNav';
 import RightNav from '../components/RightNav';
 import FeedContainer from './FeedContainer'
@@ -26,7 +26,6 @@ const mapStateToProps = state => {
     messageInput: state.tickets.messageInput,
     messageRating: state.tickets.messageRating,
     ticketsCount: state.tickets.ticketsCount,
-    isLoggedIn: state.tickets.isLoggedIn
   }
 }
 
@@ -35,14 +34,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const Wrapper = props => {
-
-  if (!props.isLoggedIn) {
-    return (
-      <form method="GET" action="/login/oauth">
-        <button type="submit">GitHub Login</button>
-      </form>
-    )
-  }
 
   return (
     <div className="wrapper">
