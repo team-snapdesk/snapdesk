@@ -10,13 +10,16 @@
  */
 
 import React from 'react';
+import { Form, Button } from 'react-bootstrap';
 
 const MenteeTicketBox = props => (
   <div className="MenteeTicketBox">
-    <p>Input:</p>
-    <p>{props.messageInput}</p>
-    <p>Rating:</p>
-    <p>{props.messageRating}</p>
+    <p>Request: {props.messageInput}</p>
+    <p>Expected Snaps: {props.messageRating}</p>
+    <span>
+    <button onClick={() => props.resolveTicket(props.messageId)}type="button" class="btn btn-success">Resolve</button>
+    <button onClick={() => props.deleteTicket(props.messageId)} type="button" class="btn btn-warning">Delete</button>
+    </span>
   </div>
 );
 

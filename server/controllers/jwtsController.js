@@ -15,7 +15,7 @@ const jwtsController = {};
 jwtsController.loginUser = (req, res, next) => {
   try {
     // create payload
-    const payload = { github_id: res.locals.userData.id };
+    const payload = { id: res.locals.userData.id };
     // create jwt token
     const token = jwt.sign(payload, jwtSecret.secret);
     res.cookie('jwt_token', token, { httpOnly: true });
