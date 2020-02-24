@@ -21,9 +21,6 @@ import { bindActionCreators } from 'redux';
 const mapStateToProps = state => ({
   totalSnaps: state.tickets.totalSnaps,
   leaderBoard: state.tickets.leaderBoard,
-  activeTickets: state.tickets.activeTickets,
-  messageInput: state.tickets.messageInput,
-  messageRating: state.tickets.messageRating,
   ticketsCount: state.tickets.ticketsCount,
 });
 
@@ -46,7 +43,7 @@ class Wrapper extends Component {
             <LeftNav />
           </div>
           <div className="col">
-            <FeedContainer {...this.props} />
+            <FeedContainer />
           </div>
           <div className="col">
             <RightNav ticketsCount={this.props.ticketsCount} />
