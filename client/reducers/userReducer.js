@@ -32,7 +32,7 @@ const userReducer = (state = userState, action) => {
       console.log('LOAD USER: ', action);
       return {
         ...state,
-        userId: action.payload.github_id,
+        userId: action.payload._id,
         userName: action.payload.name,
         userBio: action.payload.bio,
         userAvatar: action.payload.avatar_url

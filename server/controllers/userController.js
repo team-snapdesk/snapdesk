@@ -19,12 +19,11 @@ userController.getData = (req, res, next) => {
   // // make sure user is logged in before fetching data
   // if (!res.locals.isLoggedIn) return next();
   // pull github_id from fwts token
-  const { github_id } = jwt.verify(req.cookies.jwt_token, jwtSecret.secret);
+  const { id } = jwt.verify(req.cookies.jwt_token, jwtSecret.secret);
   // query data base with github id
-  const userQuery = `SELECT * FROM users WHERE github_id = ${github_id}`;
+  const userQuery = `SELECT * FROM users WHERE _id = ${id}`;
   db.query(userQuery)
     .then(user => {
-      console.log(user);
       res.locals.user = user.rows[0];
       return next();
     })
