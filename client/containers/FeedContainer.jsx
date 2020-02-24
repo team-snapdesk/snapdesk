@@ -24,16 +24,19 @@ const mapStateToProps = state => ({
   messageRating: state.tickets.messageRating,
 });
 
-const mapDispatchToProps = dispatch => ({
-  postTicket: () => dispatch(actions.postTicket()),
-  updateMessage: event => dispatch(actions.updateMessage(event.target.value)),
-  updateRating: event =>
-    dispatch(actions.updateRating(parseInt(event.target.value))),
-});
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 class FeedContainer extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    this.interval = setInterval(() => this.props.getTickets(), 5000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   render() {

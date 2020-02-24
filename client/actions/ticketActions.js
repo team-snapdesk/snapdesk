@@ -48,20 +48,20 @@ export const getTickets = () => dispatch =>
       }
       else {
         dispatch({
-          type: types.LOAD_USER,
-          payload: data.user,
+          type: types.GET_TICKETS,
+          payload: data.tickets,
         })
       }     
       })
 
-export const updateMessage = data => ({
+export const updateMessage = event => ({
   type: types.UPDATE_MESSAGE,
-  payload: data,
+  payload: event.target.value,
 });
 
-export const updateRating = data => ({
+export const updateRating = event => ({
   type: types.UPDATE_RATING,
-  payload: data,
+  payload: event.target.value,
 });
 // export const acceptTicket = event => (dispatch, getState) => {
 //   event.preventDefault();

@@ -17,7 +17,6 @@ const ticketState = {
   messageRating: '',
   activeTickets: [],
   ticketsCount: 0,
-  messageTopic: '',
 };
 
 const ticketsReducer = (state = ticketState, action) => {
@@ -29,6 +28,8 @@ const ticketsReducer = (state = ticketState, action) => {
     //     ...state,
     //     isLoggedIn
     //   };
+    case types.GET_TICKETS:
+
 
     case types.POST_TICKET:
       // build new ticket object to be inserted into activeTickets array (use props from FeedContainer)
