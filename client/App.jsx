@@ -29,9 +29,18 @@ class App extends Component {
     const { isLoggedIn } = this.props;
     if (!isLoggedIn) {
       return (
-        <form method="GET" action="/login/oauth">
-          <button type="submit">GitHub Login</button>
-        </form>
+        <div id="landing">
+          <form id="login-form" method="GET" action="/login/oauth">
+            <img id="logo" src="logo2.png" alt="" />
+            <button
+              className="btn btn-outline-primary btn-lg"
+              id="github-login"
+              type="submit"
+            >
+              GitHub Login
+            </button>
+          </form>
+        </div>
       );
     }
 

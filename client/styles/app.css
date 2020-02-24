@@ -1,5 +1,5 @@
-body {
-  background-color: lightgrey;
+html {
+  background-color: #eeeeee;
 }
 
 .primaryColor {
@@ -21,4 +21,30 @@ body {
   color: #343a40;
 }
 
+#landing {
+  background-color: #eeeeee;
+}
+#login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
+#logo {
+  margin-top: 200px;
+  margin-bottom: 80px;
+}
+
+.btn-outline-primary {
+  color: #6c757d !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: #6c757d !important;
+}
+.btn-outline-primary:hover {
+  color: #42ffc1 !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: #42ffc1 !important;
+}
