@@ -11,6 +11,7 @@
 
 // add action type constants i.e.:
 export const POST_TICKET = 'POST_TICKET';
+export const GET_TICKETS = 'GET_TICKETS';
 export const ACCEPT_TICKET = 'ACCEPT_TICKET';
 export const DELETE_TICKET = 'DELETE_TICKET';
 export const RESOLVE_TICKET = 'RESOLVE_TICKET';
