@@ -14,7 +14,7 @@ import Wrapper from './containers/Wrapper'
 import { connect } from 'react-redux';
 
 
-const mapStateToProps = ({ tickets: { isLoggedIn } }) => ({
+const mapStateToProps = ({ user: { isLoggedIn } }) => ({
   isLoggedIn
 });
 

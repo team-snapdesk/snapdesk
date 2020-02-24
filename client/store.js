@@ -14,7 +14,7 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 // import reducers here
-import reducers from './reducers/index';
+import reducers from './reducers/reducers';
 import { verifyLogin } from './actions/userActions';
 
 

@@ -11,7 +11,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions/actions';
+import * as actions from '../actions/ticketActions';
 import MenteeTicketBox from '../components/MenteeTicketBox';
 import BystanderTicketBox from '../components/BystanderTicketBox';
 import TicketCreator from '../components/TicketCreator';
