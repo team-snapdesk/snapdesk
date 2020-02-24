@@ -22,6 +22,7 @@ apiRouter.post('/tickets',
 
 apiRouter.get('/tickets',
   jwtsController.isLoggedIn,
+  ticketsController.getActiveTickets,
   (req, res) => res.status(200).json(res.locals)
 );
 
