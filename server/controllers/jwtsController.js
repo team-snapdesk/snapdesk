@@ -26,11 +26,13 @@ jwtsController.loginUser = (req, res, next) => {
     });
   }
 };
+
 jwtsController.isLoggedIn = (req, res, next) => {
   try {
     jwt.verify(req.cookies.jwt_token, jwtSecret.secret, (err, data) => {
-      if (err) return (res.locals.isLoggedIn = false);
-      res.locals.isLoggedIn = true;
+      // if not logged in, immediately report to client
+      if (err) return res.status(200).json({ isLoggedIn: false });
+      res.locals = { isLoggedIn: true };
       return next();
     });
   } catch (err) {
