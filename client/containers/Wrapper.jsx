@@ -36,14 +36,6 @@ const mapDispatchToProps = dispatch => ({
 
 const Wrapper = props => {
 
-  if (!props.isLoggedIn) {
-    return (
-      <form method="GET" action="/login/oauth">
-        <button type="submit">GitHub Login</button>
-      </form>
-    )
-  }
-
   return (
     <div className="wrapper">
       <div className="row align-items-start">

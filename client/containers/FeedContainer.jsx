@@ -20,7 +20,8 @@ import TicketCreator from '../components/TicketCreator';
 const mapStateToProps = state => ({
   messageInput: state.tickets.messageInput,
   messageRating: state.tickets.messageRating,
-  activeTickets: state.tickets.activeTickets
+  activeTickets: state.tickets.activeTickets,
+  messageRating: state.tickets.messageRating
 });
 
 const mapDispatchToProps = dispatch => ({
