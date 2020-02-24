@@ -18,6 +18,7 @@ const ticketState = {
   activeTickets: [],
   ticketsCount: 0,
   messageTopic: '',
+  nextTicketId: 10000,
 };
 
 const ticketsReducer = (state = ticketState, action) => {
@@ -35,15 +36,18 @@ const ticketsReducer = (state = ticketState, action) => {
       const newTicket = {
         messageInput: state.messageInput,
         messageRating: state.messageRating,
+        messageId: state.nextTicketId,
+        status: 'active'
       };
       // make a shallow copy of existing array and push new ticket to it
-      const updatedTickets = state.activeTickets.slice();
+      let updatedTickets = state.activeTickets.slice();
       updatedTickets.push(newTicket);
       // return updated state and reset message input/ratings to blank
       return {
         ...state,
         activeTickets: updatedTickets,
         ticketsCount: state.ticketsCount + 1,
+        nextTicketId: state.nextTicketId + 1,
         messageInput: '',
         messageRating: '',
       };
@@ -55,10 +59,38 @@ const ticketsReducer = (state = ticketState, action) => {
       return { ...state };
 
     case types.DELETE_TICKET:
-      return { ...state };
+        let idx;
+        updatedTickets = state.activeTickets.map((ticket, index) => {
+          if (ticket.messageId === action.payload) {
+            idx = index
+            return ticket;
+          }
+          return ticket;
+        })
+        updatedTickets.splice(idx, 1)
+      
+      return { 
+        ...state,
+        activeTickets: updatedTickets,
+        ticketsCount: state.ticketsCount - 1
+      };
 
     case types.RESOLVE_TICKET:
-      return { ...state };
+        idx;
+        updatedTickets = state.activeTickets.map((ticket, index) => {
+          if (ticket.messageId === action.payload) {
+            idx = index
+            return ticket;
+          }
+          return ticket;
+        })
+        updatedTickets.splice(idx, 1)
+      
+      return { 
+        ...state,
+        activeTickets: updatedTickets,
+        ticketsCount: state.ticketsCount - 1
+      };
 
     case types.UPDATE_MESSAGE:
       return { ...state, messageInput: action.payload };

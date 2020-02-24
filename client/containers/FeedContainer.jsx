@@ -26,6 +26,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   postTicket: () => dispatch(actions.postTicket()),
+  deleteTicket: () => dispatch(actions.deleteTicket()),
+  resolveTicket: () => dispatch(actions.resolveTicket()),
   updateMessage: event => dispatch(actions.updateMessage(event.target.value)),
   updateRating: event =>
     dispatch(actions.updateRating(parseInt(event.target.value))),
@@ -47,8 +49,12 @@ class FeedContainer extends Component {
     for (let i = 0; i < this.props.activeTickets.length; i++) {
       activeTickets.push(
         <MenteeTicketBox
+          deleteTicket={this.props.deleteTicket}
+          resolveTicket={this.props.resolveTicket}
           messageInput={this.props.activeTickets[i].messageInput}
           messageRating={this.props.activeTickets[i].messageRating}
+          messageId={this.props.activeTickets[i].messageId}
+          key={this.props.activeTickets[i].messageId}
         />
       );
     }
