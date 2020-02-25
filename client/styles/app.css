@@ -45,42 +45,52 @@ html {
 .btn-outline-primary:hover {
   /* color: #42ffc1 !important; */
   color: #6c757d !important;
-  background-color: #3beeb2  !important;
-  background-image: none !important;
-  border-color: #3beeb2   !important;
-}
-.btn-secondary {
-  color:#f5f7f6 !important;
   background-color: #3beeb2 !important;
   background-image: none !important;
-  border-color: #3beeb2!important;
+  border-color: #3beeb2 !important;
+}
+.btn-secondary {
+  color: #f5f7f6 !important;
+  background-color: #3beeb2 !important;
+  background-image: none !important;
+  border-color: #3beeb2 !important;
 }
 .btn-secondary:hover {
   /* color: #42ffc1 !important; */
   color: #3beeb2 !important;
-  background-color: #6c757d  !important;
-  background-image: none !important;
-  border-color:  #6c757d  !important;
-}
-.btn-success {
-  color:#f5f7f6 !important;
   background-color: #6c757d !important;
   background-image: none !important;
-  border-color:#6c757d!important;
+  border-color: #6c757d !important;
+}
+.btn-success {
+  color: #f5f7f6 !important;
+  background-color: #6c757d !important;
+  background-image: none !important;
+  border-color: #6c757d !important;
 }
 .btn-success:hover {
   /* color: #42ffc1 !important; */
-  color: #f5f7f6  !important;
-  background-color:#3beeb2  !important;
+  color: #f5f7f6 !important;
+  background-color: #3beeb2 !important;
   background-image: none !important;
-  border-color:  #3beeb2  !important;
+  border-color: #3beeb2 !important;
 }
-#mainBackground{
+#mainBackground {
   background-color: #eeeeee;
 }
-#user-Name{
+#user-Name {
   color: #6c757d;
 }
 .btn-outline-primary:focus {
- box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.ticketDisplay {
+  max-height: 700px;
+  min-height: 700px;
+}
+
+#leftNav {
+  max-height: 700px;
+  min-height: 700px;
 }
