@@ -87,7 +87,6 @@ class FeedContainer extends Component {
           activeTickets.push(ticketBox);
         }
       }
-    }
 
     return (
       <div>
