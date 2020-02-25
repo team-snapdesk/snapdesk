@@ -50,8 +50,6 @@ class FeedContainer extends Component {
     document.title = '(' + this.props.ticketsCount + ') ' + 'SnapDesk';
   }
 
-  
-
   render() {
     // if there are no active tickets, display a message in the background saying nothing here
     // do not render it when a ticket is added

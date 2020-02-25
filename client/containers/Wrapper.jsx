@@ -37,10 +37,6 @@ class Wrapper extends Component {
     this.props.getUserData();
   }
 
-  // changeTitle() {
-   
-  // }
-
   render() {
     return(
       <div className="wrapper">
