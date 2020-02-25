@@ -54,7 +54,7 @@ class FeedContainer extends Component {
     let activeTickets;
     console.log('ACTIVE TICKETS: ', this.props.activeTickets);
     if (!this.props.activeTickets || this.props.activeTickets.length === 0) {
-      activeTickets = (<p>No active tickets</p>)
+      activeTickets = <p>No active tickets</p>;
     } else {
       activeTickets = [];
       for (let i = 0; i < this.props.activeTickets.length; i++) {
@@ -84,20 +84,20 @@ class FeedContainer extends Component {
               )
           }
           
-          
           activeTickets.push(ticketBox);
         }
       }
-        
+    }
+
     return (
       <div>
-        <div className="ticketDisplay">
+        <div className="ticketDisplay overflow-auto">
           {/* map buildFeed to tickets array */}
           {/* <BystanderTicketBox /> */}
           {activeTickets}
         </div>
         <div className="ticketCreator">
-          <TicketCreator {...this.props} key={this.props.userId}/>
+          <TicketCreator {...this.props} key={this.props.userId} />
         </div>
       </div>
     );
