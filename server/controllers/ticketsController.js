@@ -13,7 +13,36 @@ const db = require('../models/userModel');
 
 const ticketsController = {};
 
-ticketsController.addNewTicket = (req, res, next) => {
+ticketsController.getActiveTickets = (req, res, next) => {
+  const getActiveTickets= `
+    SELECT t._id, t.snaps_given, t.message, t.status, t.timestamp, t.mentee_id, u.name mentee_name
+    FROM tickets t
+    INNER JOIN users u
+    ON u._id = t.mentee_id
+    WHERE status = 'active'
+    OR status = 'pending';
+  `;
+  db.query(getActiveTickets)
+    .then(({ rows }) => {
+      const formatTickets = rows.map(ticket => ({
+        messageInput: ticket.message,
+        messageRating: ticket.snaps_given,
+        messageId: ticket._id,
+        menteeId: ticket.mentee_id,
+        menteeName: ticket.mentee_name,
+        timestamp: ticket.timpestamp,
+        status: ticket.status,
+        mentorId: ticket.mentor_id || '',
+       }))
+      res.locals.activeTickets = formatTickets;
+      return next();
+    })
+    .catch(err => next({
+      log: `Error in middleware ticketsController.addNewTicket: ${err}`
+    }))
+}
+
+ticketsController.addTicket = (req, res, next) => {
   const {  snaps_given, mentee_id, status, message } = req.body;
   const addTicket = `
     INSERT INTO tickets
@@ -34,28 +63,9 @@ ticketsController.addNewTicket = (req, res, next) => {
     }))
 }
 
-ticketsController.getActiveTickets = (req, res, next) => {
-  const getActiveTickets= `
-    SELECT _id, snaps_given, message, status, timestamp, mentee_id FROM tickets
-    WHERE status = 'active'
-    OR status = 'pending';
-  `;
-  db.query(getActiveTickets)
-    .then(({ rows }) => {
-      const formatTickets = rows.map(ticket => ({
-        messageInput: ticket.message,
-        messageRating: ticket.snaps_given,
-        messageId: ticket._id,
-        menteeId: ticket.mentee_id,
-        timestamp: ticket.timpestamp,
-        status: ticket.status
-       }))
-      res.locals.activeTickets = formatTickets;
-      return next();
-    })
-    .catch(err => next({
-      log: `Error in middleware ticketsController.addNewTicket: ${err}`
-    }))
+
+ticketController.deleteTicket = (req, res, next) => {
+
 }
 
 module.exports = ticketsController;
