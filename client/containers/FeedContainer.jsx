@@ -58,30 +58,34 @@ class FeedContainer extends Component {
     } else {
       activeTickets = [];
       for (let i = 0; i < this.props.activeTickets.length; i++) {
-        activeTickets.push(
-          /*
-          if (this.props.userId !== this.props.activeTickets[i].userId) {
-            //ticket should render bystanderticketbox
+        let ticketBox;
+        if (this.props.userId !== this.props.activeTickets[i].menteeId) {
+          //ticket should render bystanderticketbox
+          ticketBox = (
             <BystanderTicketBox 
-            cancelTicket={this.props.cancelTicket}
+            cancelAccept={this.props.cancelAccept}
             acceptTicket={this.props.acceptTicket}
             messageInput={this.props.activeTickets[i].messageInput}
             messageRating={this.props.activeTickets[i].messageRating}
-            messageId={this.props.activeTickets[i].messageId}
+            ticket={this.props.activeTickets[i]}
             key={this.props.activeTickets[i].messageId}
             />
+            )
+          } else {
+            ticketBox = (
+              <MenteeTicketBox
+              deleteTicket={this.props.deleteTicket}
+              resolveTicket={this.props.resolveTicket}
+              messageInput={this.props.activeTickets[i].messageInput}
+              messageRating={this.props.activeTickets[i].messageRating}
+              ticket={this.props.activeTickets[i]}
+              key={this.props.activeTickets[i].messageId}
+              />
+              )
           }
           
-          */
-          <MenteeTicketBox
-          deleteTicket={this.props.deleteTicket}
-          resolveTicket={this.props.resolveTicket}
-          messageInput={this.props.activeTickets[i].messageInput}
-          messageRating={this.props.activeTickets[i].messageRating}
-          messageId={this.props.activeTickets[i].messageId}
-          key={this.props.activeTickets[i].messageId}
-          />
-          );
+          
+          activeTickets.push(ticketBox);
         }
       }
         
