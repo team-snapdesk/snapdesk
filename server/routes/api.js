@@ -14,17 +14,23 @@ apiRouter.get('/user',
   (req, res) => res.status(200).json(res.locals)
 );
 
-apiRouter.post('/tickets',
-  jwtsController.isLoggedIn,
-  ticketsController.addNewTicket,
-  (req, res) => res.status(200).json(res.locals)
-);
+apiRouter
 
 apiRouter.get('/tickets',
-  jwtsController.isLoggedIn,
-  ticketsController.getActiveTickets,
-  (req, res) => res.status(200).json(res.locals)
-);
+    jwtsController.isLoggedIn,
+    ticketsController.getActiveTickets,
+    (req, res) => res.status(200).json(res.locals)
+  )
+  .post(
+    jwtsController.isLoggedIn,
+    ticketsController.addTicket,
+    (req, res) => res.status(200).json(res.locals)
+  )
+  .put(
+    jwtsController.isLoggedIn,
+    (req, res) => res.status(200).json(res.locals)
+  )
+
 
 
 
