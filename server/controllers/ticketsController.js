@@ -64,8 +64,22 @@ ticketsController.addTicket = (req, res, next) => {
 }
 
 
-ticketController.deleteTicket = (req, res, next) => {
+ticketsController.updateTicketStatus = (req, res, next) => {
+  const { ticketId, status } = req.body;
+  const updateTicket = {
+    text: `
+      UPDATE tickets
+      SET status = $1
+      WHERE _id = $2;
+    `,
+    values: [status, ticketId]
+  }
 
+  db.query(updateTicket)
+    .then(success => next())
+    .catch(err => next({
+      log: `Error in middleware ticketsController.updateTicket: ${err}`
+    }));
 }
 
 module.exports = ticketsController;

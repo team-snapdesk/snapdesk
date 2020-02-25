@@ -14,7 +14,11 @@ apiRouter.get('/user',
   (req, res) => res.status(200).json(res.locals)
 );
 
-apiRouter
+apiRouter.put('/tickets/delete',
+    jwtsController.isLoggedIn,
+    ticketsController.updateTicketStatus,
+    (req, res) => res.status(200).json(res.locals)
+);
 
 apiRouter.get('/tickets',
     jwtsController.isLoggedIn,
@@ -25,13 +29,7 @@ apiRouter.get('/tickets',
     jwtsController.isLoggedIn,
     ticketsController.addTicket,
     (req, res) => res.status(200).json(res.locals)
-  )
-  .put(
-    jwtsController.isLoggedIn,
-    (req, res) => res.status(200).json(res.locals)
-  )
-
-
+);
 
 
 module.exports = apiRouter;
