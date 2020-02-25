@@ -64,10 +64,26 @@ export const updateRating = event => ({
   payload: event.target.value,
 });
 
-export const deleteTicket = id => ({
-  type: types.DELETE_TICKET,
-  payload: id,
-})
+export const deleteTicket = id => (dispatch, getState) =>
+  axios
+    .put('/api/tickets', {
+      ticketId: id,
+      status: 'deleted',
+    })
+    .then(({ data }) => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGIN,
+          payload: data,
+        })
+      }
+      else {
+        dispatch({
+          type: types.DELETE_TICKET,
+          payload: data,
+        })
+      }     
+    })
 
 export const resolveTicket = id => ({
   type: types.RESOLVE_TICKET,

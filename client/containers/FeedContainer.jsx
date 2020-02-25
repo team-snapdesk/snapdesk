@@ -24,6 +24,7 @@ const mapStateToProps = state => ({
   messageRating: state.tickets.messageRating,
   activeTickets: state.tickets.activeTickets,
   messageRating: state.tickets.messageRating,
+  ticketsCount: state.tickets.ticketsCount,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
@@ -45,6 +46,12 @@ class FeedContainer extends Component {
     clearInterval(this.interval);
   }
 
+  componentDidUpdate() {
+    document.title = '(' + this.props.ticketsCount + ') ' + 'SnapDesk';
+  }
+
+  
+
   render() {
     // if there are no active tickets, display a message in the background saying nothing here
     // do not render it when a ticket is added
@@ -52,7 +59,7 @@ class FeedContainer extends Component {
     // build activeTickets list
     // later add conditionals to check which box should be rendered based on the posterId vs logged in user
     let activeTickets;
-    console.log('ACTIVE TICKETS: ', this.props.activeTickets);
+    // console.log('ACTIVE TICKETS: ', this.props.activeTickets);
     if (!this.props.activeTickets || this.props.activeTickets.length === 0) {
       activeTickets = (<p>No active tickets</p>)
     } else {
