@@ -40,6 +40,4 @@ export const getUserData = () => dispatch =>
           payload: data.user,
         })
       }
-      
-      }
-    )
+    })

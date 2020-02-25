@@ -11,7 +11,6 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as ticketActions from '../actions/ticketActions';
 import * as userActions from '../actions/userActions';
 import LeftNav from '../components/LeftNav';
 import RightNav from '../components/RightNav';
@@ -23,7 +22,7 @@ const mapStateToProps = state => ({
   leaderBoard: state.tickets.leaderBoard,
   ticketsCount: state.tickets.ticketsCount,
   userAvatar: state.user.userAvatar,
-  userName:state.user.userName,
+  userName: state.user.userName,
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(userActions, dispatch)

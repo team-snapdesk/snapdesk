@@ -16,7 +16,6 @@ import * as actions from '../actions/ticketActions';
 import MenteeTicketBox from '../components/MenteeTicketBox';
 import BystanderTicketBox from '../components/BystanderTicketBox';
 import TicketCreator from '../components/TicketCreator';
-// import { render } from 'node-sass';
 
 const mapStateToProps = state => ({
   userId: state.user.userId,
@@ -39,6 +38,7 @@ class FeedContainer extends Component {
   }
 
   componentDidMount() {
+    //set the timer for how often the ticket feed will reload active tickets
     this.interval = setInterval(() => this.props.getTickets(), 5000);
   }
 
@@ -51,21 +51,18 @@ class FeedContainer extends Component {
   }
 
   render() {
-    // if there are no active tickets, display a message in the background saying nothing here
-    // do not render it when a ticket is added
-
     // build activeTickets list
-    // later add conditionals to check which box should be rendered based on the posterId vs logged in user
     let activeTickets;
-    // console.log('ACTIVE TICKETS: ', this.props.activeTickets);
+    // if there are no active tickets, display a message in the background saying nothing here
     if (!this.props.activeTickets || this.props.activeTickets.length === 0) {
       activeTickets = <p>No active tickets</p>;
     } else {
       activeTickets = [];
       for (let i = 0; i < this.props.activeTickets.length; i++) {
         let ticketBox;
+        //if the current logged in user doesn't match the ID of the user who posted the ticket, render the bystander box
+        // the boxes will have different options for resolve/delete or accept/cancel
         if (this.props.userId !== this.props.activeTickets[i].menteeId) {
-          //ticket should render bystanderticketbox
           ticketBox = (
             <BystanderTicketBox 
             cancelAccept={this.props.cancelAccept}
@@ -76,6 +73,7 @@ class FeedContainer extends Component {
             key={this.props.activeTickets[i].messageId}
             />
             )
+            // otherwise render the mentee ticket box
           } else {
             ticketBox = (
               <MenteeTicketBox
@@ -88,7 +86,6 @@ class FeedContainer extends Component {
               />
               )
           }
-          
           activeTickets.push(ticketBox);
         }
       }
@@ -96,8 +93,6 @@ class FeedContainer extends Component {
     return (
       <div>
         <div className="ticketDisplay overflow-auto">
-          {/* map buildFeed to tickets array */}
-          {/* <BystanderTicketBox /> */}
           {activeTickets}
         </div>
         <div className="ticketCreator">

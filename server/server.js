@@ -11,16 +11,14 @@ const PORT = 3000;
 /**
  * REQUIRE IN ROUTERS HERE
  */
+
 const apiRouter = require('./routes/api');
 const loginRouter = require('./routes/login');
 
 /**
- * REQUIRE IN MIDDLEWARE HERE
- */
-
-/**
  * Handle parsing of the body and cookies
  */
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -28,6 +26,7 @@ app.use(cookieParser());
 /**
  *  Route handlers
  */
+
 app.use('/api', apiRouter);
 app.use('/login', loginRouter);
 

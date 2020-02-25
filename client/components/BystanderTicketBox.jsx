@@ -10,14 +10,17 @@
  */
 
 import React, { Component } from 'react';
-import { Form, Button } from 'react-bootstrap';
-let buttons;
+import { Button } from 'react-bootstrap';
+
 class BystanderTicketBox extends Component {
   constructor(props) {
     super(props);
   }
   
   render () {
+
+    let buttons;
+
     if (this.props.ticket.status === 'active') {
       //ticket published by another user but has not been pick up yet
       //Accept button will be active but Cancel button will not and mentee is anonymous
