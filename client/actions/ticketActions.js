@@ -66,7 +66,7 @@ export const updateRating = event => ({
 
 export const deleteTicket = id => (dispatch, getState) =>
   axios
-    .put('/api/tickets', {
+    .put('/api/tickets/delete', {
       ticketId: id,
       status: 'deleted',
     })
@@ -80,7 +80,7 @@ export const deleteTicket = id => (dispatch, getState) =>
       else {
         dispatch({
           type: types.DELETE_TICKET,
-          payload: data,
+          payload: id,
         })
       }     
     })
