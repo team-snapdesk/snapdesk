@@ -24,7 +24,7 @@ class BystanderTicketBox extends Component {
       buttons = (
         <span>
           <Button onClick={() => this.props.acceptTicket(this.props.messageId)}type="button" className="btn btn-success">Accept</Button>
-          <Button disabled={true} type="button" className="btn btn-warning">Cancel</Button>
+          <Button disabled={true} type="button" className="btn btn-secondary">Cancel</Button>
        </span>
         )
     } else if (this.props.ticket.userId !== this.props.ticket.mentorId && this.props.ticket.status === 'pending') {
@@ -33,7 +33,7 @@ class BystanderTicketBox extends Component {
       buttons = (
         <span>
           <Button disabled={true} type="button" className="btn btn-success">Accept</Button>
-          <Button disabled={true} type="button" className="btn btn-warning">Cancel</Button>
+          <Button disabled={true} type="button" className="btn btn-secondary">Cancel</Button>
        </span>
         )
     } else if (this.props.ticket.userId === this.props.ticket.mentorId && this.props.ticket.status === 'pending') {
