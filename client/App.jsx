@@ -13,6 +13,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Wrapper from './containers/Wrapper';
 
+
 const mapStateToProps = ({ user: { isLoggedIn } }) => ({
   isLoggedIn,
 });
@@ -45,7 +46,9 @@ class App extends Component {
     }
 
     return (
+      
       <div id="mainBackground">
+        
         <Wrapper />
       </div>
     );
