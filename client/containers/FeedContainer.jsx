@@ -59,7 +59,7 @@ class FeedContainer extends Component {
       activeTickets = [];
       for (let i = 0; i < this.props.activeTickets.length; i++) {
         let ticketBox;
-        if (this.props.userId !== this.props.activeTickets[i].userId) {
+        if (this.props.userId !== this.props.activeTickets[i].menteeId) {
           //ticket should render bystanderticketbox
           ticketBox = (
             <BystanderTicketBox 
