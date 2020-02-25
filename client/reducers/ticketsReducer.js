@@ -20,6 +20,7 @@ const ticketState = {
 };
 
 const ticketsReducer = (state = ticketState, action) => {
+  let idx;
   switch (action.type) {
     // case types.USER_LOGIN:
     //   console.log(action);
@@ -64,16 +65,15 @@ const ticketsReducer = (state = ticketState, action) => {
       return { ...state };
 
     case types.DELETE_TICKET:
-        let idx;
         updatedTickets = state.activeTickets.map((ticket, index) => {
           if (ticket.messageId === action.payload) {
             idx = index
-            return ticket;
+            return ticket
           }
           return ticket;
         })
         updatedTickets.splice(idx, 1)
-      
+        console.log(updatedTickets)
       return { 
         ...state,
         activeTickets: updatedTickets,
@@ -81,16 +81,14 @@ const ticketsReducer = (state = ticketState, action) => {
       };
 
     case types.RESOLVE_TICKET:
-        idx;
         updatedTickets = state.activeTickets.map((ticket, index) => {
           if (ticket.messageId === action.payload) {
             idx = index
-            return ticket;
+            return ticket
           }
           return ticket;
-        })
+        })    
         updatedTickets.splice(idx, 1)
-      
       return { 
         ...state,
         activeTickets: updatedTickets,

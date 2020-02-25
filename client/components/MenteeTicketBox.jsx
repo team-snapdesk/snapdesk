@@ -11,7 +11,7 @@
 
 import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
-
+let buttons;
 class MenteeTicketBox extends Component {
   constructor(props) {
     super(props);
@@ -24,14 +24,27 @@ class MenteeTicketBox extends Component {
       //   //your ticket has been picked up. 
       //   //Resolve is active but Delete is not
       // }
+      console.log(this.props.ticket)
+    if (this.props.ticket.status === 'active') {
+      buttons = (
+        <span>
+          <Button disabled={true} type="button" className="btn btn-success">Resolve</Button>
+          <Button onClick={() => this.props.deleteTicket(this.props.ticket.messageId)} type="button" className="btn btn-warning">Delete</Button>
+        </span>
+      )
+    } else {
+      buttons = (
+        <span>
+          <Button onClick={() => this.props.resolveTicket(this.props.ticket.messageId)}type="button" className="btn btn-success">Resolve</Button>
+          <Button disabled={true} type="button" className="btn btn-warning">Delete</Button>
+        </span>
+      )
+    }
     return (
     <div className="MenteeTicketBox">
       <p>Request: {this.props.messageInput}</p>
       <p>Expected Snaps: {this.props.messageRating}</p>
-      <span>
-        <button onClick={() => this.props.resolveTicket(this.props.messageId)}type="button" class="btn btn-success">Resolve</button>
-        <button onClick={() => this.props.deleteTicket(this.props.messageId)} type="button" class="btn btn-warning">Delete</button>
-      </span>
+      {buttons}
     </div>
     )
   }
