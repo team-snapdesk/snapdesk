@@ -22,6 +22,14 @@ const ticketState = {
 const ticketsReducer = (state = ticketState, action) => {
   let idx;
   switch (action.type) {
+    case types.USER_LOGOUT:
+      return {
+        totalSnaps: 0,
+        messageInput: '',
+        messageRating: '',
+        activeTickets: [],
+        ticketsCount: 0,
+      }
     // case types.USER_LOGIN:
     //   console.log(action);
     //   const isLoggedIn = action.payload.isLoggedIn;

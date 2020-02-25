@@ -1,6 +1,6 @@
 CREATE TABLE "users" (
 	"_id" serial NOT NULL,
-	"name" varchar(255) NOT NULL UNIQUE,
+	"name" varchar(255) NOT NULL,
 	"email" varchar(255),
 	"bio" TEXT NOT NULL,
 	"github_id" integer NOT NULL UNIQUE,
