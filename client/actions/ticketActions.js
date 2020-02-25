@@ -27,7 +27,7 @@ export const postTicket = () => (dispatch, getState) =>
       // check if the returned user is logged in, if not, reroute
       if (!data.isLoggedIn) {
         dispatch({
-          type: types.USER_LOGIN,
+          type: types.USER_LOGOUT,
           payload: data,
         })
       }
@@ -47,7 +47,7 @@ export const getTickets = () => dispatch =>
     .then(({ data }) => {
       if (!data.isLoggedIn) {
         dispatch({
-          type: types.USER_LOGIN,
+          type: types.USER_LOGOUT,
           payload: data,
         })
       }
@@ -80,7 +80,7 @@ export const deleteTicket = id => (dispatch, getState) =>
     .then(({ data }) => {
       if (!data.isLoggedIn) {
         dispatch({
-          type: types.USER_LOGIN,
+          type: types.USER_LOGOUT,
           payload: data,
         })
       }

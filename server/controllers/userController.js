@@ -21,7 +21,11 @@ userController.getData = (req, res, next) => {
   // pull github_id from fwts token
   const { id } = jwt.verify(req.cookies.jwt_token, jwtSecret.secret);
   // query data base with github id
-  const userQuery = `SELECT * FROM users WHERE _id = ${id}`;
+  const userQuery = {
+    text: `SELECT * FROM users WHERE _id = $1`,
+    values: [id]
+  };
+  
   db.query(userQuery)
     .then(user => {
       res.locals.user = user.rows[0];

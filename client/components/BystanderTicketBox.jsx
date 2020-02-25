@@ -26,8 +26,8 @@ class BystanderTicketBox extends Component {
       //Accept button will be active but Cancel button will not and mentee is anonymous
       buttons = (
         <span>
-          <Button onClick={() => this.props.acceptTicket(this.props.messageId)}type="button" className="btn btn-secondary">Accept</Button>
-          <Button disabled={true} type="button" className="btn btn-success">Cancel</Button>
+          <Button onClick={() => this.props.acceptTicket(this.props.messageId)}type="button" className="btn btn-success">Accept</Button>
+          <Button disabled={true} type="button" className="btn btn-secondary">Cancel</Button>
        </span>
         )
     } else if (this.props.ticket.userId !== this.props.ticket.mentorId && this.props.ticket.status === 'pending') {

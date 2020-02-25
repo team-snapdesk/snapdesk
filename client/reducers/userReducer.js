@@ -21,12 +21,19 @@ const userState = {
 const userReducer = (state = userState, action) => {
   switch (action.type) {
     case types.USER_LOGIN:
-      // console.log('USER LOGIN: ', action);
-      const { isLoggedIn } = action.payload;
       return {
         ...state,
-        isLoggedIn,
+        isLoggedIn: true,
       };
+
+    case types.USER_LOGOUT:
+      return {
+        userId: '',
+        userName: '',
+        userBio: '',
+        userAvatar: '',
+        isLoggedIn: false,
+      }
     
     case types.LOAD_USER:
       // console.log('LOAD USER: ', action);
