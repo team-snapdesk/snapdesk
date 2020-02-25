@@ -24,4 +24,3 @@ render(
   </Provider>,
   document.getElementById('contents')
 );
-

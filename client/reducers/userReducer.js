@@ -1,0 +1,46 @@
+/**
+ * ************************************
+ *
+ * @module  userReducer
+ * @author Joshua Nordstrom
+ * @date 2/23/20
+ * @description reducer to maintain the state of user data
+ *
+ * ************************************
+ */
+import * as types from '../constants/actionTypes';
+
+const userState = {
+  isLoggedIn: false,
+  userId: '',
+  userName: '',
+  userBio: '',
+  userAvatar: '',
+};
+
+const userReducer = (state = userState, action) => {
+  switch (action.type) {
+    case types.USER_LOGIN:
+      console.log('USER LOGIN: ', action);
+      const { isLoggedIn } = action.payload;
+      return {
+        ...state,
+        isLoggedIn,
+      };
+    
+    case types.LOAD_USER:
+      console.log('LOAD USER: ', action);
+      return {
+        ...state,
+        userId: action.payload._id,
+        userName: action.payload.name,
+        userBio: action.payload.bio,
+        userAvatar: action.payload.avatar_url
+      }
+      
+    default:
+      return state;
+  }
+};
+
+export default userReducer;

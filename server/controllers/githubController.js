@@ -1,15 +1,14 @@
 const axios = require('axios').default;
 
 // import secret
-const jwtSecret = require('../_secret/jwtSecret');
 const githubSecret = require('../_secret/githubSecret');
 
 // import access to database
 const db = require('../models/userModel');
 
-const loginController = {};
+const githubController = {};
 
-loginController.token = (req, res, next) => {
+githubController.token = (req, res, next) => {
   axios.post('https://github.com/login/oauth/access_token', {
     client_id: githubSecret.clientId,
     client_secret: githubSecret.clientSecret,
@@ -29,7 +28,8 @@ loginController.token = (req, res, next) => {
     }))
 };
 
-loginController.userData = (req, res, next) => {
+// Uses token to retrieve information about current user
+githubController.userData = (req, res, next) => {
   axios.get('https://api.github.com/user', {
     headers: {
       Accept: 'application/vnd.github.v3+json',
@@ -42,35 +42,40 @@ loginController.userData = (req, res, next) => {
    * then destructing the rest out of data
    */ 
   .then(( { data: { bio, id, name, avatar_url, email } }) => {
-    res.locals.userData = { bio, id, name, avatar_url, email };
+    res.locals.userData = { bio, github_id: id, name, avatar_url, email };
     return next();
   })
-  .catch(err => next(err));
+  .catch(err => ({ log: `Error in middleware loginController.userData axios to github: ${err}` }));
 }
 
-loginController.createUser = (req, res, next) => {
+githubController.createUser = (req, res, next) => {
 try {
-  const checkUser = `SELECT * FROM users WHERE github_id = ${res.locals.userData.id};`;
+  const checkUser = `SELECT * FROM users WHERE github_id = ${res.locals.userData.github_id};`;
   const addUser = `
     INSERT INTO users (name, email, bio, github_id, avatar_url)
     VALUES (
     '${res.locals.userData.name}',
     '${res.locals.userData.email}',
     '${res.locals.userData.bio}',
-    ${res.locals.userData.id},
+    ${res.locals.userData.github_id},
     '${res.locals.userData.avatar_url}'
-    );
+    )
+    RETURNING _id;
   `;
   // query data
   db.query(checkUser)
     .then(user => {
-      console.log(user);
+      
       // if user doesn't exist in database, add to db
       if(user.rowCount === 0) {
         db.query(addUser)
-          .then(success => next())
+          .then(success => {
+            console.log('SUCCESS: ', success);
+            res.locals.userData.id = success.rows[0]._id;
+            return next()})
           .catch(err => ({ log: `Error in middleware loginController.createUser db addUser: ${err}` }))
       } else {
+        res.locals.userData.id = user.rows[0]._id;
         return next();
       }    
     })
@@ -81,4 +86,4 @@ try {
 }
 }
 
-module.exports = loginController;
+module.exports = githubController;
