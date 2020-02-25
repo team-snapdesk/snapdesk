@@ -84,3 +84,11 @@ html {
 .btn-outline-primary:focus {
  box-shadow: none !important;
 }
+.userNameWrap{
+  word-wrap:break-word;
+}
+.leftNavMargin{
+  margin-left: 3px;
+  margin-bottom:auto;
+ 
+}
