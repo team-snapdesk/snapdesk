@@ -21,7 +21,7 @@ const userState = {
 const userReducer = (state = userState, action) => {
   switch (action.type) {
     case types.USER_LOGIN:
-      console.log('USER LOGIN: ', action);
+      // console.log('USER LOGIN: ', action);
       const { isLoggedIn } = action.payload;
       return {
         ...state,
@@ -29,7 +29,7 @@ const userReducer = (state = userState, action) => {
       };
     
     case types.LOAD_USER:
-      console.log('LOAD USER: ', action);
+      // console.log('LOAD USER: ', action);
       return {
         ...state,
         userId: action.payload._id,
