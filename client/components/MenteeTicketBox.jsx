@@ -24,7 +24,7 @@ class MenteeTicketBox extends Component {
       //   //your ticket has been picked up. 
       //   //Resolve is active but Delete is not
       // }
-      console.log(this.props.ticket)
+      // console.log(this.props.ticket)
     if (this.props.ticket.status === 'active') {
       buttons = (
         <span>
