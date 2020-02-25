@@ -20,7 +20,8 @@ ticketsController.getActiveTickets = (req, res, next) => {
     INNER JOIN users u
     ON u._id = t.mentee_id
     WHERE status = 'active'
-    OR status = 'pending';
+    OR status = 'pending'
+    ORDER BY t._id;
   `;
   db.query(getActiveTickets)
     .then(({ rows }) => {

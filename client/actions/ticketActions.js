@@ -24,7 +24,7 @@ export const postTicket = () => (dispatch, getState) =>
     .then(({ data }) => {
       if (!data.isLoggedIn) {
         dispatch({
-          type: types.USER_LOGIN,
+          type: types.USER_LOGOUT,
           payload: data,
         })
       }
@@ -42,7 +42,7 @@ export const getTickets = () => dispatch =>
     .then(({ data }) => {
       if (!data.isLoggedIn) {
         dispatch({
-          type: types.USER_LOGIN,
+          type: types.USER_LOGOUT,
           payload: data,
         })
       }
@@ -73,7 +73,7 @@ export const deleteTicket = id => (dispatch, getState) =>
     .then(({ data }) => {
       if (!data.isLoggedIn) {
         dispatch({
-          type: types.USER_LOGIN,
+          type: types.USER_LOGOUT,
           payload: data,
         })
       }

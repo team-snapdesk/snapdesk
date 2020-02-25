@@ -44,6 +44,7 @@ class FeedContainer extends Component {
 
   componentWillUnmount() {
     clearInterval(this.interval);
+    document.title = 'SnapDesk';
   }
 
   componentDidUpdate() {
