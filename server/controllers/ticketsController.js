@@ -64,12 +64,16 @@ ticketsController.addTicket = (req, res, next) => {
 }
 
 
-ticketController.updateTicket = (req, res, next) => {
-  const updateTicket = `
-    UPDATE tickets
-    SET status = 'deleted'
-    WHERE _id = 22;
-  `;
+ticketsController.updateTicketStatus = (req, res, next) => {
+  const { ticketId, status } = req.body;
+  const updateTicket = {
+    text: `
+      UPDATE tickets
+      SET status = $1
+      WHERE _id = $2;
+    `,
+    values: [status, ticketId]
+  }
 
   db.query(updateTicket)
     .then(success => next())
