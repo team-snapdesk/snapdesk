@@ -90,7 +90,16 @@ html {
   min-height: 700px;
 }
 
-#leftNav {
-  max-height: 700px;
-  min-height: 700px;
+.userNameWrap{
+  word-wrap:break-word;
+}
+.leftNavMargin{
+  margin-left: 3px;
+  margin-bottom:auto;
+ 
+}
+
+.ticketbox {
+  border: 2px solid white;
+  border-radius: 5px;
 }

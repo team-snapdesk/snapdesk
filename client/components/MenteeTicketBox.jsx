@@ -41,7 +41,7 @@ class MenteeTicketBox extends Component {
       )
     }
     return (
-    <div className="MenteeTicketBox">
+    <div className="MenteeTicketBox ticketbox">
       <p>Request: {this.props.messageInput}</p>
       <p>Expected Snaps: {this.props.messageRating}</p>
       {buttons}

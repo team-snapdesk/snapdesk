@@ -50,18 +50,26 @@ githubController.userData = (req, res, next) => {
 
 githubController.createUser = (req, res, next) => {
 try {
-  const checkUser = `SELECT * FROM users WHERE github_id = ${res.locals.userData.github_id};`;
-  const addUser = `
-    INSERT INTO users (name, email, bio, github_id, avatar_url)
-    VALUES (
-    '${res.locals.userData.name}',
-    '${res.locals.userData.email}',
-    '${res.locals.userData.bio}',
-    ${res.locals.userData.github_id},
-    '${res.locals.userData.avatar_url}'
-    )
-    RETURNING _id;
-  `;
+  const checkUser = {
+    text: `SELECT * FROM users WHERE github_id = $1;`,
+    values: [res.locals.userData.github_id]
+  };
+
+  const addUser = {
+    text: `
+      INSERT INTO users (name, email, bio, github_id, avatar_url)
+      VALUES ($1, $2, $3, $4, $5)
+      RETURNING _id;
+    `,
+    values: [
+      res.locals.userData.name,
+      res.locals.userData.email,
+      res.locals.userData.bio,
+      res.locals.userData.github_id,
+      res.locals.userData.avatar_url
+    ]
+  };
+
   // query data
   db.query(checkUser)
     .then(user => {
