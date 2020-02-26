@@ -76,9 +76,8 @@ const ticketsReducer = (state = ticketState, action) => {
       };
 
     case types.CANCEL_ACCEPT:
-
       updatedTickets = state.activeTickets.map((ticket) => {
-        if (ticket.messageId == action.payload) {
+        if (ticket.messageId === action.payload.ticketId) {
           ticket.status = 'active'
           ticket.mentorId = null
         }
