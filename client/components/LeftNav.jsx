@@ -5,7 +5,7 @@ const LeftNav = props => (
   <Nav defaultActiveKey="/feed" className="d-flex justify-content-center flex-direct:column" id="leftNav">
     <Nav.Link>
       <img
-        src="logo2.png"
+        src="image/logo2.png"
         width="250px"
         height="60px"
         className="d-inline-block align-top mx-auto"

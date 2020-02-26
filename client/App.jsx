@@ -32,7 +32,7 @@ class App extends Component {
       return (
         <div id="landing">
           <form id="login-form" method="GET" action="/login/oauth">
-            <img id="logo" src="logo2.png" alt="" />
+            <img id="logo" src="image/logo2.png" alt="" />
             <button
               className="btn btn-outline-primary btn-lg"
               id="github-login"
