@@ -69,7 +69,7 @@ ticketsController.addTicket = (req, res, next) => {
 
 
 ticketsController.updateTicketStatus = (req, res, next) => {
-  const { ticketId, status } = req.body;
+  const { status, ticketId} = req.body;
   const updateTicket = {
     text: `
       UPDATE tickets
@@ -84,6 +84,29 @@ ticketsController.updateTicketStatus = (req, res, next) => {
     .catch(err => next({
       log: `Error in middleware ticketsController.updateTicket: ${err}`
     }));
+}
+
+
+
+ticketsController.acceptTicket = (req,res,next) => {
+const status = JSON.stringify(req.body.status);
+const messageId = JSON.stringify(req.body.messageId)
+const mentorId = JSON.stringify(req.body.mentorId);
+
+const text = `
+UPDATE tickets
+SET status = $1, mentor_id = $3
+WHERE _id = $2;`;
+const values = [status, messageId, mentorId];
+
+db.query(text,values)
+.then((response) =>{
+  return next();
+})
+.catch(err => {
+  console.log('Error: ',err);
+  return next(err)
+});
 }
 
 module.exports = ticketsController;
