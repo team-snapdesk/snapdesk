@@ -90,10 +90,26 @@ export const resolveTicket = id => ({
   payload: id,
 })
 
-export const acceptTicket = id => ({
-  type: types.ACCEPT_TICKET,
-  payload: id,
-})
+export const acceptTicket = id => (dispatch, getState) => {
+  axios
+    .put('/api/tickets/accept', {
+      ticketId: id,
+      status: 'pending',
+    })
+    .then(({ data }) => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: data,
+        })
+      }
+      else {
+        dispatch({
+          type: types.ACCEPT_TICKET,
+          payload: id,
+        })
+      }
+    })
 
 export const cancelAccept = id => ({
   type: types.CANCEL_ACCEPT,
