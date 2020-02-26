@@ -80,10 +80,30 @@ export const deleteTicket = id => (dispatch, getState) =>
             }
         });
 
-export const resolveTicket = id => ({
-    type: types.RESOLVE_TICKET,
-    payload: id
-});
+// resolve ticket action type
+export const resolveTicket = id => (dispatch, getState) =>
+    // this should PATCH to whatever backend route resolves tickets -- URL NEED TO BE UPDATED LATER
+    axios
+        .patch('/api/tickets/resolve', {
+            status: 'resolved'
+        })
+        .then(({ data }) => {
+            console.log('inside of then');
+            // Checks whether user is logged in -- prob unnecessary?
+            if (!data.isLoggedIn) {
+                dispatch({
+                    type: types.USER_LOGOUT,
+                    payload: data
+                });
+            }
+            // update our redux state so everything displays properly
+            else {
+                dispatch({
+                    type: types.RESOLVE_TICKET,
+                    payload: id
+                });
+            }
+        });
 
 export const acceptTicket = id => ({
     type: types.ACCEPT_TICKET,
