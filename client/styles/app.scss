@@ -1,2 +1,9 @@
 // import all scss files here
+@import 'variables';
 @import 'login';
+@import 'feedContainer';
+
+
+body {
+  background-color: $tertiary !important;
+}
