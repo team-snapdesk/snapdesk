@@ -62,22 +62,26 @@ const ticketsReducer = (state = ticketState, action) => {
 
     case types.ACCEPT_TICKET:
       //CODE REVIEW: <-------------------------------
-      updatedTickets = state.activeTickets.map(ticket => {
-        if (ticket.messageId == action.payload.id) {
-          ticket.status = "pending";
-          ticket.mentorId = action.payload.userId;
+
+      updatedTickets = state.activeTickets.map((ticket) => {
+        if (ticket.messageId === action.payload.id) {
+          ticket.status = 'pending'
+          ticket.mentorId = action.payload.mentorId
         }
-      });
+        return ticket;
+      })
       return {
         ...state,
         activeTickets: updatedTickets
       };
 
     case types.CANCEL_ACCEPT:
-      updatedTickets = state.activeTickets.map(ticket => {
-        if (ticket.messageId == action.payload.id) {
-          ticket.status = "active";
-          ticket.mentorId = null;
+
+      updatedTickets = state.activeTickets.map((ticket) => {
+        if (ticket.messageId == action.payload.ticketId) {
+          ticket.status = 'active'
+          ticket.mentorId = null
+
         }
       });
       return {
