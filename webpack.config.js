@@ -15,7 +15,7 @@ module.exports = {
     publicPath: '/build/',
     proxy: [
       {
-        context: ['/api', '/login/'],
+        context: ["/api", "/login", "/image"],
         target: 'http://localhost:3000',
       },
     ],
@@ -23,7 +23,7 @@ module.exports = {
   },
   // allow importing without expliciity stating .js and .jsx file extensions
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.scss'],
   },
   // plugins
   plugins: [
