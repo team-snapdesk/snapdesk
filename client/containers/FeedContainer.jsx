@@ -29,26 +29,26 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 class FeedContainer extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    componentWillMount() {
-        this.props.getTickets();
-    }
-
-    componentDidMount() {
-        this.interval = setInterval(() => this.props.getTickets(), 5000);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.interval);
-        document.title = 'SnapDesk';
-    }
-
-    componentDidUpdate() {
-        document.title = `(${this.props.ticketsCount}) ` + `SnapDesk`;
-    }
+  constructor(props) {
+    super(props);
+  }
+// query tickets on screen 
+  componentWillMount() {
+    this.props.getTickets();
+  }
+// query tickets every 5 seconds
+  componentDidMount() {
+    this.interval = setInterval(() => this.props.getTickets(), 5000);
+  }
+// clearing previous intervals/ resets the intervalsn and chnaging title to snapdesk
+  componentWillUnmount() {
+    clearInterval(this.interval);
+    document.title = 'SnapDesk';
+  }
+ // updates the titles to display active tickets
+  componentDidUpdate() {
+    document.title = '(' + this.props.ticketsCount + ') ' + 'SnapDesk';
+  }
 
     render() {
         // if there are no active tickets, display a message in the background saying nothing here
