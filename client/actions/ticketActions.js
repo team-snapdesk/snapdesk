@@ -60,10 +60,9 @@ export const updateMessage = event => ({
   payload: event.target.value
 });
 
-export const updateRating = event => ({
+export const updateRating = id => ({
   type: types.UPDATE_RATING,
-
-  payload: event.target.value,
+  payload: id,
 });
 
 export const deleteTicket = id => (dispatch, getState) =>
