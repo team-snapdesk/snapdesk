@@ -14,7 +14,7 @@ const db = require('../models/userModel');
 const ticketsController = {};
 
 ticketsController.getActiveTickets = (req, res, next) => {
-  const getActiveTickets= `
+  const getActiveTickets = `
     SELECT t._id, t.snaps_given, t.message, t.status, t.timestamp, t.mentee_id, u.name mentee_name
     FROM tickets t
     INNER JOIN users u
@@ -34,7 +34,7 @@ ticketsController.getActiveTickets = (req, res, next) => {
         timestamp: ticket.timpestamp,
         status: ticket.status,
         mentorId: ticket.mentor_id || '',
-       }))
+      }))
       res.locals.activeTickets = formatTickets;
       return next();
     })
@@ -44,7 +44,7 @@ ticketsController.getActiveTickets = (req, res, next) => {
 }
 
 ticketsController.addTicket = (req, res, next) => {
-  const {  snaps_given, mentee_id, status, message } = req.body;
+  const { snaps_given, mentee_id, status, message } = req.body;
   const addTicket = {
     text: `
       INSERT INTO tickets
@@ -59,7 +59,7 @@ ticketsController.addTicket = (req, res, next) => {
     .then(ticket => {
       res.locals.ticketId = ticket.rows[0]._id;
       res.locals.timestamp = ticket.rows[0].timestamp;
-      res.locals.menteeId = ticket.rows[0].mentee_id; 
+      res.locals.menteeId = ticket.rows[0].mentee_id;
       return next();
     })
     .catch(err => next({
@@ -69,7 +69,7 @@ ticketsController.addTicket = (req, res, next) => {
 
 
 ticketsController.updateTicketStatus = (req, res, next) => {
-  const { status, ticketId} = req.body;
+  const { status, ticketId } = req.body;
   const updateTicket = {
     text: `
       UPDATE tickets
@@ -92,7 +92,7 @@ ticketsController.cancelTicket = (req, res, next) => {
   // const messageId = JSON.stringify(req.body.messageId);
   // const status = JSON.stringify(req.body.status);
   // const mentorId = JSON.stringify(req.body.mentorId);
-  const cancelTicket = { 
+  const cancelTicket = {
     text: `UPDATE tickets
     SET status = $1, mentor_id = $3
     WHERE _id = $2;`,
@@ -106,28 +106,28 @@ ticketsController.cancelTicket = (req, res, next) => {
     .catch(err => next({
       log: `Error in middleware ticketsController.cancelTicket: ${err}`
     }));
+}
 
 
+ticketsController.acceptTicket = (req, res, next) => {
+  const status = JSON.stringify(req.body.status);
+  const messageId = JSON.stringify(req.body.messageId)
+  const mentorId = JSON.stringify(req.body.mentorId);
 
-ticketsController.acceptTicket = (req,res,next) => {
-const status = JSON.stringify(req.body.status);
-const messageId = JSON.stringify(req.body.messageId)
-const mentorId = JSON.stringify(req.body.mentorId);
-
-const text = `
+  const text = `
 UPDATE tickets
 SET status = $1, mentor_id = $3
 WHERE _id = $2;`;
-const values = [status, messageId, mentorId];
+  const values = [status, messageId, mentorId];
 
-db.query(text,values)
-.then((response) =>{
-  return next();
-})
-.catch(err => {
-  console.log('Error: ',err);
-  return next(err)
-});
+  db.query(text, values)
+    .then((response) => {
+      return next();
+    })
+    .catch(err => {
+      console.log('Error: ', err);
+      return next(err)
+    });
 
 }
 
