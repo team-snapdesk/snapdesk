@@ -13,7 +13,8 @@ import * as types from '../constants/actionTypes';
 
 const roomState = {
   roomName: '',
-  roomId: 1
+  roomId: 1,
+  roomAdmin: 1,
 }
 
 const roomsReducer = (state = roomState, action) => {
@@ -24,6 +25,7 @@ const roomsReducer = (state = roomState, action) => {
         ...state,
         activeRoom: action.payload.roomName,
         roomId: action.payload.roomId,
+        roomAdmin: action.payload.roomAdmin
       };
 
     default:

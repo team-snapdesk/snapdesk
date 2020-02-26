@@ -18,10 +18,10 @@ roomsController.addRooms = (req, res, next) => {
   };
   db.query(addRoom)
     .then((room) => {
-      console.log('ROOM RESPONSE: ', room);
+      // console.log('ROOM RESPONSE: ', room);
       res.locals.roomId = room.rows[0]._id;
-      res.locals.roomName = room.rows[0].roomName;
-      res.locals.roomAdmin = room.rows[0].roomAdmin;
+      res.locals.roomName = room.rows[0].name;
+      res.locals.roomAdmin = room.rows[0].admin_id;
       return next();
     })
     .catch((err) =>
