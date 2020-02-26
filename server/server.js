@@ -33,7 +33,7 @@ app.use('/login', loginRouter);
 
 // handle static files
 app.use('/build', express.static(path.join(__dirname, '../build')));
-app.use(express.static(path.join(__dirname, '../img')));
+app.use('/image', express.static(path.join(__dirname, '../img')));
 
 // response with main app
 if (process.env.NODE_ENV === 'production') {

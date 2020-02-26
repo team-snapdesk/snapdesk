@@ -38,4 +38,11 @@ apiRouter.put('/tickets/cancel',
   (req, res) => res.status(200).json(res.locals)
 )
 
+
+apiRouter.put('/tickets/accept',
+  jwtsController.isLoggedIn,
+  ticketsController.acceptTicket,
+  (req, res) => res.status(200).json(res.locals)
+);
+
 module.exports = apiRouter;
