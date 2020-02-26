@@ -1,4 +1,4 @@
-defaultValue/**
+/**
  * ************************************
  *
  * @module  BystanderTicketBox
