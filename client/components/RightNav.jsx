@@ -7,7 +7,11 @@ import Button from 'react-bootstrap/Button';
 const RightNav = props => (
   <Navbar bg="dark" variant="dark" className="flex-column navbar-right">
     <h3>Active Tickets</h3>
-    {props.ticketsCount}
+    <div className="active-tickets flex-container">
+      <h4>{props.ticketsCount}</h4>
+    </div>
+    <hr />
+    <h3>Leaderboard</h3>
   </Navbar>
 );
 
