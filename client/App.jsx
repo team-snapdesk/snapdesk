@@ -13,6 +13,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Wrapper from './containers/Wrapper';
+import AdminDashboard from './components/admin/AdminDashboard';
 
 const mapStateToProps = ({ user: { isLoggedIn } }) => ({
     isLoggedIn
@@ -53,9 +54,9 @@ class App extends Component {
                 {/* <Wrapper /> */}
                 <BrowserRouter>
                     <Switch>
-                        <Route path="/" component={Wrapper} />
-                        {/* <Route path="/admin" exact component={AdminDashboard} />
-                    <Route path="/signout" exact component={Signout} /> */}
+                        <Route path="/" exact component={Wrapper} />
+                        <Route path="/admin" exact component={AdminDashboard} />
+                        {/* <Route path="/signout" exact component={Signout} /> */}
                     </Switch>
                 </BrowserRouter>
             </div>

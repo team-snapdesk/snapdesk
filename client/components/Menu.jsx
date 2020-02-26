@@ -21,7 +21,7 @@ const isActive = (history, path) => {
 
 const Menu = ({ history }) => {
     return (
-        <div id="menu-div">
+        <nav id="menu-div">
             <ul className="nav nav-tabs bg-warning">
                 <li className="nav-item">
                     <Link
@@ -53,7 +53,7 @@ const Menu = ({ history }) => {
                     </Link>
                 </li>
             </ul>
-        </div>
+        </nav>
     );
 };
 
