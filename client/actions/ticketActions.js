@@ -10,27 +10,27 @@
  */
 
 // import actionType constants
-import axios from 'axios';
-import * as types from '../constants/actionTypes';
+import axios from "axios";
+import * as types from "../constants/actionTypes";
 
 export const postTicket = () => (dispatch, getState) =>
   axios
-    .post('/api/tickets', {
+    .post("/api/tickets", {
       mentee_id: getState().user.userId,
       message: getState().tickets.messageInput,
-      status: 'active',
-      snaps_given: getState().tickets.messageRating,
+      status: "active",
+      snaps_given: getState().tickets.messageRating
     })
     .then(({ data }) => {
       if (!data.isLoggedIn) {
         dispatch({
           type: types.USER_LOGOUT,
-          payload: data,
-        })
-      }
-      else {
+          payload: data
+        });
+      } else {
         dispatch({
           type: types.POST_TICKET,
+
           payload: data,
         })
       }
@@ -54,32 +54,34 @@ export const getTickets = () => dispatch =>
       }
     })
 
+
 export const updateMessage = event => ({
   type: types.UPDATE_MESSAGE,
-  payload: event.target.value,
+  payload: event.target.value
 });
 
 export const updateRating = event => ({
   type: types.UPDATE_RATING,
+
   payload: event.target.value,
 });
 
 export const deleteTicket = id => (dispatch, getState) =>
   axios
-    .put('/api/tickets/delete', {
+    .put("/api/tickets/delete", {
       ticketId: id,
-      status: 'deleted',
+      status: "deleted"
     })
     .then(({ data }) => {
       if (!data.isLoggedIn) {
         dispatch({
           type: types.USER_LOGOUT,
-          payload: data,
-        })
-      }
-      else {
+          payload: data
+        });
+      } else {
         dispatch({
           type: types.DELETE_TICKET,
+
           payload: id,
         })
       }
@@ -110,6 +112,14 @@ export const deleteTicket = id => (dispatch, getState) =>
 
 // END CODE REVIEW ------------
 
+
+export const resolveTicket = id => ({
+  type: types.RESOLVE_TICKET,
+  payload: id
+});
+
+
+
 export const acceptTicket = id => (dispatch, getState) =>
   axios
     .put('/api/tickets/accept', {
@@ -135,11 +145,11 @@ export const acceptTicket = id => (dispatch, getState) =>
         })
       }
     })
-//-------------
+
 export const cancelAccept = id => ({
   type: types.CANCEL_ACCEPT,
-  payload: id,
-})
+  payload: id
+});
 
 // export const acceptTicket = event => (dispatch, getState) => {
 //   event.preventDefault();
