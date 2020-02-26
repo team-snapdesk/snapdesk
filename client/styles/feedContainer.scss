@@ -1,4 +1,22 @@
 
+.feed-container{
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.ticket-display {
+  max-height: 700px;
+  min-height: 700px;
+}
+
+.snap-rating {
+  :hover {
+    cursor: pointer;
+  }
+}
+
 #fill {
   fill: $secondary;
   stroke: $secondary;
