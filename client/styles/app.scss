@@ -2,8 +2,14 @@
 @import 'variables';
 @import 'login';
 @import 'feedContainer';
+@import 'navbar';
 
 
 body {
   background-color: $tertiary !important;
+}
+
+.row {
+  height: 100vh;
+  margin: 0!important;
 }
