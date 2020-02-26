@@ -65,8 +65,8 @@ const ticketsReducer = (state = ticketState, action) => {
 
       updatedTickets = state.activeTickets.map((ticket) => {
         if (ticket.messageId === action.payload.id) {
-          ticket.status = 'pending'
-          ticket.mentorId = action.payload.mentorId
+          ticket.status = 'pending';
+          ticket.mentorId = action.payload.mentorId;
         }
         return ticket;
       })
@@ -81,8 +81,8 @@ const ticketsReducer = (state = ticketState, action) => {
         if (ticket.messageId == action.payload) {
           ticket.status = 'active'
           ticket.mentorId = null
-
         }
+        return ticket;
       });
       return {
         ...state,
