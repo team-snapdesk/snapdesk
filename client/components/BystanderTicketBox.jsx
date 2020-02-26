@@ -16,37 +16,37 @@ class BystanderTicketBox extends Component {
   constructor(props) {
     super(props);
   }
-  
-  render () {
+
+  render() {
     if (this.props.ticket.status === 'active') {
       //ticket published by another user but has not been pick up yet
       //Accept button will be active but Cancel button will not and mentee is anonymous
       buttons = (
         <span>
-          <Button onClick={() => this.props.acceptTicket(this.props.messageId)}type="button" className="btn btn-success">Accept</Button>
+          <Button onClick={() => this.props.acceptTicket(this.props.ticket.messageId)} type="button" className="btn btn-success">Accept</Button>
           <Button disabled={true} type="button" className="btn btn-secondary">Cancel</Button>
-       </span>
-        )
+        </span>
+      )
     } else if (this.props.ticket.userId !== this.props.ticket.mentorId && this.props.ticket.status === 'pending') {
-       //this is when the ticket has been picked up by another mentor already
+      //this is when the ticket has been picked up by another mentor already
       //Both button will not be active and mentee is anonymous
       buttons = (
         <span>
           <Button disabled={true} type="button" className="btn btn-success">Accept</Button>
           <Button disabled={true} type="button" className="btn btn-secondary">Cancel</Button>
-       </span>
-        )
+        </span>
+      )
     } else if (this.props.ticket.userId === this.props.ticket.mentorId && this.props.ticket.status === 'pending') {
-       //user is the mentor
+      //user is the mentor
       //Cancel button is active but Accept is not. mentee userName is active
       buttons = (
         <span>
           <Button disabled={true} type="button" className="btn btn-success">Accept</Button>
-          <Button onClick={() => this.props.cancelAccept(this.props.messageId)} type="button" className="btn btn-warning">Cancel - not active</Button>
-       </span>
-        )
+          <Button onClick={() => this.props.cancelAccept(this.props.ticket.messageId)} type="button" className="btn btn-warning">Cancel - not active</Button>
+        </span>
+      )
     }
-  
+
     return (
 
       <div className="BystanderTicketBox ticketbox">

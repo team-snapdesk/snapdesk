@@ -64,10 +64,11 @@ const ticketsReducer = (state = ticketState, action) => {
     case types.ACCEPT_TICKET:
       //CODE REVIEW: <-------------------------------
       updatedTickets = state.activeTickets.map((ticket) => {
-        if (ticket.messageId == action.payload.id) {
+        if (ticket.messageId === action.payload.id) {
           ticket.status = 'pending'
-          ticket.mentorId = action.payload.userId
+          ticket.mentorId = action.payload.mentorId
         }
+        return ticket;
       })
       return {
         ...state,
@@ -76,7 +77,7 @@ const ticketsReducer = (state = ticketState, action) => {
 
     case types.CANCEL_ACCEPT:
       updatedTickets = state.activeTickets.map((ticket) => {
-        if (ticket.messageId == action.payload.id) {
+        if (ticket.messageId == action.payload.ticketId) {
           ticket.status = 'active'
           ticket.mentorId = null
         }

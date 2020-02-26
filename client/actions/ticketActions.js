@@ -33,7 +33,7 @@ export const postTicket = () => (dispatch, getState) =>
           type: types.POST_TICKET,
           payload: data,
         })
-      }     
+      }
     })
 
 export const getTickets = () => dispatch =>
@@ -51,7 +51,7 @@ export const getTickets = () => dispatch =>
           type: types.GET_TICKETS,
           payload: data.activeTickets || [],
         })
-      }     
+      }
     })
 
 export const updateMessage = event => ({
@@ -59,9 +59,9 @@ export const updateMessage = event => ({
   payload: event.target.value,
 });
 
-export const updateRating = value => ({
+export const updateRating = event => ({
   type: types.UPDATE_RATING,
-  payload: value,
+  payload: event.target.value,
 });
 
 export const deleteTicket = id => (dispatch, getState) =>
@@ -82,19 +82,60 @@ export const deleteTicket = id => (dispatch, getState) =>
           type: types.DELETE_TICKET,
           payload: id,
         })
-      }     
+      }
     })
 
-export const resolveTicket = id => ({
-  type: types.RESOLVE_TICKET,
-  payload: id,
-})
+//START CODE REVIEW -----------------
+// export const resolveTicket = id => (dispatch, getState) => 
+//   axios
+//   .put('..insert path here...', {
+//     ticketId : id,
+//     status: 'resolved',
+//     //feedback??
+//   })
+//   .then(({data}) => {
+//     if(!data.isLoggedIn) {
+//       dispatch({
+//         type: types.USER_LOGOUT,
+//         payload: data,
+//       })
+//     } 
+//     else {
+//       dispatch({
+//         type: types.RESOLVE_TICKET,
+//         payload: id,
+//       })
+//     }
+//   })
 
-export const acceptTicket = id => ({
-  type: types.ACCEPT_TICKET,
-  payload: id,
-})
+// END CODE REVIEW ------------
 
+export const acceptTicket = id => (dispatch, getState) =>
+  axios
+    .put('/api/tickets/accept', {
+      ticketId: id,
+      status: 'pending',
+      mentorId: getState().user.userId
+    })
+    .then(({ data }) => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: data,
+        })
+      }
+      else {
+        console.log('ticketId', id);
+        dispatch({
+          type: types.ACCEPT_TICKET,
+          payload: {
+            id,
+            mentorId: getState().user.userId,
+          }
+        })
+      }
+    })
+//-------------
 export const cancelAccept = id => ({
   type: types.CANCEL_ACCEPT,
   payload: id,
