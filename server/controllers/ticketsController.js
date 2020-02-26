@@ -15,13 +15,13 @@ const ticketsController = {};
 
 ticketsController.getActiveTickets = (req, res, next) => {
   const getActiveTickets= `
-    SELECT t._id, t.snaps_given, t.message, t.status, t.timestamp, t.mentee_id, u.name mentee_name
+    SELECT t._id, t.snaps_given, t.message, t.status, t.timestamp, t.mentee_id, u.name mentee_name, t.room_id, u.active_room
     FROM tickets t
     INNER JOIN users u
     ON u._id = t.mentee_id
     WHERE status = 'active'
-    AND t.room_id = u.active_room
     OR status = 'pending'
+    AND t.room_id = u.active_room
     ORDER BY t._id;
   `;
   db.query(getActiveTickets)
@@ -45,6 +45,7 @@ ticketsController.getActiveTickets = (req, res, next) => {
 }
 
 ticketsController.addTicket = (req, res, next) => {
+  console.log('ADD TICKET: ', req.body);
   const {  snaps_given, mentee_id, status, message, room_id } = req.body;
   const addTicket = {
     text: `
