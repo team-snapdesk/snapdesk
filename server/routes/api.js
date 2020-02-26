@@ -32,5 +32,17 @@ apiRouter.post('/tickets',
     (req, res) => res.status(200).json(res.locals)
 );
 
+apiRouter.put('/tickets/cancel',
+  jwtsController.isLoggedIn,
+  ticketsController.cancelTicket,
+  (req, res) => res.status(200).json(res.locals)
+)
+
+
+apiRouter.put('/tickets/accept',
+  jwtsController.isLoggedIn,
+  ticketsController.acceptTicket,
+  (req, res) => res.status(200).json(res.locals)
+);
 
 module.exports = apiRouter;

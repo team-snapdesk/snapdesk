@@ -33,7 +33,7 @@ app.use('/login', loginRouter);
 
 // handle static files
 app.use('/build', express.static(path.join(__dirname, '../build')));
-app.use(express.static(path.join(__dirname, '../img')));
+app.use('/image', express.static(path.join(__dirname, '../img')));
 
 // response with main app
 if (process.env.NODE_ENV === 'production') {
@@ -53,7 +53,7 @@ app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 400,
-    message: { err: 'An error occurred. Check server logs for detials.' },
+    message: { err: 'An error occurred. Check server logs for details.' },
   };
   const errorObj = Object.assign({}, defaultErr, err);
   console.log(errorObj.log);
