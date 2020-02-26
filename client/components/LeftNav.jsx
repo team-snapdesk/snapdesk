@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Button from 'react-bootstrap/Button';
 
 const LeftNav = props => (
-  <Navbar bg="dark" variant="dark" className="flex-column">
+  <Navbar bg="dark" variant="dark" className="flex-column navbar-left">
     <div className="top-nav">
       <Navbar.Brand href="/">
         <img
