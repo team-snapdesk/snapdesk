@@ -9,6 +9,8 @@
  * ************************************
  */
 
+ //test comment
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Wrapper from './containers/Wrapper';
