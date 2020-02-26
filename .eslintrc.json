@@ -37,6 +37,7 @@
         "no-multiple-empty-lines": "off",
         "no-prototype-builtins": "warn",
         "prefer-destructuring": "off",
-        "max-classes-per-file": "off"
+        "max-classes-per-file": "off",
+        "react/prefer-stateless-function": [0]
     }
 }
