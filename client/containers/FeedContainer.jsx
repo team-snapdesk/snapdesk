@@ -33,20 +33,20 @@ class FeedContainer extends Component {
   constructor(props) {
     super(props);
   }
-
+// query tickets on screen 
   componentWillMount() {
     this.props.getTickets();
   }
-
+// query tickets every 5 seconds
   componentDidMount() {
     this.interval = setInterval(() => this.props.getTickets(), 5000);
   }
-
+// clearing previous intervals/ resets the intervalsn and chnaging title to snapdesk
   componentWillUnmount() {
     clearInterval(this.interval);
     document.title = 'SnapDesk';
   }
-
+ // updates the titles to display active tickets
   componentDidUpdate() {
     document.title = '(' + this.props.ticketsCount + ') ' + 'SnapDesk';
   }
