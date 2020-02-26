@@ -14,7 +14,7 @@ import * as types from '../constants/actionTypes';
 const ticketState = {
   totalSnaps: 0,
   messageInput: '',
-  messageRating: '',
+  messageRating: 1,
   activeTickets: [],
   ticketsCount: 0,
 };
@@ -30,13 +30,7 @@ const ticketsReducer = (state = ticketState, action) => {
         activeTickets: [],
         ticketsCount: 0,
       }
-    // case types.USER_LOGIN:
-    //   console.log(action);
-    //   const isLoggedIn = action.payload.isLoggedIn;
-    //   return {
-    //     ...state,
-    //     isLoggedIn
-    //   };
+
     case types.GET_TICKETS:
       return {
         ...state,
