@@ -31,8 +31,9 @@ apiRouter.post('/tickets', jwtsController.isLoggedIn, ticketsController.addTicke
   res.status(200).json(res.locals)
 );
 
-apiRouter.post('/rooms', jwtsController.isLoggedIn, roomsController.addRooms, (req, res) =>
-  res.status(200)
-);
+apiRouter.post('/rooms', jwtsController.isLoggedIn, roomsController.addRooms, (req, res) => {
+  console.log('END OF ROOMS POST REQUEST', res.locals);
+  res.status(200);
+})
 
-apiRouter.module.exports = apiRouter;
+module.exports = apiRouter;

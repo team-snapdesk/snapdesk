@@ -13,7 +13,8 @@
 import axios from 'axios';
 import * as types from '../constants/actionTypes';
 
-export const addRoom = (name) => (dispatch, getState) =>
+export const addRoom = (name) => (dispatch, getState) => {
+  console.log('ADD ROOM: ', name);
   // this part is why thunk is necessary to delay the firing of the dispatch handlers
   axios
     .post('/api/rooms', {
@@ -23,6 +24,7 @@ export const addRoom = (name) => (dispatch, getState) =>
     })
     .then(({ data }) => {
       // check if the returned user is logged in, if not, reroute
+      console.log('POST ROOM ACTION DATA: ', data);
       if (!data.isLoggedIn) {
         dispatch({
           type: types.USER_LOGOUT,
@@ -37,3 +39,4 @@ export const addRoom = (name) => (dispatch, getState) =>
         })
       }     
     })
+  }
