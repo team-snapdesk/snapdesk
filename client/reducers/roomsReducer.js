@@ -12,17 +12,24 @@
 import * as types from '../constants/actionTypes';
 
 const roomState = {
-  activeRoom: 1,
+  roomName: '',
+  roomId: 1
 }
 
 const roomsReducer = (state = roomState, action) => {
   
   switch (action.type) {
     case types.ADD_ROOM:
-      return state;
+      return {
+        ...state,
+        activeRoom: action.payload.roomName,
+        roomId: action.payload.roomId,
+      };
 
     default:
       return state;
   }
 
 }
+
+export default roomsReducer;
