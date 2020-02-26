@@ -1,28 +1,34 @@
 /**
  * ************************************
  *
- * @module
- * @author
- * @date
- * @description
+ * @module  roomsReducer
+ * @author team snapdesk
+ * @date 02/25/20
+ * @description reducer for rooms data
  *
  * ************************************
  */
 
 import * as types from "../constants/actionTypes";
 
-const roomsState = {
-  activeRoom: { name: "Choose a room" },
+const roomState = {
+  activeRoom: { id: null, name: "Choose a room", admin: null },
   rooms: []
 };
 
-const roomsReducer = (state = roomsState, action) => {
+const roomsReducer = (state = roomState, action) => {
   switch (action.type) {
     case types.LOAD_ROOMS:
       return {
         ...state,
         activeRoom: action.payload.activeRoom,
         rooms: action.payload.rooms
+      };
+
+    case types.ADD_ROOM:
+      return {
+        ...state,
+        activeRoom: action.payload.activeRoom
       };
 
     default:

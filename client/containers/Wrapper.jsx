@@ -52,6 +52,7 @@ class Wrapper extends Component {
               userName={this.props.userName}
               activeRoom={this.props.activeRoom}
               rooms={this.props.rooms}
+              addRoom={this.props.addRoom}
             />
           </div>
           <div className="col-8">

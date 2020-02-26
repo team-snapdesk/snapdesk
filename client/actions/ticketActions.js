@@ -14,20 +14,25 @@ import axios from "axios";
 import * as types from "../constants/actionTypes";
 
 export const postTicket = () => (dispatch, getState) =>
+  // this part is why thunk is necessary to delay the firing of the dispatch handlers
   axios
-    .post("/api/tickets", {
+    .post('/api/tickets', {
+      // POST request to create a new ticket
       mentee_id: getState().user.userId,
       message: getState().tickets.messageInput,
       status: "active",
       snaps_given: getState().tickets.messageRating
     })
     .then(({ data }) => {
+      // check if the returned user is logged in, if not, reroute
       if (!data.isLoggedIn) {
         dispatch({
           type: types.USER_LOGOUT,
-          payload: data
-        });
-      } else {
+          payload: data,
+        })
+      }
+      else {
+        // if they're still logged in, continue with new ticket request
         dispatch({
           type: types.POST_TICKET,
           payload: data
@@ -36,19 +41,24 @@ export const postTicket = () => (dispatch, getState) =>
     });
 
 export const getTickets = () => dispatch =>
-  axios.get("/api/tickets").then(({ data }) => {
-    if (!data.isLoggedIn) {
-      dispatch({
-        type: types.USER_LOGOUT,
-        payload: data
-      });
-    } else {
-      dispatch({
-        type: types.GET_TICKETS,
-        payload: data.activeTickets || []
-      });
-    }
-  });
+  // get all active tickets from the DB. the timer for this is configurable from FeedContainer.jsx
+  axios
+    .get('/api/tickets')
+    .then(({ data }) => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: data,
+        })
+      }
+      // if the user is logged in, get all active tickets. if the DB request returns undefined, forward an empty array to reducer.
+      else {
+        dispatch({
+          type: types.GET_TICKETS,
+          payload: data.activeTickets || [],
+        })
+      }     
+    })
 
 export const updateMessage = event => ({
   type: types.UPDATE_MESSAGE,
@@ -61,6 +71,7 @@ export const updateRating = event => ({
 });
 
 export const deleteTicket = id => (dispatch, getState) =>
+  // don't actually delete the ticket from the DB, just set status to deleted so it isn't displayed
   axios
     .put("/api/tickets/delete", {
       ticketId: id,
@@ -75,11 +86,20 @@ export const deleteTicket = id => (dispatch, getState) =>
       } else {
         dispatch({
           type: types.DELETE_TICKET,
+<<<<<<< HEAD
           payload: id
         });
       }
     });
 
+=======
+          payload: id,
+        })
+      }     
+    })
+    
+// none of these are working yet
+>>>>>>> 6182353330c21d1f0845763acef3c48a45f47807
 export const resolveTicket = id => ({
   type: types.RESOLVE_TICKET,
   payload: id
@@ -92,6 +112,7 @@ export const acceptTicket = id => ({
 
 export const cancelAccept = id => ({
   type: types.CANCEL_ACCEPT,
+<<<<<<< HEAD
   payload: id
 });
 
@@ -102,3 +123,7 @@ export const cancelAccept = id => ({
 //     payload: ticket,
 //   })
 // }
+=======
+  payload: id,
+})
+>>>>>>> 6182353330c21d1f0845763acef3c48a45f47807

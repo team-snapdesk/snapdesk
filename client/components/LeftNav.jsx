@@ -17,9 +17,16 @@ const LeftNav = props => {
   roomList.push(
     <NavDropdown.Item key={roomList.length}>
       <InputGroup className="createRoom">
-        <FormControl type="text" placeholder="Room name" />
+        <FormControl id="roomForm" type="text" placeholder="Room name" />
         <InputGroup.Append>
-          <Button>Create</Button>
+          <Button
+            onClick={() => {
+              // e.preventDefault();
+              props.addRoom(roomForm.value);
+            }}
+          >
+            Create
+          </Button>
         </InputGroup.Append>
       </InputGroup>
     </NavDropdown.Item>

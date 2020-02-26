@@ -29,6 +29,7 @@ jwtsController.loginUser = (req, res, next) => {
 
 jwtsController.isLoggedIn = (req, res, next) => {
   try {
+    // console.log('IS LOGGED IN');
     jwt.verify(req.cookies.jwt_token, jwtSecret.secret, (err, data) => {
       // if not logged in, immediately report to client
       if (err) return res.status(200).json({ isLoggedIn: false });
