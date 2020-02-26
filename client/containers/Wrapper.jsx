@@ -55,9 +55,7 @@ class Wrapper extends Component {
               addRoom={this.props.addRoom}
             />
           </div>
-          <div className="col-8">
-            <FeedContainer />
-          </div>
+          <div className="col-8">{/* <FeedContainer /> */}</div>
           <div className="col-2">
             <RightNav ticketsCount={this.props.ticketsCount} />
           </div>

@@ -9,13 +9,13 @@
  * ************************************
  */
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as ticketActions from '../actions/ticketActions';
-import MenteeTicketBox from '../components/MenteeTicketBox';
-import BystanderTicketBox from '../components/BystanderTicketBox';
-import TicketCreator from '../components/TicketCreator';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as ticketActions from "../actions/ticketActions";
+import MenteeTicketBox from "../components/MenteeTicketBox";
+import BystanderTicketBox from "../components/BystanderTicketBox";
+import TicketCreator from "../components/TicketCreator";
 
 const mapStateToProps = state => ({
   userId: state.user.userId,
@@ -73,32 +73,29 @@ class FeedContainer extends Component {
               ticket={this.props.activeTickets[i]}
               key={this.props.activeTickets[i].messageId}
             />
-            )
-            // otherwise render the mentee ticket box
-          } else {
-            ticketBox = (
-              <MenteeTicketBox
+          );
+          // otherwise render the mentee ticket box
+        } else {
+          ticketBox = (
+            <MenteeTicketBox
               deleteTicket={this.props.deleteTicket}
               resolveTicket={this.props.resolveTicket}
               messageInput={this.props.activeTickets[i].messageInput}
               messageRating={this.props.activeTickets[i].messageRating}
               ticket={this.props.activeTickets[i]}
               key={this.props.activeTickets[i].messageId}
-              />
-              )
-          }
-          activeTickets.push(ticketBox);
+            />
+          );
         }
-
         activeTickets.push(ticketBox);
       }
+
+      activeTickets.push(ticketBox);
     }
 
     return (
       <div>
-        <div className="ticketDisplay overflow-auto">
-          {activeTickets}
-        </div>
+        <div className="ticketDisplay overflow-auto">{activeTickets}</div>
         <div className="ticketCreator">
           <TicketCreator {...this.props} key={this.props.userId} />
         </div>
