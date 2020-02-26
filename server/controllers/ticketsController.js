@@ -89,9 +89,6 @@ ticketsController.updateTicketStatus = (req, res, next) => {
 
 ticketsController.cancelTicket = (req, res, next) => {
   const { status, messageId, mentorId } = req.body;
-  // const messageId = JSON.stringify(req.body.messageId);
-  // const status = JSON.stringify(req.body.status);
-  // const mentorId = JSON.stringify(req.body.mentorId);
   const cancelTicket = {
     text: `UPDATE tickets
     SET status = $1, mentor_id = $3
@@ -110,17 +107,17 @@ ticketsController.cancelTicket = (req, res, next) => {
 
 
 ticketsController.acceptTicket = (req, res, next) => {
-  const status = JSON.stringify(req.body.status);
-  const messageId = JSON.stringify(req.body.messageId)
-  const mentorId = JSON.stringify(req.body.mentorId);
+  const { status, ticketId, mentorId } = req.body;
+  const acceptTicket = {
+    text: `
+      UPDATE tickets
+      SET status = $1, mentor_id = $3
+      WHERE _id = $2;
+    `,
+    values: [status, ticketId, mentorId],
+  }
 
-  const text = `
-UPDATE tickets
-SET status = $1, mentor_id = $3
-WHERE _id = $2;`;
-  const values = [status, messageId, mentorId];
-
-  db.query(text, values)
+  db.query(acceptTicket)
     .then((response) => {
       return next();
     })
