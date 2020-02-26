@@ -19,8 +19,8 @@ ticketsController.getActiveTickets = (req, res, next) => {
     FROM tickets t
     INNER JOIN users u
     ON u._id = t.mentee_id
-    WHERE status = 'active'
-    OR status = 'pending'
+    WHERE (status = 'active'
+    OR status = 'pending')
     AND t.room_id = u.active_room
     ORDER BY t._id;
   `;
@@ -71,6 +71,7 @@ ticketsController.addTicket = (req, res, next) => {
 
 
 ticketsController.updateTicketStatus = (req, res, next) => {
+  console.log('UPDATE REQ BODY: ', req.body);
   const { ticketId, status, mentorId } = req.body;
   const updateTicket = {
     text: `
