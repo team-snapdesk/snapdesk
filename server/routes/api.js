@@ -14,11 +14,18 @@ apiRouter.get('/user', jwtsController.isLoggedIn, userController.getData, (req, 
 );
 
 apiRouter.put(
-  '/tickets/delete',
+  '/tickets/update',
   jwtsController.isLoggedIn,
   ticketsController.updateTicketStatus,
   (req, res) => res.status(200).json(res.locals)
 );
+
+// apiRouter.put(
+//   '/tickets/accept',
+//   jwtsController.isLoggedIn,
+//   ticketsController.updateTicketStatus,
+//   (req, res) => res.status(200).json(res.locals)
+// );
 
 apiRouter.get(
   '/tickets',

@@ -74,9 +74,10 @@ export const updateRating = event => ({
 export const deleteTicket = id => (dispatch, getState) =>
   // don't actually delete the ticket from the DB, just set status to deleted so it isn't displayed
   axios
-    .put('/api/tickets/delete', {
+    .put('/api/tickets/update', {
       ticketId: id,
       status: 'deleted',
+      mentorId: null,
     })
     .then(({ data }) => {
       if (!data.isLoggedIn) {
@@ -99,12 +100,48 @@ export const resolveTicket = id => ({
   payload: id,
 })
 
-export const acceptTicket = id => ({
-  type: types.ACCEPT_TICKET,
-  payload: id,
-})
+export const acceptTicket = id => (dispatch, getState) =>
+// don't actually delete the ticket from the DB, just set status to deleted so it isn't displayed
+axios
+  .put('/api/tickets/update', {
+    ticketId: id,
+    status: 'pending',
+    mentorId: getState().user.userId,
+  })
+  .then(({ data }) => {
+    if (!data.isLoggedIn) {
+      dispatch({
+        type: types.USER_LOGOUT,
+        payload: data,
+      })
+    }
+    else {
+      dispatch({
+        type: types.ACCEPT_TICKET,
+        payload: id,
+      })
+    }     
+  })
 
-export const cancelAccept = id => ({
-  type: types.CANCEL_ACCEPT,
-  payload: id,
-})
+export const cancelAccept = id => dispatch =>
+// don't actually delete the ticket from the DB, just set status to deleted so it isn't displayed
+axios
+  .put('/api/tickets/update', {
+    ticketId: id,
+    status: 'active',
+    mentorId: null,
+  })
+  .then(({ data }) => {
+    if (!data.isLoggedIn) {
+      dispatch({
+        type: types.USER_LOGOUT,
+        payload: data,
+      })
+    }
+    else {
+      dispatch({
+        type: types.CANCEL_ACCEPT,
+        payload: id,
+      })
+    }     
+  })

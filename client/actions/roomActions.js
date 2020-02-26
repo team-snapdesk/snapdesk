@@ -34,7 +34,7 @@ export const addRoom = (name) => (dispatch, getState) => {
       else {
         // if they're still logged in, continue with new ticket request
         dispatch({
-          type: types.POST_TICKET,
+          type: types.ADD_ROOM,
           payload: data,
         })
       }     

@@ -70,14 +70,14 @@ ticketsController.addTicket = (req, res, next) => {
 
 
 ticketsController.updateTicketStatus = (req, res, next) => {
-  const { ticketId, status } = req.body;
+  const { ticketId, status, mentorId } = req.body;
   const updateTicket = {
     text: `
       UPDATE tickets
-      SET status = $1
+      SET status = $1, mentor_id = $3
       WHERE _id = $2;
     `,
-    values: [status, ticketId]
+    values: [status, ticketId, mentorId]
   }
 
   db.query(updateTicket)
