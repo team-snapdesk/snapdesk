@@ -52,13 +52,7 @@ class FeedContainer extends Component {
   }
 
   render() {
-    // if there are no active tickets, display a message in the background saying nothing here
-    // do not render it when a ticket is added
-
-    // build activeTickets list
-    // later add conditionals to check which box should be rendered based on the posterId vs logged in user
     let activeTickets;
-    // console.log('ACTIVE TICKETS: ', this.props.activeTickets);
     if (!this.props.activeTickets || this.props.activeTickets.length === 0) {
       activeTickets = <p>No active tickets</p>;
     } else {
@@ -72,8 +66,6 @@ class FeedContainer extends Component {
             userId={this.props.userId}
             cancelAccept={this.props.cancelAccept}
             acceptTicket={this.props.acceptTicket}
-            messageInput={this.props.activeTickets[i].messageInput}
-            messageRating={this.props.activeTickets[i].messageRating}
             ticket={this.props.activeTickets[i]}
             key={this.props.activeTickets[i].messageId}
             />
@@ -83,8 +75,6 @@ class FeedContainer extends Component {
               <MenteeTicketBox
               deleteTicket={this.props.deleteTicket}
               resolveTicket={this.props.resolveTicket}
-              messageInput={this.props.activeTickets[i].messageInput}
-              messageRating={this.props.activeTickets[i].messageRating}
               ticket={this.props.activeTickets[i]}
               key={this.props.activeTickets[i].messageId}
               />
