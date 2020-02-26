@@ -20,6 +20,7 @@ ticketsController.getActiveTickets = (req, res, next) => {
     INNER JOIN users u
     ON u._id = t.mentee_id
     WHERE status = 'active'
+    AND t.room_id = u.active_room
     OR status = 'pending'
     ORDER BY t._id;
   `;
@@ -44,16 +45,16 @@ ticketsController.getActiveTickets = (req, res, next) => {
 }
 
 ticketsController.addTicket = (req, res, next) => {
-  const {  snaps_given, mentee_id, status, message } = req.body;
+  const {  snaps_given, mentee_id, status, message, room_id } = req.body;
   const addTicket = {
     text: `
       INSERT INTO tickets
-      (snaps_given, mentee_id, status, message, timestamp)
+      (snaps_given, mentee_id, status, message, timestamp, room_id)
       VALUES
-      ($1, $2, $3, $4, NOW())
+      ($1, $2, $3, $4, NOW(), $5)
       RETURNING _id, timestamp, mentee_id;
     `,
-    values: [snaps_given, mentee_id, status, message]
+    values: [snaps_given, mentee_id, status, message, room_id]
   }
   db.query(addTicket)
     .then(ticket => {

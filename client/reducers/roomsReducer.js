@@ -12,9 +12,8 @@
 import * as types from '../constants/actionTypes';
 
 const roomState = {
-  roomName: '',
-  roomId: 1,
-  roomAdmin: 1,
+  activeRoom: { id: null, name: "Choose a room", admin: null},
+  rooms: []
 }
 
 const roomsReducer = (state = roomState, action) => {
