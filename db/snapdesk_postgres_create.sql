@@ -1,6 +1,7 @@
 CREATE TABLE "users" (
 	"_id" serial NOT NULL,
 	"name" varchar(255),
+	"active_room" integer,
 	"email" varchar(255),
 	"bio" TEXT,
 	"github_id" integer NOT NULL UNIQUE,
@@ -14,6 +15,7 @@ CREATE TABLE "users" (
 
 CREATE TABLE "tickets" (
 	"_id" serial NOT NULL,
+	"room_id" integer NOT NULL,
 	"topic" varchar(255),
 	"snaps_given" integer NOT NULL,
 	"mentee_id" integer NOT NULL,
@@ -27,9 +29,18 @@ CREATE TABLE "tickets" (
   OIDS=FALSE
 );
 
-
+CREATE TABLE "rooms" (
+	"_id" serial NOT NULL,
+	"name" varchar(255) NOT NULL,
+	"admin_id" integer NOT NULL,
+	CONSTRAINT "rooms_pk" PRIMARY KEY ("_id")
+) WITH (
+  OIDS=FALSE
+);
 
 
 ALTER TABLE "tickets" ADD CONSTRAINT "tickets_fk0" FOREIGN KEY ("mentee_id") REFERENCES "users"("_id");
 ALTER TABLE "tickets" ADD CONSTRAINT "tickets_fk1" FOREIGN KEY ("mentor_id") REFERENCES "users"("_id");
-
+ALTER TABLE "rooms" ADD CONSTRAINT "rooms_fk0" FOREIGN KEY ("admin_id") REFERENCES "users"("_id");
+ALTER TABLE "tickets" ADD CONSTRAINT "tickets_fk2" FOREIGN KEY ("room_id") REFERENCES "rooms"("_id");
+ALTER TABLE "users" ADD CONSTRAINT "users_fk0" FOREIGN KEY ("active_room") REFERENCES "rooms"("_id");

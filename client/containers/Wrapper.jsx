@@ -11,8 +11,8 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as ticketActions from '../actions/ticketActions';
 import * as userActions from '../actions/userActions';
+import * as roomActions from '../actions/roomActions';
 import LeftNav from '../components/LeftNav';
 import RightNav from '../components/RightNav';
 import FeedContainer from './FeedContainer';
@@ -23,10 +23,10 @@ const mapStateToProps = state => ({
   leaderBoard: state.tickets.leaderBoard,
   ticketsCount: state.tickets.ticketsCount,
   userAvatar: state.user.userAvatar,
-  userName:state.user.userName,
+  userName: state.user.userName,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(userActions, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({...roomActions, ...userActions}, dispatch)
 
 class Wrapper extends Component {
   constructor(props) {
@@ -42,7 +42,7 @@ class Wrapper extends Component {
       <div className="wrapper">
         <div className="row align-items-start">
           <div className="col-2">
-            <LeftNav url={this.props.userAvatar} userName={this.props.userName} />
+            <LeftNav url={this.props.userAvatar} userName={this.props.userName} addRoom={this.props.addRoom} />
           </div>
           <div className="col-8">
             <FeedContainer />

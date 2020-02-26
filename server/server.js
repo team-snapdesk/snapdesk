@@ -11,16 +11,14 @@ const PORT = 3000;
 /**
  * REQUIRE IN ROUTERS HERE
  */
+
 const apiRouter = require('./routes/api');
 const loginRouter = require('./routes/login');
 
 /**
- * REQUIRE IN MIDDLEWARE HERE
- */
-
-/**
  * Handle parsing of the body and cookies
  */
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -28,6 +26,7 @@ app.use(cookieParser());
 /**
  *  Route handlers
  */
+
 app.use('/api', apiRouter);
 app.use('/login', loginRouter);
 
@@ -37,9 +36,7 @@ app.use(express.static(path.join(__dirname, '../img')));
 
 // response with main app
 if (process.env.NODE_ENV === 'production') {
-  app.get('/', (req, res) =>
-    res.status(200).sendFile(path.resolve(__dirname, '../index.html'))
-  );
+  app.get('/', (req, res) => res.status(200).sendFile(path.resolve(__dirname, '../index.html')));
 }
 
 // catch-all route handler for any requests to an unknown route
@@ -53,7 +50,7 @@ app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',
     status: 400,
-    message: { err: 'An error occurred. Check server logs for detials.' },
+    message: { err: 'An error occurred. Check server logs for detials.' }
   };
   const errorObj = Object.assign({}, defaultErr, err);
   console.log(errorObj.log);

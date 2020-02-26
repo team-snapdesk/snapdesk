@@ -29,10 +29,15 @@ const LeftNav = props => (
         {props.userName}{" "}
       </h4>
     </Nav.Link>
-    <InputGroup className="createRoom">
-      <FormControl type="text" placeholder="Room name" />
+    <InputGroup className="createRoom" >
+      <FormControl id="roomForm" type="text" placeholder="Room name" />
       <InputGroup.Append>
-        <Button>Create</Button>
+        <Button onClick={() => {
+          // e.preventDefault();
+          props.addRoom(roomForm.value)}}
+          >
+            Create
+        </Button>
       </InputGroup.Append>
     </InputGroup>
     <Nav.Link
