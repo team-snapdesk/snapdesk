@@ -128,7 +128,26 @@ WHERE _id = $2;`;
       console.log('Error: ', err);
       return next(err)
     });
+};
 
-}
+
+
+ticketsController.resolveTicket = (req, res, next) =>{
+  const { status, messageId, messageRating, feedback } = req.body;
+  const resolveTicket = {
+    text: `UPDATE tickets
+    SET status = $1, snaps_given = $3, feedback = $4
+    WHERE _id = $2;`,
+    values: [status, messageId, messageRating, feedback]
+  }
+  db.query(resolveTicket)
+  .then((result) => {
+    return next();
+  })
+  .catch(err =>{
+    console.log('Error: ', err);
+    return next(err);
+  });
+};
 
 module.exports = ticketsController;
