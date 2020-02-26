@@ -22,4 +22,3 @@ leaderboardController.getLeaderBoard = (req, res, next) => {
 }
 
 module.exports = leaderboardController;
-
