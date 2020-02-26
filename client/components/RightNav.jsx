@@ -1,11 +1,14 @@
 import React from 'react';
-import { Nav } from 'react-bootstrap';
+// import bootstrap components
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import Button from 'react-bootstrap/Button';
 
 const RightNav = props => (
-  <Nav defaultActiveKey="/feed" className="flex-column justify-content-end">
-    <Nav.Item>Active Tickets: {props.ticketsCount}</Nav.Item>
-    <Nav.Item>Leaderboard: </Nav.Item>
-  </Nav>
+  <Navbar bg="dark" variant="dark" className="flex-column navbar-right">
+    <h3>Active Tickets</h3>
+    {props.ticketsCount}
+  </Navbar>
 );
 
 export default RightNav;
