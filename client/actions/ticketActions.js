@@ -80,7 +80,6 @@ export const deleteTicket = id => (dispatch, getState) =>
       } else {
         dispatch({
           type: types.DELETE_TICKET,
-
           payload: id,
         })
       }
