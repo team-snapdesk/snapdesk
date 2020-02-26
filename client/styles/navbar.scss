@@ -48,5 +48,24 @@
   height: 100%;
   h3 {
     color: $tertiary;
+    margin: 0;
+  }
+  h4 {
+    color: $tertiary;
+    margin: 0;
+    padding: .8em;
+  }
+  hr {
+    border-top: 1px solid $secondary;
+    width: 100%;
+  }
+  .active-tickets {
+    height: 48px;
+    width: 48px;
+    border: .2em solid $primary;
+    border-radius: .2em;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
   }
 }
