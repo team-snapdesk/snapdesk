@@ -11,6 +11,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Wrapper from './containers/Wrapper';
 
 const mapStateToProps = ({ user: { isLoggedIn } }) => ({
@@ -30,8 +31,10 @@ class App extends Component {
         if (!isLoggedIn) {
             return (
                 <div id="landing">
+                    {/* /login/oauth is the route on the bakend that submit leads to */}
                     <form id="login-form" method="GET" action="/login/oauth">
                         <img id="logo" src="logo2.png" alt="" />
+                        {/* GitHub OAuth button */}
                         <button
                             className="btn btn-outline-primary btn-lg"
                             id="github-login"
@@ -44,9 +47,17 @@ class App extends Component {
             );
         }
 
+        // if we ARE logged in, return our Wrapper component
         return (
             <div id="mainBackground">
-                <Wrapper />
+                {/* <Wrapper /> */}
+                <BrowserRouter>
+                    <Switch>
+                        <Route path="/" component={Wrapper} />
+                        {/* <Route path="/admin" exact component={AdminDashboard} />
+                    <Route path="/signout" exact component={Signout} /> */}
+                    </Switch>
+                </BrowserRouter>
             </div>
         );
     }
