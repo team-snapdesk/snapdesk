@@ -38,7 +38,8 @@ const ticketsReducer = (state = ticketState, action) => {
     //     isLoggedIn
     //   };
     case types.GET_TICKETS:
-      return { ...state,
+      return {
+        ...state,
         activeTickets: action.payload,
         ticketsCount: action.payload.length,
       }
@@ -67,37 +68,56 @@ const ticketsReducer = (state = ticketState, action) => {
       };
 
     case types.ACCEPT_TICKET:
-      return { ...state };
+      //CODE REVIEW: <-------------------------------
+      updatedTickets = state.activeTickets.map((ticket) => {
+        if (ticket.messageId == action.payload.id) {
+          ticket.status = 'pending'
+          ticket.mentorId = action.payload.userId
+        }
+      })
+      return {
+        ...state,
+        activeTickets: updatedTickets
+      }
 
     case types.CANCEL_ACCEPT:
-      return { ...state };
-
+      updatedTickets = state.activeTickets.map((ticket) => {
+        if (ticket.messageId == action.payload.id) {
+          ticket.status = 'active'
+          ticket.mentorId = null
+        }
+      })
+      return {
+        ...state,
+        activeTickets: updatedTickets
+      };
+    //END OF CODE <------------------------------
     case types.DELETE_TICKET:
-        updatedTickets = state.activeTickets.map((ticket, index) => {
-          if (ticket.messageId === action.payload) {
-            idx = index
-            return ticket
-          }
-          return ticket;
-        })
-        updatedTickets.splice(idx, 1)
-        // console.log(updatedTickets)
-      return { 
+      updatedTickets = state.activeTickets.map((ticket, index) => {
+        if (ticket.messageId === action.payload) {
+          idx = index
+          return ticket
+        }
+        return ticket;
+      })
+      updatedTickets.splice(idx, 1)
+      // console.log(updatedTickets)
+      return {
         ...state,
         activeTickets: updatedTickets,
         ticketsCount: state.ticketsCount - 1
       };
 
     case types.RESOLVE_TICKET:
-        updatedTickets = state.activeTickets.map((ticket, index) => {
-          if (ticket.messageId === action.payload) {
-            idx = index
-            return ticket
-          }
-          return ticket;
-        })    
-        updatedTickets.splice(idx, 1)
-      return { 
+      updatedTickets = state.activeTickets.map((ticket, index) => {
+        if (ticket.messageId === action.payload) {
+          idx = index
+          return ticket
+        }
+        return ticket;
+      })
+      updatedTickets.splice(idx, 1)
+      return {
         ...state,
         activeTickets: updatedTickets,
         ticketsCount: state.ticketsCount - 1
