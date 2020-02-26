@@ -15,7 +15,7 @@ const roomState = {
   activeRoom: 1,
 }
 
-const ticketsReducer = (state = roomState, action) => {
+const roomsReducer = (state = roomState, action) => {
   
   switch (action.type) {
     case types.ADD_ROOM:
