@@ -87,6 +87,27 @@ ticketsController.updateTicketStatus = (req, res, next) => {
 }
 
 
+ticketsController.cancelTicket = (req, res, next) => {
+  const { status, messageId, mentorId } = req.body;
+  // const messageId = JSON.stringify(req.body.messageId);
+  // const status = JSON.stringify(req.body.status);
+  // const mentorId = JSON.stringify(req.body.mentorId);
+  const cancelTicket = { 
+    text: `UPDATE tickets
+    SET status = $1, mentor_id = $3
+    WHERE _id = $2;`,
+    values: [status, messageId, mentorId]
+  };
+
+  db.query(cancelTicket)
+    .then(data => {
+      return next();
+    })
+    .catch(err => next({
+      log: `Error in middleware ticketsController.cancelTicket: ${err}`
+    }));
+
+
 
 ticketsController.acceptTicket = (req,res,next) => {
 const status = JSON.stringify(req.body.status);
@@ -107,6 +128,7 @@ db.query(text,values)
   console.log('Error: ',err);
   return next(err)
 });
+
 }
 
 module.exports = ticketsController;
