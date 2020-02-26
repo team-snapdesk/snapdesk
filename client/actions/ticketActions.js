@@ -89,12 +89,55 @@ export const resolveTicket = id => ({
   type: types.RESOLVE_TICKET,
   payload: id,
 })
-
-export const acceptTicket = id => ({
+/*
+export const acceptTicket = data => (dispatch, getState) =>
+  axios
+    .patch('/api/tickets/accept', { //send ticket info to database
+       ticketId: data.messageId,
+       mentorId: data.mentorId,
+       status: 'pending',
+    })
+    .then(({ data } => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: data,
+        })
+      }
+      else {
+        dispatch({
+          type: types.ACCEPT_TICKET,
+          payload: data,
+        })
+      }     
+    }))
+*/
+export const acceptTicket = data => ({
   type: types.ACCEPT_TICKET,
-  payload: id,
+  payload: data,
 })
-
+/*
+export const cancelAccept = data => (dispatch, getState) =>
+  axios
+    .patch('/api/tickets/cancelAccept', { //send ticket info to database
+       ticketId: data,
+       status: 'active',
+    })
+    .then(({ data } => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: data,
+        })
+      }
+      else {
+        dispatch({
+          type: types.CANCEL_ACCEPT,
+          payload: data,
+        })
+      }     
+    }))
+*/
 export const cancelAccept = id => ({
   type: types.CANCEL_ACCEPT,
   payload: id,
