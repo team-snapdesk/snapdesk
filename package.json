@@ -5,10 +5,10 @@
   "main": "server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=production node server/server.js",
-    "build": "NODE_ENV=production webpack",
-    "dev": "NODE_ENV=development webpack-dev-server & nodemon server/server.js",
-    "backend": "NODE_ENV=production nodemon server/server.js"
+    "start": "cross-env NODE_ENV=production node server/server.js",
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "cross-env NODE_ENV=development concurrently \"webpack-dev-server --open \" \"nodemon server/server.js\"",
+    "backend": "cross-env NODE_ENV=production nodemon server/server.js"
   },
   "repository": {
     "type": "git",
@@ -49,8 +49,8 @@
     "@babel/preset-env": "^7.8.4",
     "@babel/preset-react": "^7.8.3",
     "babel-loader": "^8.0.6",
-    "concurrently": "^4.1.0",
-    "cross-env": "^5.2.0",
+    "concurrently": "^4.1.2",
+    "cross-env": "^5.2.1",
     "css-loader": "^3.4.2",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
