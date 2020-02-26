@@ -17,6 +17,7 @@ const ticketState = {
   messageRating: '',
   activeTickets: [],
   ticketsCount: 0,
+  //roomId: ''
 };
 
 const ticketsReducer = (state = ticketState, action) => {
@@ -43,7 +44,6 @@ const ticketsReducer = (state = ticketState, action) => {
         ticketsCount: action.payload.length,
       }
 
-
     case types.POST_TICKET:
       // build new ticket object to be inserted into activeTickets array (use props from FeedContainer)
       const newTicket = {
@@ -52,7 +52,9 @@ const ticketsReducer = (state = ticketState, action) => {
         messageId: action.payload.ticketId,
         menteeId: action.payload.menteeId,
         timestamp: action.payload.timestamp,
-        status: 'active'
+        status: 'active',
+        //adding new mentorId
+        mentorId:'',
       };
       // make a shallow copy of existing array and push new ticket to it
       let updatedTickets = state.activeTickets.slice();
@@ -67,10 +69,40 @@ const ticketsReducer = (state = ticketState, action) => {
       };
 
     case types.ACCEPT_TICKET:
-      return { ...state };
-
+      //find index of the accepted ticket
+      updatedTickets = state.activeTickets.map((ticket, index) => {
+        if (ticket.messageId === action.payload.messageId) {
+          idx = index;
+        }
+        return ticket;
+      });
+      //update the ticket's status to pending and messageId to mentor id
+      updatedTickets[idx] =  {
+        ...updatedTickets[idx],
+        mentorId: action.payload.userId, 
+        status: 'pending'
+      };
+      return { //return updated state
+        ...state,
+        activeTickets: updatedTickets };
+        
     case types.CANCEL_ACCEPT:
-      return { ...state };
+      //find index of the cancel-accept ticket
+      updatedTickets = state.activeTickets.map((ticket, index) => {
+        if (ticket.messageId === action.payload.messageId) {
+          idx = index;
+        }
+        return ticket;
+      });
+      //update ticket's status back to active and remove mentor id
+      updatedTickets[idx] =  {
+        ...updatedTickets[idx],
+        mentorId: '', 
+        status: 'active'
+      };
+      return { 
+        ...state,
+        activeTickets: updatedTickets };
 
     case types.DELETE_TICKET:
         updatedTickets = state.activeTickets.map((ticket, index) => {

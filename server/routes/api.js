@@ -20,13 +20,6 @@ apiRouter.put(
   (req, res) => res.status(200).json(res.locals)
 );
 
-// apiRouter.put(
-//   '/tickets/accept',
-//   jwtsController.isLoggedIn,
-//   ticketsController.updateTicketStatus,
-//   (req, res) => res.status(200).json(res.locals)
-// );
-
 apiRouter.get(
   '/tickets',
   jwtsController.isLoggedIn,

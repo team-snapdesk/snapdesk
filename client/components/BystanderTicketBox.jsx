@@ -4,6 +4,7 @@
  * @module  BystanderTicketBox
  * @author
  * @date
+ * 
  * @description  component that renders a single textbox for all Bystanders / Mentors
  *
  * ************************************
@@ -26,7 +27,10 @@ class BystanderTicketBox extends Component {
       //Accept button will be active but Cancel button will not and mentee is anonymous
       buttons = (
         <span>
-          <Button onClick={() => this.props.acceptTicket(this.props.messageId)}type="button" className="btn btn-success">Accept</Button>
+          <Button onClick={() => this.props.acceptTicket({
+            userId: this.props.userId,
+            messageId: this.props.ticket.messageId 
+          })} type="button" className="btn btn-success">Accept</Button>
           <Button disabled={true} type="button" className="btn btn-secondary">Cancel</Button>
        </span>
         )
@@ -45,7 +49,7 @@ class BystanderTicketBox extends Component {
       buttons = (
         <span>
           <Button disabled={true} type="button" className="btn btn-success">Accept</Button>
-          <Button onClick={() => this.props.cancelAccept(this.props.messageId)} type="button" className="btn btn-warning">Cancel - not active</Button>
+          <Button onClick={() => this.props.cancelAccept(this.props.ticket.messageId)} type="button" className="btn btn-warning">Cancel - not active</Button>
        </span>
         )
     }

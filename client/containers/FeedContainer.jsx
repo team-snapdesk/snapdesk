@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
   messageInput: state.tickets.messageInput,
   messageRating: state.tickets.messageRating,
   activeTickets: state.tickets.activeTickets,
-  messageRating: state.tickets.messageRating,
+  //messageRating: state.tickets.messageRating,
   ticketsCount: state.tickets.ticketsCount,
 });
 
@@ -71,6 +71,8 @@ class FeedContainer extends Component {
             messageInput={this.props.activeTickets[i].messageInput}
             messageRating={this.props.activeTickets[i].messageRating}
             ticket={this.props.activeTickets[i]}
+            //adding new userId
+            userId = {this.props.userId}
             key={this.props.activeTickets[i].messageId}
             />
             )
