@@ -9,14 +9,14 @@
  * ************************************
  */
 
-import * as types from '../constants/actionTypes';
+import * as types from "../constants/actionTypes";
 
 const ticketState = {
   totalSnaps: 0,
-  messageInput: '',
+  messageInput: "",
   messageRating: 1,
   activeTickets: [],
-  ticketsCount: 0,
+  ticketsCount: 0
 };
 
 const ticketsReducer = (state = ticketState, action) => {
@@ -25,19 +25,18 @@ const ticketsReducer = (state = ticketState, action) => {
     case types.USER_LOGOUT:
       return {
         totalSnaps: 0,
-        messageInput: '',
-        messageRating: '',
+        messageInput: "",
+        messageRating: "",
         activeTickets: [],
-        ticketsCount: 0,
-      }
+        ticketsCount: 0
+      };
 
     case types.GET_TICKETS:
       return {
         ...state,
         activeTickets: action.payload,
-        ticketsCount: action.payload.length,
-      }
-
+        ticketsCount: action.payload.length
+      };
 
     case types.POST_TICKET:
       // build new ticket object to be inserted into activeTickets array (use props from FeedContainer)
@@ -47,7 +46,7 @@ const ticketsReducer = (state = ticketState, action) => {
         messageId: action.payload.ticketId,
         menteeId: action.payload.menteeId,
         timestamp: action.payload.timestamp,
-        status: 'active'
+        status: "active"
       };
       // make a shallow copy of existing array and push new ticket to it
       let updatedTickets = state.activeTickets.slice();
@@ -58,44 +57,42 @@ const ticketsReducer = (state = ticketState, action) => {
         activeTickets: updatedTickets,
         ticketsCount: state.ticketsCount + 1,
         nextTicketId: state.nextTicketId + 1,
-        messageInput: '',
+        messageInput: ""
       };
 
     case types.ACCEPT_TICKET:
       //CODE REVIEW: <-------------------------------
+
       updatedTickets = state.activeTickets.map((ticket) => {
-        if (ticket.messageId == action.payload.id) {
+        if (ticket.messageId === action.payload.id) {
           ticket.status = 'pending'
-          ticket.mentorId = action.payload.userId
+          ticket.mentorId = action.payload.mentorId
         }
+        return ticket;
       })
       return {
         ...state,
         activeTickets: updatedTickets
-      }
+      };
 
     case types.CANCEL_ACCEPT:
+
       updatedTickets = state.activeTickets.map((ticket) => {
-        if (ticket.messageId == action.payload.id) {
+        if (ticket.messageId == action.payload.ticketId) {
           ticket.status = 'active'
           ticket.mentorId = null
+
         }
-      })
+      });
       return {
         ...state,
         activeTickets: updatedTickets
       };
     //END OF CODE <------------------------------
     case types.DELETE_TICKET:
-      updatedTickets = state.activeTickets.map((ticket, index) => {
-        if (ticket.messageId === action.payload) {
-          idx = index
-          return ticket
-        }
-        return ticket;
-      })
-      updatedTickets.splice(idx, 1)
-      // console.log(updatedTickets)
+      updatedTickets = state.activeTickets.filter(
+        ticket => ticket.messageId !== action.payload
+      );
       return {
         ...state,
         activeTickets: updatedTickets,
@@ -105,12 +102,12 @@ const ticketsReducer = (state = ticketState, action) => {
     case types.RESOLVE_TICKET:
       updatedTickets = state.activeTickets.map((ticket, index) => {
         if (ticket.messageId === action.payload) {
-          idx = index
-          return ticket
+          idx = index;
+          return ticket;
         }
         return ticket;
-      })
-      updatedTickets.splice(idx, 1)
+      });
+      updatedTickets.splice(idx, 1);
       return {
         ...state,
         activeTickets: updatedTickets,

@@ -16,15 +16,15 @@ class MenteeTicketBox extends Component {
   constructor(props) {
     super(props);
   }
-  render () {
+  render() {
     //if (this.props.activeTickets[i].status === 'active') {
-      //   //has not been picked up yet
-      //   //Delete button is active but Resolve is not
-      // } this.props.activeTickets[i].status === 'pending') {
-      //   //your ticket has been picked up. 
-      //   //Resolve is active but Delete is not
-      // }
-      // console.log(this.props.ticket)
+    //   //has not been picked up yet
+    //   //Delete button is active but Resolve is not
+    // } this.props.activeTickets[i].status === 'pending') {
+    //   //your ticket has been picked up. 
+    //   //Resolve is active but Delete is not
+    // }
+    // console.log(this.props.ticket)
     if (this.props.ticket.status === 'active') {
       buttons = (
         <span>
@@ -35,17 +35,17 @@ class MenteeTicketBox extends Component {
     } else {
       buttons = (
         <span>
-          <Button onClick={() => this.props.resolveTicket(this.props.ticket.messageId)}type="button" className="btn btn-secondary">Resolve</Button>
+          <Button onClick={() => this.props.resolveTicket(this.props.ticket.messageId)} type="button" className="btn btn-secondary">Resolve</Button>
           <Button disabled={true} type="button" className="btn btn-success">Delete</Button>
         </span>
       )
     }
     return (
-    <div className="MenteeTicketBox ticketbox">
-      <p>Request: {this.props.messageInput}</p>
-      <p>Expected Snaps: {this.props.messageRating}</p>
-      {buttons}
-    </div>
+      <div className="MenteeTicketBox ticketbox">
+        <p>Request: {this.props.messageInput}</p>
+        <p>Expected Snaps: {this.props.messageRating}</p>
+        {buttons}
+      </div>
     )
   }
 }

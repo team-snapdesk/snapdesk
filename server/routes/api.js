@@ -45,10 +45,19 @@ apiRouter.put('/tickets/accept',
   (req, res) => res.status(200).json(res.locals)
 );
 
+
 apiRouter.get('/leaderboard', 
   jwtsController.isLoggedIn,
   leaderboardController.getLeaderBoard,
   (req, res) => res.status(200).json(res.locals)
+=======
+
+
+apiRouter.put('/tickets/resolved',
+jwtsController.isLoggedIn,
+ticketsController.resolveTicket,
+(req,res) => res.status(200).json(res.locals)
+
 );
 
 module.exports = apiRouter;
