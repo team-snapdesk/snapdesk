@@ -21,3 +21,4 @@ export const UPDATE_RATING = 'UPDATE_RATING';
 export const USER_LOGIN = 'USER_LOGIN';
 export const LOAD_USER = 'LOAD_USER';
 export const USER_LOGOUT = 'USER_LOGOUT';
+export const ADD_ROOM = 'ADD_ROOM';
