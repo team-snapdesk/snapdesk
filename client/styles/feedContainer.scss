@@ -7,15 +7,14 @@
   max-height: 100%;
   min-height: 100%;
   display: grid;
-  grid-template-columns: [main] 100%;
-  grid-template-rows: [feed] 1fr [creator] 250px;
+  grid-template-columns: [main] minmax(450px, 850px);
+  grid-template-rows: [feed] minmax(450px, 1fr) [creator] 300px;
   align-items: end;
   justify-content: center;
 }
 
 .content-wrapper {
   height: 100%;
-  min-height: 500px;
   grid-row-start: feed;
   grid-row-end: creator;
   overflow: auto;
@@ -39,8 +38,16 @@
   
 
 
-.ticket-creator {
+.ticket-creator-container {
   grid-row-start: creator;
+  max-height: 100%;
+  width: 100%;
+  .ticket-creator-display {
+    padding: 1em 1em;
+    background-color: $tertiary;
+    border: $border;
+    box-sizing: border-box;
+  }
 }
 
 .snap-rating {

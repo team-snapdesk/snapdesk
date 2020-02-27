@@ -35,16 +35,9 @@ const TicketCreator = ({
   }
 
   return (
-    <div>
-      <Form
-        onSubmit={e => {
-          e.preventDefault();
-          postTicket();
-        }}
-      >
-        <Form.Group
-          controlId="exampleForm.ControlTextarea1"
-        >
+    <div className="ticket-creator-display">
+      <Form onSubmit={e => { e.preventDefault(); postTicket(); }}>
+        <Form.Group>
           <Form.Label>What do you need help with?</Form.Label>
           <Form.Control as="textarea" rows="3" value={messageInput} onChange={updateMessage}/>
         </Form.Group>

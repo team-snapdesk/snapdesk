@@ -112,7 +112,7 @@ class FeedContainer extends Component {
               </div>
             </div>
           </div>
-          <div className="ticket-creator">
+          <div className="ticket-creator-container">
             <TicketCreator {...this.props} key={this.props.userId} />
           </div>
         </div>
