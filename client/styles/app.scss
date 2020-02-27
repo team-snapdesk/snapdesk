@@ -9,8 +9,13 @@ body {
   background-color: $tertiary !important;
 }
 
+.flex-container {
+  display: flex;
+}
+
 .row {
   max-height: 100vh;
   min-height: 100vh;
   margin: 0!important;
+  flex-wrap: nowrap!important;
 }
