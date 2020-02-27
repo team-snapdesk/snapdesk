@@ -4,22 +4,27 @@ const db = require('../models/userModel');
 const roomsController = {};
 
 roomsController.addRooms = (req, res, next) => {
-  const { name, admin } = req.body;
+  console.log('REQUEST BODY: ', req.body);
+  const {
+    name,
+    admin
+  } = req.body;
   const addRoom = {
     text: `
       INSERT INTO rooms
-      (name, admin)
+      (name, admin_id)
       VALUES
       ($1, $2)
-      RETURNING _id, name, admin;
+      RETURNING _id, name, admin_id;
     `,
     values: [name, admin]
   };
   db.query(addRoom)
     .then((room) => {
+      // console.log('ROOM RESPONSE: ', room);
       res.locals.roomId = room.rows[0]._id;
-      res.locals.roomName = room.rows[0].roomName;
-      res.locals.roomAdmin = room.rows[0].roomAdmin;
+      res.locals.roomName = room.rows[0].name;
+      res.locals.roomAdmin = room.rows[0].admin_id;
       return next();
     })
     .catch((err) =>

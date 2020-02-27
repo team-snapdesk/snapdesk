@@ -13,6 +13,15 @@ apiRouter.get('/user', jwtsController.isLoggedIn, userController.getData, (req, 
   res.status(200).json(res.locals)
 );
 
+// Get all rooms for user, including active room
+apiRouter.put('/user', jwtsController.isLoggedIn, userController.getAllRooms, userController.getActiveRoom, (req, res) =>
+  res.status(200).json(res.locals.userRooms)
+);
+
+apiRouter.put('/user', jwtsController.isLoggedIn, userController.updateActiveRoom, (req, res) =>
+  res.status(200).json(res.locals.activeRoomStatus)
+);
+
 apiRouter.put(
   '/tickets/delete',
   jwtsController.isLoggedIn,
@@ -31,8 +40,13 @@ apiRouter.post('/tickets', jwtsController.isLoggedIn, ticketsController.addTicke
   res.status(200).json(res.locals)
 );
 
-apiRouter.post('/rooms', jwtsController.isLoggedIn, roomsController.addRooms, (req, res) =>
-  res.status(200)
+apiRouter.post('/rooms', jwtsController.isLoggedIn, roomsController.addRooms, (req, res) => {
+  console.log('END OF ROOMS POST REQUEST', res.locals);
+  res.status(200);
+});
+
+apiRouter.get('/rooms/:userId', jwtsController.isLoggedIn, roomsController.getRooms, (req, res) =>
+  res.status(200).json()
 );
 
 // apiRouter.get('/', jwtsController.isLoggedIn, adminController.getBannedList, (req, res) => {
@@ -43,4 +57,4 @@ apiRouter.post('/rooms', jwtsController.isLoggedIn, roomsController.addRooms, (r
 //   res.status(200).json(res.locals)
 // })
 
-apiRouter.module.exports = apiRouter;
+module.exports = apiRouter;

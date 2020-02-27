@@ -23,7 +23,7 @@ const store = createStore(
   reducers,
   composeWithDevTools(applyMiddleware(thunk))
 );
-
+//this is so thunk works
 store.dispatch(verifyLogin());
 
 export default store;
