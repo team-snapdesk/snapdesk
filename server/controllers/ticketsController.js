@@ -20,8 +20,8 @@ ticketsController.getActiveTickets = (req, res, next) => {
     text: `SELECT tickets.*, users.name as mentee_name from TICKETS
     LEFT OUTER JOIN USERS
     ON tickets.mentee_id=users._id
-    WHERE status='pending'
-    OR status='active'
+    WHERE (status='pending'
+    OR status='active')
     AND tickets.room_id=$1`,
     values: [req.params.roomId]
   };

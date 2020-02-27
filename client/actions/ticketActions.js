@@ -19,7 +19,7 @@ export const postTicket = () => (dispatch, getState) =>
     .post("/api/tickets", {
       // POST request to create a new ticket
       mentee_id: getState().user.userId,
-      room_id: 1,
+      room_id: getState().rooms.activeRoom.id,
       message: getState().tickets.messageInput,
       status: "active",
       snaps_given: getState().tickets.messageRating
