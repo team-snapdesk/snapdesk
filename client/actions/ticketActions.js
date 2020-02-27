@@ -43,6 +43,7 @@ export const getTickets = () => dispatch =>
                 payload: data
             });
         } else {
+            console.log(data.activeTickets);
             dispatch({
                 type: types.GET_TICKETS,
                 payload: data.activeTickets || []
@@ -85,10 +86,10 @@ export const resolveTicket = id => (dispatch, getState) =>
     // this should PATCH to whatever backend route resolves tickets -- URL NEED TO BE UPDATED LATER
     axios
         .patch('/api/tickets/resolve', {
+            ticketId: id,
             status: 'resolved'
         })
         .then(({ data }) => {
-            console.log('inside of then');
             // Checks whether user is logged in -- prob unnecessary?
             if (!data.isLoggedIn) {
                 dispatch({
@@ -105,10 +106,28 @@ export const resolveTicket = id => (dispatch, getState) =>
             }
         });
 
-export const acceptTicket = id => ({
-    type: types.ACCEPT_TICKET,
-    payload: id
-});
+export const acceptTicket = id => (dispatch, getState) =>
+    // this should patch to whatever backend route accept tickets
+    axios
+        .patch('api/tickets/accept', {
+            ticketId: id,
+            status: 'pending',
+            mentor_id: getState().user.userId
+        })
+        .then(({ data }) => {
+            console.log(getState().tickets.activeTickets, 'active tick');
+            if (!data.isLoggedIn) {
+                dispatch({
+                    type: types.USER_LOGOUT,
+                    payload: data
+                });
+            } else {
+                dispatch({
+                    type: types.ACCEPT_TICKET,
+                    payload: id
+                });
+            }
+        });
 
 export const cancelAccept = id => ({
     type: types.CANCEL_ACCEPT,
