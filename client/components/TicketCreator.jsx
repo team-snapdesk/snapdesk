@@ -22,7 +22,8 @@ const TicketCreator = ({
   updateMessage,
   ticketsCount,
   postTicket,
-  updateRating
+  updateRating,
+  topic
 }) => {
 
   const snapButtons = [];
@@ -51,48 +52,6 @@ const TicketCreator = ({
         <div className="flex-container">
           {snapButtons}
         </div>
-        {/* <Form.Group onChange={updateRating}>
-          <Form.Check
-            inline
-            label="1"
-            type="radio"
-            id="snap-1"
-            name="snap-form"
-            value={1}
-          />
-          <Form.Check
-            inline
-            label="2"
-            type="radio"
-            id="snap-2"
-            name="snap-form"
-            value={2}
-          />
-          <Form.Check
-            inline
-            label="3"
-            type="radio"
-            id="snap-3"
-            name="snap-form"
-            value={3}
-          />
-          <Form.Check
-            inline
-            label="4"
-            type="radio"
-            id="snap-4"
-            name="snap-form"
-            value={4}
-          />
-          <Form.Check
-            inline
-            label="5"
-            type="radio"
-            id="snap-5"
-            name="snap-form"
-            value={5}
-          />
-        </Form.Group> */}
         <Button className="btn btn-secondary btn-md" type="submit">
           Post
         </Button>

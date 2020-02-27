@@ -17,12 +17,12 @@
   }
 }
 
-#fill {
+.fill {
   fill: $secondary;
   stroke: $secondary;
 }
 
-#empty{
+.empty{
   stroke: $secondary;
   fill: $tertiary;
 }

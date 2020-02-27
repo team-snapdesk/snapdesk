@@ -13,7 +13,53 @@
 import axios from "axios";
 import * as types from "../constants/actionTypes";
 
-export const postTicket = () => (dispatch, getState) =>
+
+export const updateMessage = event => ({
+  type: types.UPDATE_MESSAGE,
+  payload: event.target.value
+});
+
+export const updateRating = value => ({
+  type: types.UPDATE_RATING,
+  payload: value,
+});
+
+export const toggleModal = messageRating => ({
+  type: types.TOGGLE_MODAL,
+  payload: messageRating
+});
+
+export const updateFeedback = event => ({
+  type: types.UPDATE_FEEDBACK,
+  payload: event.target.value
+});
+
+export const updateFinalRating = value => ({
+  type: types.UPDATE_FINAL_RATING,
+  payload: value,
+});
+
+export const getTickets = () => dispatch => {
+  axios
+    .get('/api/tickets')
+    .then(({ data }) => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: data,
+        })
+      }
+      else {
+        dispatch({
+          type: types.GET_TICKETS,
+          payload: data.activeTickets || [],
+        })
+      }
+    })
+}
+
+
+export const postTicket = () => (dispatch, getState) => {
   axios
     .post("/api/tickets", {
       mentee_id: getState().user.userId,
@@ -35,37 +81,9 @@ export const postTicket = () => (dispatch, getState) =>
         })
       }
     })
+}
 
-export const getTickets = () => dispatch =>
-  axios
-    .get('/api/tickets')
-    .then(({ data }) => {
-      if (!data.isLoggedIn) {
-        dispatch({
-          type: types.USER_LOGOUT,
-          payload: data,
-        })
-      }
-      else {
-        dispatch({
-          type: types.GET_TICKETS,
-          payload: data.activeTickets || [],
-        })
-      }
-    })
-
-
-export const updateMessage = event => ({
-  type: types.UPDATE_MESSAGE,
-  payload: event.target.value
-});
-
-export const updateRating = id => ({
-  type: types.UPDATE_RATING,
-  payload: id,
-});
-
-export const deleteTicket = id => (dispatch, getState) =>
+export const deleteTicket = id => (dispatch, getState) => {
   axios
     .put("/api/tickets/delete", {
       ticketId: id,
@@ -84,41 +102,35 @@ export const deleteTicket = id => (dispatch, getState) =>
         })
       }
     })
-
-//START CODE REVIEW -----------------
-// export const resolveTicket = id => (dispatch, getState) => 
-//   axios
-//   .put('..insert path here...', {
-//     ticketId : id,
-//     status: 'resolved',
-//     //feedback??
-//   })
-//   .then(({data}) => {
-//     if(!data.isLoggedIn) {
-//       dispatch({
-//         type: types.USER_LOGOUT,
-//         payload: data,
-//       })
-//     } 
-//     else {
-//       dispatch({
-//         type: types.RESOLVE_TICKET,
-//         payload: id,
-//       })
-//     }
-//   })
-
-// END CODE REVIEW ------------
+}
 
 
-export const resolveTicket = id => ({
-  type: types.RESOLVE_TICKET,
-  payload: id
-});
+export const resolveTicket = id => (dispatch, getState) => {
+  axios
+  .put('/api/tickets/resolved', {
+    messageId : id,
+    status: 'resolved',
+    messageRating: getState().tickets.resolveModal.finalSnaps,
+    feedback: getState().tickets.resolveModal.feedback,
+  })
+  .then(({data}) => {
+    if(!data.isLoggedIn) {
+      dispatch({
+        type: types.USER_LOGOUT,
+        payload: data,
+      })
+    } 
+    else {
+      dispatch({
+        type: types.RESOLVE_TICKET,
+        payload: id,
+      })
+    }
+  })
+}
 
 
-
-export const acceptTicket = id => (dispatch, getState) =>
+export const acceptTicket = id => (dispatch, getState) => {
   axios
     .put('/api/tickets/accept', {
       ticketId: id,
@@ -133,7 +145,6 @@ export const acceptTicket = id => (dispatch, getState) =>
         })
       }
       else {
-        console.log('ticketId', id);
         dispatch({
           type: types.ACCEPT_TICKET,
           payload: {
@@ -143,10 +154,8 @@ export const acceptTicket = id => (dispatch, getState) =>
         })
       }
     })
+};
 
-/**
- * 
- */
 export const cancelAccept = id => (dispatch, getState) => {
   axios
     .put('/api/tickets/accept', {

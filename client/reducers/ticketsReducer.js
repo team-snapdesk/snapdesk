@@ -16,7 +16,12 @@ const ticketState = {
   messageInput: "",
   messageRating: 1,
   activeTickets: [],
-  ticketsCount: 0
+  ticketsCount: 0,
+  resolveModal: {
+    show: false,
+    feedback: '',
+    finalSnaps: 0
+  }
 };
 
 const ticketsReducer = (state = ticketState, action) => {
@@ -30,6 +35,12 @@ const ticketsReducer = (state = ticketState, action) => {
         activeTickets: [],
         ticketsCount: 0
       };
+
+    case types.UPDATE_MESSAGE:
+      return { ...state, messageInput: action.payload };
+
+    case types.UPDATE_RATING:
+      return { ...state, messageRating: action.payload };
 
     case types.GET_TICKETS:
       return {
@@ -60,9 +71,60 @@ const ticketsReducer = (state = ticketState, action) => {
         messageInput: ""
       };
 
-    case types.ACCEPT_TICKET:
-      //CODE REVIEW: <-------------------------------
+      case types.DELETE_TICKET:
+        updatedTickets = state.activeTickets.filter(
+          ticket => ticket.messageId !== action.payload
+        );
+        return {
+          ...state,
+          activeTickets: updatedTickets,
+          ticketsCount: state.ticketsCount - 1
+        };
+  
+      case types.RESOLVE_TICKET:
+        updatedTickets = state.activeTickets.filter(
+          ticket => ticket.messageId !== action.payload
+        );
+        return {
+          ...state,
+          activeTickets: updatedTickets,
+          ticketsCount: state.ticketsCount - 1,
+          resolveModal: {
+            show: false,
+            feedback: '',
+            finalSnaps: 0
+          }
+        };
 
+    case types.TOGGLE_MODAL:
+      return {
+        ...state,
+        resolveModal: {
+          show: state.resolveModal.show ? false : true,
+          feedback: '',
+          finalSnaps: action.payload ? action.payload : 0
+        }
+      }
+
+    case types.UPDATE_FEEDBACK:
+      return {
+        ...state,
+        resolveModal: {
+          ...state.resolveModal,
+          feedback: action.payload
+        }
+      }
+
+    case types.UPDATE_FINAL_RATING:
+      return {
+        ...state,
+        resolveModal: {
+          ...state.resolveModal,
+          finalSnaps: action.payload
+        }
+      }
+
+    case types.ACCEPT_TICKET:
       updatedTickets = state.activeTickets.map((ticket) => {
         if (ticket.messageId === action.payload.id) {
           ticket.status = 'pending';
@@ -87,37 +149,6 @@ const ticketsReducer = (state = ticketState, action) => {
         ...state,
         activeTickets: updatedTickets
       };
-    //END OF CODE <------------------------------
-    case types.DELETE_TICKET:
-      updatedTickets = state.activeTickets.filter(
-        ticket => ticket.messageId !== action.payload
-      );
-      return {
-        ...state,
-        activeTickets: updatedTickets,
-        ticketsCount: state.ticketsCount - 1
-      };
-
-    case types.RESOLVE_TICKET:
-      updatedTickets = state.activeTickets.map((ticket, index) => {
-        if (ticket.messageId === action.payload) {
-          idx = index;
-          return ticket;
-        }
-        return ticket;
-      });
-      updatedTickets.splice(idx, 1);
-      return {
-        ...state,
-        activeTickets: updatedTickets,
-        ticketsCount: state.ticketsCount - 1
-      };
-
-    case types.UPDATE_MESSAGE:
-      return { ...state, messageInput: action.payload };
-
-    case types.UPDATE_RATING:
-      return { ...state, messageRating: action.payload };
 
     default:
       return state;

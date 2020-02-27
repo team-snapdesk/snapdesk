@@ -47,6 +47,14 @@ apiRouter.put('/tickets/accept',
 );
 
 
+apiRouter.put('/tickets/resolved',
+  jwtsController.isLoggedIn,
+  ticketsController.resolveTicket,
+  (req,res) => res.status(200).json(res.locals)
+);
+
+
+
 apiRouter.get('/leaderboard', 
   jwtsController.isLoggedIn,
   leaderboardController.getLeaderBoard,
@@ -54,11 +62,11 @@ apiRouter.get('/leaderboard',
 );
 
 
-apiRouter.put('/tickets/resolved',
-jwtsController.isLoggedIn,
-ticketsController.resolveTicket,
-(req,res) => res.status(200).json(res.locals)
-
+apiRouter.get('/leaderboard/topic',
+  jwtsController.isLoggedIn,
+  leaderboardController.byTopic,
+  (req,res) => res.status(200).json(res.locals)
 );
+
 
 module.exports = apiRouter;
