@@ -105,10 +105,28 @@ export const resolveTicket = id => (dispatch, getState) =>
             }
         });
 
-export const acceptTicket = id => ({
-    type: types.ACCEPT_TICKET,
-    payload: id
-});
+// author Anthony 2/26 4:40pm >>
+export const acceptTicket = id => (dispatch, getState) =>
+    // this should patch to whatever backend route accept tickets
+    axios
+        .patch('api/tickets/accept', {
+            status: 'pending',
+            mentor_id: getState().user.userId
+        })
+        .then(({ data }) => {
+            console.log(getState().tickets.activeTickets, 'active tick');
+            if (!data.isLoggedIn) {
+                dispatch({
+                    type: types.USER_LOGOUT,
+                    payload: data
+                });
+            } else {
+                dispatch({
+                    type: types.ACCEPT_TICKET,
+                    payload: id
+                });
+            }
+        });
 
 export const cancelAccept = id => ({
     type: types.CANCEL_ACCEPT,

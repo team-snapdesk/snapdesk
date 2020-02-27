@@ -71,7 +71,7 @@ class BystanderTicketBox extends Component {
             buttons = (
                 <span>
                     <Button disabled type="button" className="btn btn-success">
-                        Accept
+                        Pending
                     </Button>
                     <Button
                         onClick={() =>
