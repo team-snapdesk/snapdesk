@@ -9,9 +9,8 @@ const isActive = (history, path) => {
     // comes from the browser itself
     if (history.location.pathname === path) {
         return { color: '#000' };
-    } else {
-        return { color: '#fff' };
     }
+    return { color: '#fff' };
 };
 
 /**
