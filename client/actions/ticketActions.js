@@ -89,6 +89,7 @@ export const resolveTicket = id => (dispatch, getState) =>
         })
         .then(({ data }) => {
             console.log('inside of then');
+            console.log('data in resolve: ', data);
             // Checks whether user is logged in -- prob unnecessary?
             if (!data.isLoggedIn) {
                 dispatch({
