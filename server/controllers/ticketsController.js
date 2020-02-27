@@ -14,15 +14,15 @@ const db = require('../models/userModel');
 const ticketsController = {};
 
 ticketsController.getActiveTickets = (req, res, next) => {
+  //pass in active room id from front end and query from that
+  
   const getActiveTickets= `
-    SELECT t._id, t.snaps_given, t.message, t.status, t.timestamp, t.mentee_id, u.name mentee_name, t.room_id, u.active_room
-    FROM tickets t
-    INNER JOIN users u
-    ON u._id = t.mentee_id
-    WHERE (status = 'active'
-    OR status = 'pending')
-    AND t.room_id = u.active_room
-    ORDER BY t._id;
+    SELECT tickets.*, users.name as mentee_name from TICKETS
+    LEFT OUTER JOIN USERS
+    ON tickets.mentee_id=users._id
+    WHERE status='pending'
+    OR status='active'
+    AND tickets.room_id=1
   `;
   db.query(getActiveTickets)
     .then(({ rows }) => {
@@ -32,7 +32,7 @@ ticketsController.getActiveTickets = (req, res, next) => {
         messageId: ticket._id,
         menteeId: ticket.mentee_id,
         menteeName: ticket.mentee_name,
-        timestamp: ticket.timpestamp,
+        timestamp: ticket.timestamp,
         status: ticket.status,
         mentorId: ticket.mentor_id || '',
        }))
