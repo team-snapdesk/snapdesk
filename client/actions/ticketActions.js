@@ -86,6 +86,7 @@ export const resolveTicket = id => (dispatch, getState) =>
     // this should PATCH to whatever backend route resolves tickets -- URL NEED TO BE UPDATED LATER
     axios
         .patch('/api/tickets/resolve', {
+            ticketId: id,
             status: 'resolved'
         })
         .then(({ data }) => {
@@ -109,6 +110,7 @@ export const acceptTicket = id => (dispatch, getState) =>
     // this should patch to whatever backend route accept tickets
     axios
         .patch('api/tickets/accept', {
+            ticketId: id,
             status: 'pending',
             mentor_id: getState().user.userId
         })

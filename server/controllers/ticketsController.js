@@ -46,7 +46,9 @@ ticketsController.getActiveTickets = (req, res, next) => {
 };
 
 ticketsController.addTicket = (req, res, next) => {
-    const { snaps_given, mentee_id, status, message } = req.body;
+    const { mentee_id, status, message } = req.body;
+    const snaps_given = Number(req.body.snaps_given);
+    console.log('addTicketNumberTest: ', typeof snaps_given);
     const addTicket = {
         text: `
       INSERT INTO tickets
@@ -57,6 +59,8 @@ ticketsController.addTicket = (req, res, next) => {
     `,
         values: [snaps_given, mentee_id, status, message]
     };
+
+    console.log(addTicket.values);
     db.query(addTicket)
         .then(ticket => {
             res.locals.ticketId = ticket.rows[0]._id;
@@ -81,9 +85,12 @@ ticketsController.updateTicketStatus = (req, res, next) => {
     `,
         values: [status, ticketId]
     };
-
     db.query(updateTicket)
-        .then(success => next())
+        .then(success => {
+            console.log(success);
+            // res.locals.tickets = success
+            return next();
+        })
         .catch(err =>
             next({
                 log: `Error in middleware ticketsController.updateTicket: ${err}`
