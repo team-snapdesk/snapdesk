@@ -55,7 +55,7 @@ class Profile extends Component {
     const feedbacks = fbFetched.map((fb, idx) => {
       let stars = '';
       for (let i = 0; i < fb.rating; i++) {
-        stars += '⭐';
+        stars += '⭐'; //emoji size: 32 x 32
       }
       return (
         <div className="profile feedback" key={`feedback${idx}`}>
@@ -86,14 +86,14 @@ class Profile extends Component {
           </Media.Body>
         </Media>
 
-        <article>
+        <div className="profile expertiseDisplay">
           <h5>Expertise</h5>
           <ul>
             <li>Hardcoded</li>
             <li>Javascript</li>
             <li>React-Redux</li>
           </ul>
-        </article>
+        </div>
 
         <h5>Your Snaps</h5>
         <div className="profile snapsDisplay">
@@ -112,6 +112,8 @@ class Profile extends Component {
           {/* display feedbacks user received*/}
           {feedbacks}
         </div>
+
+        <button className="btn btnBack" onClick={() => this.props.updatePage('main')}>Back</button>
       </section>
     )
   }

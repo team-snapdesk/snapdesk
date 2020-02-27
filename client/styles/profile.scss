@@ -6,9 +6,8 @@ $darkest: #343a40;
 
 //for profile page
 .profileSection {
-  margin: 10%;
-  padding: 10%; 
-  width: 500px;
+  margin: 2em;
+  padding: 2em; 
 
   h2, h5 {
     color: $highlightedColor;
@@ -17,6 +16,18 @@ $darkest: #343a40;
 
   span {
     display: block;
+  }
+
+  button {
+    margin: 1em;
+    color: $grey;
+    background-color: $highlightedColor;
+    border-color: $grey;
+
+     &:hover {
+        background-color: $dark;
+        color: $primaryColor;
+     }
   }
 
   .mediaBody {

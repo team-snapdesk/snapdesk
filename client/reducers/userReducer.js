@@ -16,6 +16,7 @@ const userState = {
   userName: '',
   userBio: '',
   userAvatar: '',
+  currPage: 'main',
 };
 
 const userReducer = (state = userState, action) => {
@@ -43,6 +44,12 @@ const userReducer = (state = userState, action) => {
         userName: action.payload.name,
         userBio: action.payload.bio,
         userAvatar: action.payload.avatar_url
+      }
+
+    case types.USER_PAGE:
+      return {
+        ...state,
+        currPage: action.payload
       }
       
     default:

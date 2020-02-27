@@ -47,6 +47,9 @@ export const getUserData = () => dispatch =>
           payload: data.user,
         })
       }
-      
-      }
-    )
+    })
+
+export const updatePage = (page) => ({
+  type: types.USER_PAGE,
+  payload: page,
+})

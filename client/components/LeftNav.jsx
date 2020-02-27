@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
 
 
@@ -12,6 +11,7 @@ const LeftNav = props => (
         height="60px"
         className="d-inline-block align-top mx-auto"
         alt="Snap Desk Logo"
+        onClick={() => { props.updatePage('main') }}
       ></img>
     </Nav.Link>
     <Nav.Link eventKey="profile-link">  <img
@@ -22,9 +22,9 @@ const LeftNav = props => (
       alt="Snap Desk Logo">
     </img>
       <h4 className="userNameWrap " id="user-Name" width="200px">{props.userName} </h4></Nav.Link>
-    <Link to={`/profile`}>
-      <Nav.Link to={Profile}>Profile</Nav.Link>
-    </Link>
+    <Nav.Link onClick={() => { props.updatePage('profile') }}>
+      Profile
+    </Nav.Link>
     <Nav.Link className="btn btn-success btn-sm " width="100px" eventKey="logout-link">Logout</Nav.Link>
   </Nav>
 );
