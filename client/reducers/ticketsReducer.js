@@ -30,13 +30,7 @@ const ticketsReducer = (state = ticketState, action) => {
   let idx;
   switch (action.type) {
     case types.USER_LOGOUT:
-      return {
-        totalSnaps: 0,
-        messageInput: "",
-        messageRating: "",
-        activeTickets: [],
-        ticketsCount: 0
-      };
+      return ticketState;
 
     case types.UPDATE_MESSAGE:
       return { ...state, messageInput: action.payload };
@@ -70,7 +64,8 @@ const ticketsReducer = (state = ticketState, action) => {
         activeTickets: updatedTickets,
         ticketsCount: state.ticketsCount + 1,
         nextTicketId: state.nextTicketId + 1,
-        messageInput: ""
+        messageInput: "",
+        messageRating: 1
       };
 
       case types.DELETE_TICKET:

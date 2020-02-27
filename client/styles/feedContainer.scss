@@ -35,18 +35,27 @@
   }
 }
 
-  
-
-
 .ticket-creator-container {
   grid-row-start: creator;
   max-height: 100%;
   width: 100%;
+  hr {
+    margin-top: .5em;
+    margin-bottom: .5em;
+  }
   .ticket-creator-display {
-    padding: 1em 1em;
+    margin-bottom: 1em;
+    padding: 1em 1em .5em 1em;
     background-color: $tertiary;
     border: $border;
     box-sizing: border-box;
+    border-radius: .2em;
+    .snap-buttons {
+      margin-top: .5em;
+    }
+    .post-button {
+      justify-content: end;
+    }
   }
 }
 
@@ -54,6 +63,7 @@
   :hover {
     cursor: pointer;
   }
+  stroke-width: .2em;
 }
 
 .fill {
@@ -62,6 +72,6 @@
 }
 
 .empty{
-  stroke: $secondary;
   fill: $tertiary;
+  stroke: $secondary;
 }
