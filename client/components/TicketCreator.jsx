@@ -65,9 +65,11 @@ const TicketCreator = ({
           onChange={updateMessage}
           placeholder="What do you need help with?"
         />
-        <div className="flex-container snap-buttons">
-          {snapButtons}
-          <Form.Control required as='select' onChange={chooseTopic}>
+        <div className="flex-container snaps-topic-container">
+          <div className="flex-container snap-buttons">
+            {snapButtons}
+          </div>
+          <Form.Control className="topic-selector" required as='select' onChange={chooseTopic}>
                 <option value='Javascript' >Javascript</option>
                 <option value='Data Structures'>Data Structures</option>
                 <option value='GIT/Github'>GIT/Github</option>
