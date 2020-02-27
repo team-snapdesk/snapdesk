@@ -65,6 +65,7 @@ class MenteeTicketBox extends Component {
         <p>Request: {messageInput}</p>
         <p>user: {userName}</p>
         <p>Expected Snaps: {messageRating}</p>
+
         {buttons}
       </div>
     )
