@@ -12,31 +12,21 @@
 import axios from "axios";
 import * as types from "../constants/actionTypes";
 
-export const getRooms = userId => dispatch =>
-  axios
-    .get("/api/rooms/" + userId)
-    .then(({ data }) => {
-      if (!data.isLoggedIn) {
-        dispatch({
-          type: types.USER_LOGOUT,
-          payload: data
-        });
-      } else if (data.rooms.length > 0) {
-        dispatch({
-          type: types.LOAD_ROOMS,
-          payload: data
-          // {
-          //   activeRoom: { id: 3, name: "testroom3", admin: 3 },
-          //   rooms: [
-          //     { id: 3, name: "testroom3", admin: 3 },
-          //     { id: 4, name: "testroom4", admin: 3 },
-          //     { id: 5, name: "testroom5", admin: 3 }
-          //   ]
-          // }
-        });
-      }
-    })
-    .catch(err => console.log(err));
+export const getRooms = userId => dispatch => {
+  axios.get("/api/rooms/" + userId).then(({ data }) => {
+    if (!data.isLoggedIn) {
+      dispatch({
+        type: types.USER_LOGOUT,
+        payload: data
+      });
+    } else if (data.rooms.length > 0) {
+      dispatch({
+        type: types.LOAD_ROOMS,
+        payload: data
+      });
+    }
+  });
+};
 
 export const updateNewRoom = input => dispatch => {
   dispatch({
@@ -46,7 +36,6 @@ export const updateNewRoom = input => dispatch => {
 };
 
 export const addRoom = () => (dispatch, getState) => {
-  // console.log('ADD ROOM: ', name);
   // this part is why thunk is necessary to delay the firing of the dispatch handlers
   axios
     .post("/api/rooms", {
@@ -56,7 +45,6 @@ export const addRoom = () => (dispatch, getState) => {
     })
     .then(({ data }) => {
       // check if the returned user is logged in, if not, reroute
-      // console.log('POST ROOM ACTION DATA: ', data);
       if (!data.isLoggedIn) {
         dispatch({
           type: types.USER_LOGOUT,
@@ -69,8 +57,7 @@ export const addRoom = () => (dispatch, getState) => {
           payload: data
         });
       }
-    })
-    .catch(err => console.log(err));
+    });
 };
 
 export const updateActiveRoom = (newActiveRoomId, userId) => dispatch => {
@@ -91,8 +78,7 @@ export const updateActiveRoom = (newActiveRoomId, userId) => dispatch => {
           payload: data
         });
       }
-    })
-    .catch(err => console.log(err));
+    });
 };
 
 export const joinRoom = () => (dispatch, getState) => {
@@ -113,13 +99,12 @@ export const joinRoom = () => (dispatch, getState) => {
           payload: data
         });
       }
-    })
-    .catch(err => console.log(err));
+    });
 };
 
 export const updateJoinRoomName = input => dispatch => {
   dispatch({
     type: types.UPDATE_JOINROOMNAME,
     payload: input
-  }).catch(err => console.log(err));
+  });
 };
