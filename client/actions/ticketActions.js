@@ -71,16 +71,10 @@ export const updateRating = event => ({
 export const deleteTicket = id => (dispatch, getState) =>
   // don't actually delete the ticket from the DB, just set status to deleted so it isn't displayed
   axios
-<<<<<<< HEAD
-    .put("/api/tickets/delete", {
+    .put("/api/tickets/update", {
       ticketId: id,
-      status: "deleted"
-=======
-    .put('/api/tickets/update', {
-      ticketId: id,
-      status: 'deleted',
-      mentorId: null,
->>>>>>> 80b7f7a15433845d64c651f9028a4b0fae4014b4
+      status: "deleted",
+      mentorId: null
     })
     .then(({ data }) => {
       if (!data.isLoggedIn) {
@@ -91,97 +85,70 @@ export const deleteTicket = id => (dispatch, getState) =>
       } else {
         dispatch({
           type: types.DELETE_TICKET,
-<<<<<<< HEAD
           payload: id
         });
       }
     });
 
-// none of these are working yet
-export const resolveTicket = id => ({
-  type: types.RESOLVE_TICKET,
-  payload: id
-});
-
-export const acceptTicket = id => ({
-  type: types.ACCEPT_TICKET,
-  payload: id
-});
-
-export const cancelAccept = id => ({
-  type: types.CANCEL_ACCEPT,
-  payload: id
-});
-=======
-          payload: id,
-        })
-      }     
-    })
-    
-
 export const resolveTicket = id => (dispatch, getState) =>
   axios
-    .put('/api/tickets/update', {
+    .put("/api/tickets/update", {
       ticketId: id,
-      status: 'resolved',
-      mentorId: getState().user.userId,
+      status: "resolved",
+      mentorId: getState().user.userId
     })
     .then(({ data }) => {
       if (!data.isLoggedIn) {
         dispatch({
           type: types.USER_LOGOUT,
-          payload: data,
-        })
-      }
-      else {
+          payload: data
+        });
+      } else {
         dispatch({
           type: types.RESOLVE_TICKET,
-          payload: id,
-        })
-      }     
-    })
+          payload: id
+        });
+      }
+    });
 
 export const acceptTicket = ticket => (dispatch, getState) =>
   axios
-    .put('/api/tickets/update', {
+    .put("/api/tickets/update", {
       ticketId: ticket.messageId,
-      status: 'pending',
-      mentorId: getState().user.userId,
+      status: "pending",
+      mentorId: getState().user.userId
     })
     .then(({ data }) => {
       if (!data.isLoggedIn) {
         dispatch({
           type: types.USER_LOGOUT,
-          payload: data,
-        })
-      }
-      else {
+          payload: data
+        });
+      } else {
         dispatch({
           type: types.ACCEPT_TICKET,
-          payload: data.messageId,
-        })
-      }     
-    })
+          payload: data.messageId
+        });
+      }
+    });
 
 export const cancelAccept = id => dispatch =>
   axios
-    .put('/api/tickets/update', {
+    .put("/api/tickets/update", {
       ticketId: id,
-      status: 'active',
-      mentorId: null,
+      status: "active",
+      mentorId: null
     })
     .then(({ data }) => {
       if (!data.isLoggedIn) {
         dispatch({
           type: types.USER_LOGOUT,
-          payload: res,
-        })
-      }
-      else {
+          payload: res
+        });
+      } else {
         dispatch({
           type: types.CANCEL_ACCEPT,
-          payload: id,
-        })
-      }     
-    })
->>>>>>> 80b7f7a15433845d64c651f9028a4b0fae4014b4
+          payload: id
+        });
+      }
+    });
