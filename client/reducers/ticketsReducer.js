@@ -43,7 +43,7 @@ const ticketsReducer = (state = ticketState, action) => {
       return {
         ...state,
         activeTickets: action.payload,
-        ticketsCount: action.payload.length
+        ticketsCount: action.payload.length,
       };
 
     case types.CHOOSE_TOPIC:

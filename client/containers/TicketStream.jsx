@@ -21,6 +21,8 @@ import BystanderTicketBox from '../components/BystanderTicketBox';
 
 const mapStateToProps = state => ({
   activeTickets: state.tickets.activeTickets,
+  userId: state.user.userId,
+  ticketsCount: state.tickets.ticketsCount
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
@@ -28,10 +30,26 @@ const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 class TicketStream extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      scroll: 0
+    }
+  }
+
+  componentDidMount() {
+    this.props.getTickets();
+    // this.interval = setInterval(() => this.props.getTickets(), 5000);
   }
 
   componentDidUpdate() {
-    this.scrollToBottom();
+    if (this.state.scroll !== this.props.ticketsCount) {
+      this.scrollToBottom();
+      this.setState({ scroll: this.props.ticketsCount })
+    }
+  }
+
+  componentWillUnmount() {
+    // clearInterval(this.interval);
   }
 
   scrollToBottom() {
@@ -50,6 +68,7 @@ class TicketStream extends Component {
           //ticket should render bystanderticketbox
           ticketBox = (
             <BystanderTicketBox 
+              userId={this.props.userId}
               cancelAccept={this.props.cancelAccept}
               acceptTicket={this.props.acceptTicket}
               ticket={this.props.activeTickets[i]}
@@ -60,6 +79,7 @@ class TicketStream extends Component {
           } else {
             ticketBox = (
               <MenteeTicketBox
+                userId={this.props.userId}
                 deleteTicket={this.props.deleteTicket}
                 resolveTicket={this.props.resolveTicket}
                 toggleModal={this.props.toggleModal}

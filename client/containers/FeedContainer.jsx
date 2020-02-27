@@ -38,20 +38,13 @@ class FeedContainer extends Component {
     super(props);
   }
 
-  componentDidMount() {
-    this.props.getTickets();
-    // this.interval = setInterval(() => this.props.getTickets(), 5000);
-  }
-
-  componentWillUnmount() {
-    // clearInterval(this.interval);
-    document.title = 'SnapDesk';
-  }
-
   componentDidUpdate() {
     document.title = '(' + this.props.ticketsCount + ') ' + 'SnapDesk';
   }
 
+  componentWillUnmount() {
+    document.title = 'SnapDesk';
+  }
 
   render() {
     return (
