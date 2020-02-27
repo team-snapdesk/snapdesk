@@ -95,7 +95,7 @@ const LeftNav = props => {
           />
           <InputGroup.Append>
             <Button
-              onClick={e => {
+              onSubmit={e => {
                 e.preventDefault();
                 props.joinRoom();
               }}
