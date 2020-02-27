@@ -94,72 +94,69 @@ export const deleteTicket = id => (dispatch, getState) =>
       }     
     })
     
-// none of these are working yet
-export const resolveTicket = id => (dispatch, getState) =>
-// don't actually delete the ticket from the DB, just set status to deleted so it isn't displayed
-axios
-  .put('/api/tickets/update', {
-    ticketId: id,
-    status: 'resolved',
-    mentorId: getState().user.userId,
-  })
-  .then(({ res }) => {
-    if (!res.isLoggedIn) {
-      dispatch({
-        type: types.USER_LOGOUT,
-        payload: res,
-      })
-    }
-    else {
-      dispatch({
-        type: types.RESOLVE_TICKET,
-        payload: id,
-      })
-    }     
-  })
 
-export const acceptTicket = data => (dispatch, getState) =>
-// don't actually delete the ticket from the DB, just set status to deleted so it isn't displayed
-axios
-  .put('/api/tickets/update', {
-    ticketId: data.messageId,
-    status: 'pending',
-    mentorId: getState().user.userId,
-  })
-  .then(({ res }) => {
-    if (!res.isLoggedIn) {
-      dispatch({
-        type: types.USER_LOGOUT,
-        payload: res,
-      })
-    }
-    else {
-      dispatch({
-        type: types.ACCEPT_TICKET,
-        payload: data.messageId,
-      })
-    }     
-  })
+export const resolveTicket = id => (dispatch, getState) =>
+  axios
+    .put('/api/tickets/update', {
+      ticketId: id,
+      status: 'resolved',
+      mentorId: getState().user.userId,
+    })
+    .then(({ data }) => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: data,
+        })
+      }
+      else {
+        dispatch({
+          type: types.RESOLVE_TICKET,
+          payload: id,
+        })
+      }     
+    })
+
+export const acceptTicket = ticket => (dispatch, getState) =>
+  axios
+    .put('/api/tickets/update', {
+      ticketId: ticket.messageId,
+      status: 'pending',
+      mentorId: getState().user.userId,
+    })
+    .then(({ data }) => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: data,
+        })
+      }
+      else {
+        dispatch({
+          type: types.ACCEPT_TICKET,
+          payload: data.messageId,
+        })
+      }     
+    })
 
 export const cancelAccept = id => dispatch =>
-// don't actually delete the ticket from the DB, just set status to deleted so it isn't displayed
-axios
-  .put('/api/tickets/update', {
-    ticketId: id,
-    status: 'active',
-    mentorId: null,
-  })
-  .then(({ res }) => {
-    if (!res.isLoggedIn) {
-      dispatch({
-        type: types.USER_LOGOUT,
-        payload: res,
-      })
-    }
-    else {
-      dispatch({
-        type: types.RESOLVE_TICKET,
-        payload: id,
-      })
-    }     
-  })
+  axios
+    .put('/api/tickets/update', {
+      ticketId: id,
+      status: 'active',
+      mentorId: null,
+    })
+    .then(({ data }) => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: res,
+        })
+      }
+      else {
+        dispatch({
+          type: types.CANCEL_ACCEPT,
+          payload: id,
+        })
+      }     
+    })
