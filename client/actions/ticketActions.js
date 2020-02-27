@@ -19,6 +19,11 @@ export const updateMessage = event => ({
   payload: event.target.value
 });
 
+export const chooseTopic = event => ({
+  type: types.CHOOSE_TOPIC,
+  payload: event.target.value
+});
+
 export const updateRating = value => ({
   type: types.UPDATE_RATING,
   payload: value,
@@ -65,7 +70,8 @@ export const postTicket = () => (dispatch, getState) => {
       mentee_id: getState().user.userId,
       message: getState().tickets.messageInput,
       status: "active",
-      snaps_given: getState().tickets.messageRating
+      snaps_given: getState().tickets.messageRating,
+      topic: getState().tickets.topic,
     })
     .then(({ data }) => {
       if (!data.isLoggedIn) {

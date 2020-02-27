@@ -28,7 +28,8 @@ const mapStateToProps = state => ({
   activeTickets: state.tickets.activeTickets,
   messageRating: state.tickets.messageRating,
   ticketsCount: state.tickets.ticketsCount,
-  resolveModal: state.tickets.resolveModal
+  resolveModal: state.tickets.resolveModal,
+  topic: state.tickets.topic
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
