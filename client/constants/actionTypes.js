@@ -15,6 +15,7 @@ export const UPDATE_MESSAGE = 'UPDATE_MESSAGE';
 export const UPDATE_RATING = 'UPDATE_RATING';
 // mentee ticket actions
 export const POST_TICKET = 'POST_TICKET';
+export const CHOOSE_TOPIC = 'CHOOSE_TOPIC';
 export const DELETE_TICKET = 'DELETE_TICKET';
 export const RESOLVE_TICKET = 'RESOLVE_TICKET';
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';

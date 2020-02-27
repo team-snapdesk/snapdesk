@@ -12,6 +12,7 @@
 import * as types from "../constants/actionTypes";
 
 const ticketState = {
+  topic: '',
   totalSnaps: 0,
   messageInput: "",
   messageRating: 1,
@@ -51,6 +52,12 @@ const ticketsReducer = (state = ticketState, action) => {
         ticketsCount: action.payload.length
       };
 
+    case types.CHOOSE_TOPIC:
+      return {
+        ...state,
+        topic: action.payload
+      }
+
     case types.POST_TICKET:
       // build new ticket object to be inserted into activeTickets array (use props from FeedContainer)
       const newTicket = {
@@ -59,6 +66,7 @@ const ticketsReducer = (state = ticketState, action) => {
         messageId: action.payload.ticketId,
         menteeId: action.payload.menteeId,
         timestamp: action.payload.timestamp,
+        topic: state.topic,
         status: "active"
       };
       // make a shallow copy of existing array and push new ticket to it

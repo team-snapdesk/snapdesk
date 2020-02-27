@@ -55,7 +55,7 @@ ticketsController.addTicket = (req, res, next) => {
       (snaps_given, mentee_id, status, message, timestamp, topic)
       VALUES
       ($1, $2, $3, $4, NOW(), $5)
-      RETURNING _id, timestamp, mentee_id;
+      RETURNING _id, timestamp, mentee_id, topic;
     `,
     values: [snaps_given, mentee_id, status, message, topic]
   }
