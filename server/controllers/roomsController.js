@@ -1,10 +1,10 @@
 // import access to database
-const db = require('../models/userModel');
+const db = require("../models/userModel");
 
 const roomsController = {};
 
 roomsController.addRooms = (req, res, next) => {
-  console.log('REQUEST BODY: ', req.body);
+  console.log("REQUEST BODY: ", req.body);
   const { name, admin } = req.body;
   const addRoom = {
     text: `
@@ -17,14 +17,16 @@ roomsController.addRooms = (req, res, next) => {
     values: [name, admin]
   };
   db.query(addRoom)
-    .then((room) => {
+    .then(room => {
       // console.log('ROOM RESPONSE: ', room);
-      res.locals.roomId = room.rows[0]._id;
-      res.locals.roomName = room.rows[0].name;
-      res.locals.roomAdmin = room.rows[0].admin_id;
+      res.locals.activeRoom = {
+        id: room.rows[0]._id,
+        name: room.rows[0].name,
+        admin: room.rows[0].admin_id
+      };
       return next();
     })
-    .catch((err) =>
+    .catch(err =>
       next({
         log: `Error in middleware roomsController.addNewRoom: ${err}`
       })

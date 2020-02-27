@@ -26,7 +26,8 @@ const mapStateToProps = state => ({
   userName: state.user.userName,
   userId: state.user.userId,
   activeRoom: state.rooms.activeRoom,
-  rooms: state.rooms.rooms
+  rooms: state.rooms.rooms,
+  newRoom: state.rooms.newRoom
 });
 
 const mapDispatchToProps = dispatch =>
@@ -53,11 +54,19 @@ class Wrapper extends Component {
               activeRoom={this.props.activeRoom}
               rooms={this.props.rooms}
               addRoom={this.props.addRoom}
+              NewRoom={this.props.newRoom}
+              updateNewRoom={this.props.updateNewRoom}
             />
           </div>
-          <div className="col-8">{/* <FeedContainer /> */}</div>
+          <div className="col-8">
+            <FeedContainer />
+          </div>
           <div className="col-2">
-            <RightNav ticketsCount={this.props.ticketsCount} />
+            <RightNav
+              ticketsCount={this.props.ticketsCount}
+              activeRoom={this.props.activeRoom}
+              userId={this.props.userId}
+            />
           </div>
         </div>
       </div>

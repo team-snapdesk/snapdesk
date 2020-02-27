@@ -22,7 +22,9 @@ const mapStateToProps = state => ({
   messageInput: state.tickets.messageInput,
   messageRating: state.tickets.messageRating,
   activeTickets: state.tickets.activeTickets,
-  ticketsCount: state.tickets.ticketsCount
+  ticketsCount: state.tickets.ticketsCount,
+  roomId: state.rooms.activeRoom.id,
+  roomName: state.rooms.activeRoom.name
 });
 
 const mapDispatchToProps = dispatch =>
@@ -89,12 +91,11 @@ class FeedContainer extends Component {
         }
         activeTickets.push(ticketBox);
       }
-
-      activeTickets.push(ticketBox);
     }
 
     return (
       <div>
+        <h1>{this.props.roomName}</h1>
         <div className="ticketDisplay overflow-auto">{activeTickets}</div>
         <div className="ticketCreator">
           <TicketCreator {...this.props} key={this.props.userId} />

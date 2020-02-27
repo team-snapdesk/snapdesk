@@ -14,7 +14,7 @@ import * as types from "../constants/actionTypes";
 
 export const getRooms = userId => dispatch =>
   axios
-    .get("INSERT BACKEND ROUTE HERE/" + userId)
+    .get("/api/rooms/" + userId)
     .then(({ data }) => {
       if (!data.isLoggedIn) {
         dispatch({
@@ -25,18 +25,33 @@ export const getRooms = userId => dispatch =>
         dispatch({
           type: types.LOAD_ROOMS,
           payload: data
+          // {
+          //   activeRoom: { id: 3, name: "testroom3", admin: 3 },
+          //   rooms: [
+          //     { id: 3, name: "testroom3", admin: 3 },
+          //     { id: 4, name: "testroom4", admin: 3 },
+          //     { id: 5, name: "testroom5", admin: 3 }
+          //   ]
+          // }
         });
       }
     })
     .catch(err => console.log(err));
 
-export const addRoom = name => (dispatch, getState) => {
+export const updateNewRoom = input => dispatch => {
+  dispatch({
+    type: types.UPDATE_NEWROOM,
+    payload: input
+  });
+};
+
+export const addRoom = () => (dispatch, getState) => {
   // console.log('ADD ROOM: ', name);
   // this part is why thunk is necessary to delay the firing of the dispatch handlers
   axios
     .post("/api/rooms", {
       // POST request to create a new ticket
-      name: name,
+      name: getState().rooms.newRoom,
       admin: getState().user.userId
     })
     .then(({ data }) => {
@@ -48,9 +63,9 @@ export const addRoom = name => (dispatch, getState) => {
           payload: data
         });
       } else {
-        // if they're still logged in, continue with new ticket request
+        // if they're still logged in, continue with loading new room
         dispatch({
-          type: types.POST_TICKET,
+          type: types.ADD_ROOM,
           payload: data
         });
       }

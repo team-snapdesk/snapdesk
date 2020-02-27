@@ -13,7 +13,8 @@ import * as types from "../constants/actionTypes";
 
 const roomState = {
   activeRoom: { id: null, name: "Choose a room", admin: null },
-  rooms: []
+  rooms: [],
+  newRoom: ""
 };
 
 const roomsReducer = (state = roomState, action) => {
@@ -24,11 +25,16 @@ const roomsReducer = (state = roomState, action) => {
         activeRoom: action.payload.activeRoom,
         rooms: action.payload.rooms
       };
-
+    case types.UPDATE_NEWROOM:
+      return {
+        ...state,
+        newRoom: action.payload
+      };
     case types.ADD_ROOM:
       return {
         ...state,
-        activeRoom: action.payload.activeRoom
+        activeRoom: action.payload.activeRoom,
+        newRoom: ""
       };
 
     default:

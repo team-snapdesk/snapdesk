@@ -15,21 +15,29 @@ const LeftNav = props => {
     });
   }
   roomList.push(
-    <NavDropdown.Item key={roomList.length}>
-      <InputGroup className="createRoom">
-        <FormControl id="roomForm" type="text" placeholder="Room name" />
-        <InputGroup.Append>
-          <Button
-            onClick={() => {
-              // e.preventDefault();
-              props.addRoom(roomForm.value);
-            }}
-          >
-            Create
-          </Button>
-        </InputGroup.Append>
-      </InputGroup>
-    </NavDropdown.Item>
+    // <NavDropdown.Item key={roomList.length}>
+    <InputGroup className="createRoom">
+      <FormControl
+        id="roomForm"
+        type="text"
+        placeholder="Room name"
+        value={props.rooms.newRoom}
+        onChange={e => {
+          props.updateNewRoom(e.target.value);
+        }}
+      />
+      <InputGroup.Append>
+        <Button
+          onClick={e => {
+            e.preventDefault();
+            props.addRoom();
+          }}
+        >
+          Create
+        </Button>
+      </InputGroup.Append>
+    </InputGroup>
+    // </NavDropdown.Item>
   );
 
   return (

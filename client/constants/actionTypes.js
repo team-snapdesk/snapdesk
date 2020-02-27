@@ -23,3 +23,4 @@ export const LOAD_USER = "LOAD_USER";
 export const USER_LOGOUT = "USER_LOGOUT";
 export const ADD_ROOM = "ADD_ROOM";
 export const LOAD_ROOMS = "LOAD_ROOM";
+export const UPDATE_NEWROOM = "UPDATE_NEWROOM";
