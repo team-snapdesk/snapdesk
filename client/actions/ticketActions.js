@@ -13,7 +13,7 @@
 import axios from "axios";
 import * as types from "../constants/actionTypes";
 
-export const postTicket = () => (dispatch, getState) =>
+export const postTicket = roomId => (dispatch, getState) =>
   // this part is why thunk is necessary to delay the firing of the dispatch handlers
   axios
     .post("/api/tickets", {

@@ -27,7 +27,8 @@ const mapStateToProps = state => ({
   userId: state.user.userId,
   activeRoom: state.rooms.activeRoom,
   rooms: state.rooms.rooms,
-  newRoom: state.rooms.newRoom
+  newRoom: state.rooms.newRoom,
+  joinRoomName: state.rooms.joinRoomName
 });
 
 const mapDispatchToProps = dispatch =>
@@ -39,8 +40,9 @@ class Wrapper extends Component {
   }
 
   componentDidMount() {
-    this.props.getUserData();
-    this.props.getRooms(this.props.userId);
+    this.props.getUserData().then(res => {
+      this.props.getRooms(this.props.userId);
+    });
   }
 
   render() {
@@ -51,11 +53,16 @@ class Wrapper extends Component {
             <LeftNav
               url={this.props.userAvatar}
               userName={this.props.userName}
+              userId={this.props.userId}
               activeRoom={this.props.activeRoom}
               rooms={this.props.rooms}
               addRoom={this.props.addRoom}
-              NewRoom={this.props.newRoom}
+              newRoom={this.props.newRoom}
               updateNewRoom={this.props.updateNewRoom}
+              updateActiveRoom={this.props.updateActiveRoom}
+              updateJoinRoomName={this.props.updateJoinRoomName}
+              joinRoomName={this.props.joinRoomName}
+              joinRoom={this.props.joinRoom}
             />
           </div>
           <div className="col-8">

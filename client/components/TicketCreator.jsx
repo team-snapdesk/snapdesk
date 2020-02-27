@@ -9,15 +9,15 @@
  * ************************************
  */
 
-import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import React from "react";
+import { Form, Button } from "react-bootstrap";
 
 const TicketCreator = props => (
   <div>
     <Form
       onSubmit={e => {
         e.preventDefault();
-        props.postTicket();
+        props.postTicket(props.roomId);
       }}
     >
       <Form.Group

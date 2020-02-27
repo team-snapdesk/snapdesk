@@ -7,11 +7,11 @@
  *
  * ************************************
  */
-const jwt = require('jsonwebtoken');
-const jwtSecret = require('../_secret/jwtSecret');
+const jwt = require("jsonwebtoken");
+const jwtSecret = require("../_secret/jwtSecret");
 
 // import access to database
-const db = require('../models/userModel');
+const db = require("../models/userModel");
 
 const userController = {};
 
@@ -25,15 +25,17 @@ userController.getData = (req, res, next) => {
     text: `SELECT * FROM users WHERE _id = $1`,
     values: [id]
   };
-  
+
   db.query(userQuery)
     .then(user => {
       res.locals.user = user.rows[0];
       return next();
     })
-    .catch(err => next({ 
-      log: `Error in middleware userController.getData: ${err}` 
-    }));
-}
+    .catch(err =>
+      next({
+        log: `Error in middleware userController.getData: ${err}`
+      })
+    );
+};
 
- module.exports = userController;
+module.exports = userController;

@@ -12,41 +12,30 @@
 import axios from "axios";
 import * as types from "../constants/actionTypes";
 
-export const getRooms = userId => dispatch =>
-  axios
-    .get("/api/rooms/" + userId)
-    .then(({ data }) => {
-      if (!data.isLoggedIn) {
-        dispatch({
-          type: types.USER_LOGOUT,
-          payload: data
-        });
-      } else if (data.rooms.length > 0) {
-        dispatch({
-          type: types.LOAD_ROOMS,
-          payload: data
-          // {
-          //   activeRoom: { id: 3, name: "testroom3", admin: 3 },
-          //   rooms: [
-          //     { id: 3, name: "testroom3", admin: 3 },
-          //     { id: 4, name: "testroom4", admin: 3 },
-          //     { id: 5, name: "testroom5", admin: 3 }
-          //   ]
-          // }
-        });
-      }
-    })
-    .catch(err => console.log(err));
+export const getRooms = userId => dispatch => {
+  axios.get("/api/rooms/" + userId).then(({ data }) => {
+    if (!data.isLoggedIn) {
+      dispatch({
+        type: types.USER_LOGOUT,
+        payload: data
+      });
+    } else if (data.rooms.length > 0) {
+      dispatch({
+        type: types.LOAD_ROOMS,
+        payload: data
+      });
+    }
+  });
+};
 
 export const updateNewRoom = input => dispatch => {
   dispatch({
     type: types.UPDATE_NEWROOM,
     payload: input
-  });
+  }).catch(err => console.log(err));
 };
 
 export const addRoom = () => (dispatch, getState) => {
-  // console.log('ADD ROOM: ', name);
   // this part is why thunk is necessary to delay the firing of the dispatch handlers
   axios
     .post("/api/rooms", {
@@ -56,7 +45,6 @@ export const addRoom = () => (dispatch, getState) => {
     })
     .then(({ data }) => {
       // check if the returned user is logged in, if not, reroute
-      // console.log('POST ROOM ACTION DATA: ', data);
       if (!data.isLoggedIn) {
         dispatch({
           type: types.USER_LOGOUT,
@@ -70,4 +58,53 @@ export const addRoom = () => (dispatch, getState) => {
         });
       }
     });
+};
+
+export const updateActiveRoom = (newActiveRoomId, userId) => dispatch => {
+  axios
+    .put("/api/rooms/" + userId, {
+      roomId: newActiveRoomId,
+      userId: userId
+    })
+    .then(({ data }) => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: data
+        });
+      } else {
+        dispatch({
+          type: types.UPDATE_ACTIVEROOM,
+          payload: data
+        });
+      }
+    });
+};
+
+export const joinRoom = () => (dispatch, getState) => {
+  axios
+    .post("/api/rooms/joinRoom", {
+      roomName: getState().rooms.joinRoomName,
+      userId: getState().user.userId
+    })
+    .then(({ data }) => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: data
+        });
+      } else {
+        dispatch({
+          type: types.LOAD_ROOMS,
+          payload: data
+        });
+      }
+    });
+};
+
+export const updateJoinRoomName = input => dispatch => {
+  dispatch({
+    type: types.UPDATE_JOINROOMNAME,
+    payload: input
+  });
 };

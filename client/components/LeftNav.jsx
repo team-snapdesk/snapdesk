@@ -11,17 +11,35 @@ const LeftNav = props => {
   let roomList = [];
   if (props.rooms.length > 0) {
     roomList = props.rooms.map((room, i) => {
-      return <NavDropdown.Item key={i}>{room.name}</NavDropdown.Item>;
+      if (room.id === props.activeRoom.id) {
+        return (
+          <NavDropdown.Item
+            key={i}
+            onClick={() => props.updateActiveRoom(room.id, props.userId)}
+          >
+            <b>{room.name}</b>
+          </NavDropdown.Item>
+        );
+      } else {
+        return (
+          <NavDropdown.Item
+            key={i}
+            id={room.id}
+            onClick={e => props.updateActiveRoom(e.target.id, props.userId)}
+          >
+            {room.name}
+          </NavDropdown.Item>
+        );
+      }
     });
   }
   roomList.push(
-    // <NavDropdown.Item key={roomList.length}>
     <InputGroup className="createRoom">
       <FormControl
         id="roomForm"
         type="text"
         placeholder="Room name"
-        value={props.rooms.newRoom}
+        value={props.newRoom}
         onChange={e => {
           props.updateNewRoom(e.target.value);
         }}
@@ -37,7 +55,6 @@ const LeftNav = props => {
         </Button>
       </InputGroup.Append>
     </InputGroup>
-    // </NavDropdown.Item>
   );
 
   return (
@@ -69,6 +86,25 @@ const LeftNav = props => {
         </h4>
       </Nav.Link>
       <NavDropdown title={props.activeRoom.name}>{roomList}</NavDropdown>
+      <Nav.Item>
+        <InputGroup>
+          <FormControl
+            placeholder="Enter a room name"
+            onChange={e => props.updateJoinRoomName(e.target.value)}
+            value={props.joinRoomName}
+          />
+          <InputGroup.Append>
+            <Button
+              onSubmit={e => {
+                e.preventDefault();
+                props.joinRoom();
+              }}
+            >
+              Join
+            </Button>
+          </InputGroup.Append>
+        </InputGroup>
+      </Nav.Item>
       <Nav.Link
         className="btn btn-success btn-sm "
         width="100px"
