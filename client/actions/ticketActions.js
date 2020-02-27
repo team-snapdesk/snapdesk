@@ -104,37 +104,30 @@ export const deleteTicket = id => (dispatch, getState) => {
     })
 }
 
-//START CODE REVIEW -----------------
-// export const resolveTicket = id => (dispatch, getState) => 
-//   axios
-//   .put('..insert path here...', {
-//     ticketId : id,
-//     status: 'resolved',
-//     //feedback??
-//   })
-//   .then(({data}) => {
-//     if(!data.isLoggedIn) {
-//       dispatch({
-//         type: types.USER_LOGOUT,
-//         payload: data,
-//       })
-//     } 
-//     else {
-//       dispatch({
-//         type: types.RESOLVE_TICKET,
-//         payload: id,
-//       })
-//     }
-//   })
 
-// END CODE REVIEW ------------
-
-
-export const resolveTicket = id => ({
-  type: types.RESOLVE_TICKET,
-  payload: id
-});
-
+export const resolveTicket = id => (dispatch, getState) => {
+  axios
+  .put('/api/tickets/resolved', {
+    messageId : id,
+    status: 'resolved',
+    messageRating: getState().tickets.resolveModal.finalSnaps,
+    feedback: getState().tickets.resolveModal.feedback,
+  })
+  .then(({data}) => {
+    if(!data.isLoggedIn) {
+      dispatch({
+        type: types.USER_LOGOUT,
+        payload: data,
+      })
+    } 
+    else {
+      dispatch({
+        type: types.RESOLVE_TICKET,
+        payload: id,
+      })
+    }
+  })
+}
 
 
 export const acceptTicket = id => (dispatch, getState) => {
@@ -152,7 +145,6 @@ export const acceptTicket = id => (dispatch, getState) => {
         })
       }
       else {
-        console.log('ticketId', id);
         dispatch({
           type: types.ACCEPT_TICKET,
           payload: {

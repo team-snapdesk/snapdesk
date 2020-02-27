@@ -98,10 +98,10 @@ class MenteeTicketBox extends Component {
           </div>
           <Modal.Footer>
             <Button variant="secondary" onClick={toggleModal}>
-              Close
+              Cancel
             </Button>
-            <Button variant="primary" onClick={() => resolveTicket(ticketId)}>
-              Save Changes
+            <Button variant="primary" onClick={() => resolveTicket(messageId)}>
+              Resolve
             </Button>
           </Modal.Footer>
         </Modal>

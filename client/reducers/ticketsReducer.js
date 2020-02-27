@@ -82,29 +82,28 @@ const ticketsReducer = (state = ticketState, action) => {
         };
   
       case types.RESOLVE_TICKET:
-        updatedTickets = state.activeTickets.map((ticket, index) => {
-          if (ticket.messageId === action.payload) {
-            idx = index;
-            return ticket;
-          }
-          return ticket;
-        });
-        updatedTickets.splice(idx, 1);
+        updatedTickets = state.activeTickets.filter(
+          ticket => ticket.messageId !== action.payload
+        );
         return {
           ...state,
           activeTickets: updatedTickets,
-          ticketsCount: state.ticketsCount - 1
+          ticketsCount: state.ticketsCount - 1,
+          resolveModal: {
+            show: false,
+            feedback: '',
+            finalSnaps: 0
+          }
         };
 
     case types.TOGGLE_MODAL:
-      const resolveModal = Object.assign({}, state.resolveModal, {
-        show: state.resolveModal.show ? false : true,
-        feedback: '',
-        finalSnaps: action.payload ? action.payload : 0
-      });
       return {
         ...state,
-        resolveModal
+        resolveModal: {
+          show: state.resolveModal.show ? false : true,
+          feedback: '',
+          finalSnaps: action.payload ? action.payload : 0
+        }
       }
 
     case types.UPDATE_FEEDBACK:
