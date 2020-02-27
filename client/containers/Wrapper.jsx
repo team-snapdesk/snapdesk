@@ -16,6 +16,7 @@ import * as userActions from '../actions/userActions';
 import LeftNav from '../components/LeftNav';
 import RightNav from '../components/RightNav';
 import FeedContainer from './FeedContainer';
+import Profile from '../components/Profile';
 import { bindActionCreators } from 'redux';
 
 const mapStateToProps = state => ({
@@ -43,6 +44,9 @@ class Wrapper extends Component {
         <div className="row align-items-start">
           <div className="col-2">
             <LeftNav url={this.props.userAvatar} userName={this.props.userName} />
+          </div>
+          <div className="profileDiv">{/*PROFILE TESTING */}
+            <Profile />
           </div>
           <div className="col-8">
             <FeedContainer />
