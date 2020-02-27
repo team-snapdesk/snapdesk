@@ -39,7 +39,8 @@ leaderboardController.byTopic = (req, res, next) => {
 				const values = [topic];
 
     db.query(text, values)
-    .then((result) =>{
+    .then((data) =>{
+			res.locals.LeaderboardTopic = data.rows;
         return next();
     })
     .catch(err =>{
