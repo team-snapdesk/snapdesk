@@ -90,7 +90,6 @@ const ticketsReducer = (state = ticketState, action) => {
                 return ticket;
             });
             updatedTickets.splice(idx, 1);
-            // console.log(updatedTickets)
             return {
                 ...state,
                 activeTickets: updatedTickets,
