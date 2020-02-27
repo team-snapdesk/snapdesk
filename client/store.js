@@ -19,9 +19,9 @@ import { verifyLogin } from './actions/userActions';
 
 // we are adding composeWithDevTools here to get easy access to the Redux dev tools
 const store = createStore(
-  // ADD REDUCERS
-  reducers,
-  composeWithDevTools(applyMiddleware(thunk))
+    // ADD REDUCERS
+    reducers,
+    composeWithDevTools(applyMiddleware(thunk))
 );
 
 store.dispatch(verifyLogin());
