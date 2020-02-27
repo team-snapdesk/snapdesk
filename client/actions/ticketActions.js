@@ -95,11 +95,11 @@ export const deleteTicket = id => (dispatch, getState) =>
     })
     
 // none of these are working yet
-export const resolveTicket = data => (dispatch, getState) =>
+export const resolveTicket = id => (dispatch, getState) =>
 // don't actually delete the ticket from the DB, just set status to deleted so it isn't displayed
 axios
   .put('/api/tickets/update', {
-    ticketId: data.messageId,
+    ticketId: id,
     status: 'resolved',
     mentorId: getState().user.userId,
   })
@@ -113,7 +113,7 @@ axios
     else {
       dispatch({
         type: types.RESOLVE_TICKET,
-        payload: data.messageId,
+        payload: id,
       })
     }     
   })
@@ -141,11 +141,11 @@ axios
     }     
   })
 
-export const cancelAccept = data => dispatch =>
+export const cancelAccept = id => dispatch =>
 // don't actually delete the ticket from the DB, just set status to deleted so it isn't displayed
 axios
   .put('/api/tickets/update', {
-    ticketId: data.messageId,
+    ticketId: id,
     status: 'active',
     mentorId: null,
   })
@@ -159,7 +159,7 @@ axios
     else {
       dispatch({
         type: types.RESOLVE_TICKET,
-        payload: data.messageId,
+        payload: id,
       })
     }     
   })
