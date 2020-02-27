@@ -5,16 +5,19 @@ const leaderboardController = {};
 leaderboardController.getLeaderBoard = (req, res, next) => {
     const getLeaderBoard = {
         text:`
-        SELECT mentor_id, users.name, SUM(snaps_given)
-        FROM tickets
-        INNER JOIN users ON users._id=mentor_id
+
+        SELECT SUM(snaps_given), mentor_id, users.name
+        FROM tickets 
+        INNER JOIN users ON users._id = mentor_id
         WHERE status = 'resolved'
         GROUP BY mentor_id, users.name
-        ORDER BY sum DESC
+        ORDER BY sum desc
+
         LIMIT 10;`}
 
     db.query(getLeaderBoard)
         .then(data => {
+            res.locals.leaderBoard = data.rows;
             return next();
         })
         .catch(err => next({ 
