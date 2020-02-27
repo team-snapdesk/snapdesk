@@ -27,6 +27,7 @@ class MenteeTicketBox extends Component {
       updateFeedback,
       updateFinalRating,
       userId,
+      userName,
       ticket: { 
         messageInput,
         messageRating,
@@ -35,7 +36,8 @@ class MenteeTicketBox extends Component {
         menteeName,
         timestamp,
         status,
-        mentorId
+        mentorId,
+        topic
       },
     } = this.props;
 
@@ -59,7 +61,9 @@ class MenteeTicketBox extends Component {
 
     return (
       <div className="MenteeTicketBox ticketbox">
+        <p>Topic: {topic}</p>
         <p>Request: {messageInput}</p>
+        <p>user: {userName}</p>
         <p>Expected Snaps: {messageRating}</p>
         {buttons}
       </div>

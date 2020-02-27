@@ -17,6 +17,7 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Snap from './Snap';
+import { chooseTopic } from '../actions/ticketActions';
 
 const TicketCreator = ({
   userId,
@@ -27,7 +28,7 @@ const TicketCreator = ({
   ticketsCount,
   postTicket,
   updateRating,
-  topic
+  chooseTopic
 }) => {
   const [validated, setValidated] = useState(false);
   const handleSubmit = event => {
@@ -66,6 +67,20 @@ const TicketCreator = ({
         />
         <div className="flex-container snap-buttons">
           {snapButtons}
+          <Form.Control required as='select' onChange={chooseTopic}>
+                <option value='Javascript' >Javascript</option>
+                <option value='Data Structures'>Data Structures</option>
+                <option value='GIT/Github'>GIT/Github</option>
+                <option value='Algorithms'>Algorithms</option>
+                <option value='AJAX'>AJAX</option>
+                <option value='React'>React</option>
+                <option value='Redux'>Redux</option>
+                <option value='HTML/CSS'>HTML/CSS</option>
+                <option value='Node'>Node</option>
+                <option value='Express'>Express</option>
+                <option value='Databases'>Databases</option>
+                <option value='Authentication'>Authentication</option>
+              </Form.Control>
         </div>
         <hr/>
         <div className="flex-container post-button">

@@ -27,18 +27,19 @@ leaderboardController.getLeaderBoard = (req, res, next) => {
 
 
 leaderboardController.byTopic = (req, res, next) => {
-    const topic = JSON.stringify(req.body.topic)
-    const text =  `SELECT mentor_id, users.name, topic, SUM(snaps_given)
+    const { topic } = req.body;
+    const byTopic = {
+         text:  `SELECT mentor_id, users.name, topic, SUM(snaps_given)
         FROM tickets
         INNER JOIN users ON users._id=mentor_id
         WHERE status = 'resolved' AND topic = $1
         GROUP BY mentor_id, users.name, topic
         ORDER BY sum DESC
-				LIMIT 5;`;
-				
-				const values = [topic];
+				LIMIT 5;`,
+        values: [topic]
+    }
 
-    db.query(text, values)
+    db.query(byTopic)
     .then((data) =>{
 			res.locals.LeaderboardTopic = data.rows;
         return next();

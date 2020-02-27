@@ -15,10 +15,12 @@ const ticketsController = {};
 
 ticketsController.getActiveTickets = (req, res, next) => {
   const getActiveTickets = `
-    SELECT t._id, t.snaps_given, t.message, t.status, t.timestamp, t.mentee_id, t.mentor_id, u.name, t.topic
+  SELECT t._id, t.snaps_given, t.message, t.status, t.timestamp, t.mentee_id, t.mentor_id, u.name as mentor_name, u2.name as mentee_name, t.topic
     FROM tickets t
     INNER JOIN users u
-    ON u._id = t.mentee_id
+    ON u._id = t.mentor_id
+    INNER JOIN users u2
+    ON u2._id = t.mentee_id
     WHERE status = 'active'
     OR status = 'pending'
     ORDER BY t._id;
@@ -30,7 +32,8 @@ ticketsController.getActiveTickets = (req, res, next) => {
         messageRating: ticket.snaps_given,
         messageId: ticket._id,
         menteeId: ticket.mentee_id,
-        menteeName: ticket.mentee_name,
+        mentorName: ticket.mentor_name,//added
+        menteeName: ticket.mentee_name,//added
         timestamp: ticket.timpestamp,
         status: ticket.status,
         mentorId: ticket.mentor_id || '',
@@ -52,7 +55,7 @@ ticketsController.addTicket = (req, res, next) => {
       (snaps_given, mentee_id, status, message, timestamp, topic)
       VALUES
       ($1, $2, $3, $4, NOW(), $5)
-      RETURNING _id, timestamp, mentee_id;
+      RETURNING _id, timestamp, mentee_id, topic;
     `,
     values: [snaps_given, mentee_id, status, message, topic]
   }
