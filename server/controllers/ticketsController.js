@@ -85,6 +85,9 @@ ticketsController.updateTicketStatus = (req, res, next) => {
     `,
         values: [status, ticketId]
     };
+
+    console.log(updateTicket);
+
     db.query(updateTicket)
         .then(success => {
             console.log(success);
