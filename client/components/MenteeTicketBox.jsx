@@ -13,6 +13,7 @@ import React, { Component } from 'react';
 // import bootstrap
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
 
 let buttons;
 class MenteeTicketBox extends Component {
@@ -24,6 +25,7 @@ class MenteeTicketBox extends Component {
       deleteTicket,
       resolveTicket,
       toggleModal,
+      updateFeedback,
       userId,
       ticket: { 
         messageInput,
@@ -37,6 +39,7 @@ class MenteeTicketBox extends Component {
       },
       resolveModal: {
         show,
+        feedback
       }
     } = this.props;
 
@@ -63,9 +66,16 @@ class MenteeTicketBox extends Component {
 
         <Modal show={show} onHide={toggleModal} >
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Resolving</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+          <Modal.Body>Request: {messageInput}</Modal.Body>
+          <Form.Control 
+            as="textarea"
+            rows="3"
+            placeholder="Feedback"
+            value={feedback}
+            onChange={(e) => updateFeedback(e)}
+          />
           <Modal.Footer>
             <Button variant="secondary" onClick={toggleModal}>
               Close

@@ -19,6 +19,8 @@ const ticketState = {
   ticketsCount: 0,
   resolveModal: {
     show: false,
+    feedback: '',
+    finalSnaps: 0
   }
 };
 
@@ -97,10 +99,20 @@ const ticketsReducer = (state = ticketState, action) => {
     case types.TOGGLE_MODAL:
       const resolveModal = Object.assign({}, state.resolveModal, {
         show: state.resolveModal.show ? false : true,
+        feedback: '',
       });
       return {
         ...state,
         resolveModal
+      }
+
+    case types.UPDATE_FEEDBACK:
+      return {
+        ...state,
+        resolveModal: {
+          ...state.resolveModal,
+          feedback: action.payload
+        }
       }
 
     case types.ACCEPT_TICKET:

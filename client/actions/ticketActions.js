@@ -29,6 +29,11 @@ export const toggleModal = () => ({
   payload: null
 });
 
+export const updateFeedback = event => ({
+  type: types.UPDATE_FEEDBACK,
+  payload: event.target.value
+})
+
 export const getTickets = () => dispatch => {
   axios
     .get('/api/tickets')

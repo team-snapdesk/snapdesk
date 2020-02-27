@@ -18,6 +18,7 @@ export const POST_TICKET = 'POST_TICKET';
 export const DELETE_TICKET = 'DELETE_TICKET';
 export const RESOLVE_TICKET = 'RESOLVE_TICKET';
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';
+export const UPDATE_FEEDBACK = 'UPDATE_FEEDBACK';
 // bystander ticket actions
 export const ACCEPT_TICKET = 'ACCEPT_TICKET';
 export const CANCEL_ACCEPT = 'CANCEL_ACCEPT';

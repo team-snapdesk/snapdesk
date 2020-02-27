@@ -35,11 +35,8 @@ class FeedContainer extends Component {
     super(props);
   }
 
-  componentWillMount() {
-    this.props.getTickets();
-  }
-
   componentDidMount() {
+    this.props.getTickets();
     // this.interval = setInterval(() => this.props.getTickets(), 5000);
   }
 
@@ -77,6 +74,7 @@ class FeedContainer extends Component {
               deleteTicket={this.props.deleteTicket}
               resolveTicket={this.props.resolveTicket}
               toggleModal={this.props.toggleModal}
+              updateFeedback={this.props.updateFeedback}
               resolveModal={this.props.resolveModal}
               ticket={this.props.activeTickets[i]}
               key={this.props.activeTickets[i].messageId}
