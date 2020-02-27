@@ -9,9 +9,13 @@
  * ************************************
  */
 
-import React from 'react';
-import { Form, Button } from 'react-bootstrap';
+import React, { useState } from 'react';
+
 // import components here
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Snap from './Snap';
 import { chooseTopic } from '../actions/ticketActions';
 
@@ -26,6 +30,21 @@ const TicketCreator = ({
   updateRating,
   chooseTopic
 }) => {
+  const [validated, setValidated] = useState(false);
+  const handleSubmit = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    setValidated(true);
+    const form = event.currentTarget;
+    if (form.checkValidity()!== false) {
+      postTicket();
+      setValidated(false);
+    }
+  }
+
+  const handleFocus = event => {
+    if (validated === true) setValidated(false);
+  }
 
   const snapButtons = [];
   for (let i = 1; i <= 5; i++) {
@@ -36,20 +55,19 @@ const TicketCreator = ({
   }
 
   return (
-    <div>
-      <Form
-        onSubmit={e => {
-          e.preventDefault();
-          postTicket();
-        }}
-      >
-        <Form.Group
-          controlId="exampleForm.ControlTextarea1"
-        >
-          <Form.Label>What do you need help with?</Form.Label>          
-            <Form.Group controldId="formGridState">
-              <Form.Label>Choose topic</Form.Label>
-              <Form.Control as='select' onChange={chooseTopic}>
+    <div className="ticket-creator-display">
+      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <textarea
+          required
+          onFocus={handleFocus}
+          rows="3" 
+          value={messageInput}
+          onChange={updateMessage}
+          placeholder="What do you need help with?"
+        />
+        <div className="flex-container snap-buttons">
+          {snapButtons}
+          <Form.Control required as='select' onChange={chooseTopic}>
                 <option value='Javascript' >Javascript</option>
                 <option value='Data Structures'>Data Structures</option>
                 <option value='GIT/Github'>GIT/Github</option>
@@ -63,15 +81,17 @@ const TicketCreator = ({
                 <option value='Databases'>Databases</option>
                 <option value='Authentication'>Authentication</option>
               </Form.Control>
-            </Form.Group>
-          <Form.Control as="textarea" rows="3" value={messageInput} onChange={updateMessage}/>
-        </Form.Group>
-        <div className="flex-container">
-          {snapButtons}
         </div>
-        <Button className="btn btn-secondary btn-md" type="submit">
-          Post
-        </Button>
+        <hr/>
+        <div className="flex-container post-button">
+          <Button variant="link" className="button-subtle" type="submit">
+            {/* Icon by Bytesize https://github.com/danklammer/bytesize-icons */}
+            <svg id="i-send" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="2o" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+              <path d="M2 16 L30 2 16 30 12 20 Z M30 2 L12 20" />
+            </svg>
+            <span>Post</span>
+          </Button>
+        </div>
       </Form>
     </div>
   );

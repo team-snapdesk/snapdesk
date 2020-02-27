@@ -66,7 +66,7 @@ class LeaderBoard extends Component {
                     <thead>
                     <tr>
                         <th>Ranking</th>
-                        <th>Username</th>
+                        <th>Mentor</th>
                         <th>Total Snaps</th>
                     </tr>
                     </thead>
