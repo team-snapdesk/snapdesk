@@ -67,10 +67,10 @@ class BystanderTicketBox extends Component {
     return (
 
       <div className="BystanderTicketBox ticketbox">
-        <p>Request: {messageInput}</p>
-        <p>Expected Snaps: {messageRating}</p>
         <p>Topic: {topic}</p>
+        <p>Request: {messageInput}</p>
         <p>User: {menteeName}</p>
+        <p>Expected Snaps: {messageRating}</p>
         {buttons}
       </div>
     )

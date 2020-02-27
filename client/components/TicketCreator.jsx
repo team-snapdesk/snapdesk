@@ -80,6 +80,7 @@ const TicketCreator = ({
                 <option value='Express'>Express</option>
                 <option value='Databases'>Databases</option>
                 <option value='Authentication'>Authentication</option>
+                <option value='Other'>Other</option>
               </Form.Control>
         </div>
         <hr/>
