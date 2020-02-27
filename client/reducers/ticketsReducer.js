@@ -44,6 +44,13 @@ const ticketsReducer = (state = ticketState, action) => {
                 ticketsCount: action.payload.length
             };
 
+        case types.GET_PENDING:
+            return {
+                ...state,
+                pendingTickets: action.payload,
+                pendingCount: action.payload.length
+            };
+
         case types.POST_TICKET:
             // build new ticket object to be inserted into activeTickets array (use props from FeedContainer)
             const newTicket = {
@@ -67,7 +74,9 @@ const ticketsReducer = (state = ticketState, action) => {
             };
 
         case types.ACCEPT_TICKET:
-            return { ...state };
+            return {
+                ...state
+            };
 
         case types.CANCEL_ACCEPT:
             return { ...state };

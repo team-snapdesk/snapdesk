@@ -105,31 +105,28 @@ export const resolveTicket = id => (dispatch, getState) =>
             }
         });
 
-        // author Anthony 2/26 4:40pm >>
-export const acceptTicket = id => (dispatch, getState) => 
-// this should patch to whatever backend route accept tickets 
+// author Anthony 2/26 4:40pm >>
+export const acceptTicket = id => (dispatch, getState) =>
+    // this should patch to whatever backend route accept tickets
     axios
-    .patch('api/ticket/accept', {
-        status: 'pending'
-    })
-    .then(({ data }) => {
-        console.log('inside of then in accept ticket middleware')
-        if(!data.isLoggedIn) {
-            console.log('inside of !data.isLoggedIn')
-            dispatch({
-                type: types.USER_LOGOUT, 
-                payload: data
-            });
-        }
-        else {   
-            console.log('inside else statement of accept middleware')
-         dispatch({
-        type: types.ACCEPT_TICKET,
-        payload: id
-    });
-
-    }
-    })
+        .patch('api/tickets/accept', {
+            status: 'pending',
+            mentor_id: getState().user.userId
+        })
+        .then(({ data }) => {
+            console.log(getState().tickets.activeTickets, 'active tick');
+            if (!data.isLoggedIn) {
+                dispatch({
+                    type: types.USER_LOGOUT,
+                    payload: data
+                });
+            } else {
+                dispatch({
+                    type: types.ACCEPT_TICKET,
+                    payload: id
+                });
+            }
+        });
 
 export const cancelAccept = id => ({
     type: types.CANCEL_ACCEPT,
