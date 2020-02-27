@@ -36,12 +36,15 @@ class FeedContainer extends Component {
   }
 
   componentWillMount() {
-    this.props.getTickets();
+    this.props.getTickets(this.props.roomId);
   }
 
   componentDidMount() {
     //set the timer for how often the ticket feed will reload active tickets
-    this.interval = setInterval(() => this.props.getTickets(), 5000);
+    this.interval = setInterval(
+      () => this.props.getTickets(this.props.roomId),
+      5000
+    );
   }
 
   componentWillUnmount() {

@@ -40,9 +40,9 @@ export const postTicket = () => (dispatch, getState) =>
       }
     });
 
-export const getTickets = () => dispatch =>
+export const getTickets = roomId => dispatch =>
   // get all active tickets from the DB. the timer for this is configurable from FeedContainer.jsx
-  axios.get("/api/tickets").then(({ data }) => {
+  axios.get("/api/tickets/" + roomId).then(({ data }) => {
     if (!data.isLoggedIn) {
       dispatch({
         type: types.USER_LOGOUT,

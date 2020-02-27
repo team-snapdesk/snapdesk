@@ -24,7 +24,7 @@ apiRouter.put(
 );
 
 apiRouter.get(
-  "/tickets",
+  "/tickets/:roomId",
   jwtsController.isLoggedIn,
   ticketsController.getActiveTickets,
   (req, res) => res.status(200).json(res.locals)
