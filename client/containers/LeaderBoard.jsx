@@ -15,6 +15,9 @@ import { Table } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/leaderActions';
 
+import LeaderBox from '../components/LeaderBox';
+
+
 const mapStateToProps = state => ({
     leaderList: state.leader.leaderList
   });
@@ -31,13 +34,14 @@ class LeaderBoard extends Component {
     }
 
     render() {
-        let LeaderBox; 
+        let leaderList; 
 //this.props.leaderboard = [{leader 1},{leader 2},.....]
         if (!this.props.leaderList || this.props.leaderList.length === 0) {
-            LeaderBox = <p>No current Rankings </p>;
+            leaderList = <p>No current Rankings </p>;
         } else {
-            LeaderBox = [];
+            leaderList = [];
             for (let i = 0; i < this.props.leaderList.length; i++) {
+                console.log('leaderboard', this.props.leaderList[i])
                 let currentLeader;
                 currentLeader = (
                 <LeaderBox
@@ -48,9 +52,10 @@ class LeaderBoard extends Component {
                 ranking={i+1}
                 />
                 )
-                LeaderBox.push(currentLeader);
+                leaderList.push(currentLeader);
           }
-          return (
+        }
+        return (
             <div>
                 <Table>
                     <thead>
@@ -61,12 +66,11 @@ class LeaderBoard extends Component {
                     </tr>
                     </thead>
                     <tbody>
-                 {LeaderBox}
+                    {leaderList}
                     </tbody>
                 </Table>
             </div>
-          )
-        }
+        )
     }
 }
 

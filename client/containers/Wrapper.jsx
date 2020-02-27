@@ -24,8 +24,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const mapStateToProps = state => ({
-  totalSnaps: state.tickets.totalSnaps,
-  leaderBoard: state.tickets.leaderBoard,
+  // totalSnaps: state.tickets.totalSnaps,
+  // leaderBoard: state.tickets.leaderBoard,
   ticketsCount: state.tickets.ticketsCount,
   userAvatar: state.user.userAvatar,
   userName:state.user.userName,

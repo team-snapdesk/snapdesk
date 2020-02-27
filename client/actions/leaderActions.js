@@ -28,7 +28,7 @@ export const getLeaderBoard = () => dispatch =>
             else {
                 dispatch({
                     type: types.LEADER_BY_TOPIC,
-                    payload: { mentor_id, name, sum }
+                    payload: data
                 })
             }
         })

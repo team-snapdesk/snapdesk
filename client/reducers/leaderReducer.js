@@ -19,10 +19,14 @@ const leaderReducer = (state = leaderState, action) => {
     switch(action.type) {
         case types.LEADER_BY_TOPIC: {
             return {
-                leaderList: action.payload,
+                leaderList: action.payload.leaderBoard
             }
         }
+
+        default:
+            return state;
     }
+
 }
 
 export default leaderReducer;
