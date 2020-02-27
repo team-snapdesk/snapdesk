@@ -35,26 +35,26 @@ class FeedContainer extends Component {
     super(props);
   }
 
-  // componentWillMount() {
-  //   this.props.getTickets(this.props.roomId);
-  // }
+  componentWillMount() {
+    this.props.getTickets(this.props.roomId);
+  }
 
-  // componentDidMount() {
-  //   //set the timer for how often the ticket feed will reload active tickets
-  //   this.interval = setInterval(
-  //     () => this.props.getTickets(this.props.roomId),
-  //     5000
-  //   );
-  // }
+  componentDidMount() {
+    //set the timer for how often the ticket feed will reload active tickets
+    this.interval = setInterval(
+      () => this.props.getTickets(this.props.roomId),
+      5000
+    );
+  }
 
-  // componentWillUnmount() {
-  //   clearInterval(this.interval);
-  //   document.title = "SnapDesk";
-  // }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+    document.title = "SnapDesk";
+  }
 
-  // componentDidUpdate() {
-  //   document.title = "(" + this.props.ticketsCount + ") " + "SnapDesk";
-  // }
+  componentDidUpdate() {
+    document.title = "(" + this.props.ticketsCount + ") " + "SnapDesk";
+  }
 
   render() {
     // build activeTickets list
