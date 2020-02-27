@@ -17,9 +17,9 @@ import userReducer from './userReducer';
 
 // combine reducers
 const reducers = combineReducers({
-    // if we had other reducers, they would go here
-    tickets: ticketsReducer,
-    user: userReducer
+  // if we had other reducers, they would go here
+  tickets: ticketsReducer,
+  user: userReducer
 });
 
 // make the combined reducers available for import

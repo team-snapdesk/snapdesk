@@ -6,11 +6,11 @@ import { Link, withRouter } from 'react-router-dom';
  * If we are on the same page, then the menu items text-color will change
  */
 const isActive = (history, path) => {
-    // comes from the browser itself
-    if (history.location.pathname === path) {
-        return { color: '#000' };
-    }
-    return { color: '#fff' };
+  // comes from the browser itself
+  if (history.location.pathname === path) {
+    return { color: '#000' };
+  }
+  return { color: '#fff' };
 };
 
 /**
@@ -19,41 +19,37 @@ const isActive = (history, path) => {
  */
 
 const Menu = ({ history }) => {
-    return (
-        <nav id="menu-div">
-            <ul className="nav nav-tabs bg-warning">
-                <li className="nav-item">
-                    <Link
-                        className="nav-link"
-                        style={isActive(history, '/')}
-                        to="/"
-                    >
-                        Home
-                    </Link>
-                </li>
+  return (
+    <nav id="menu-div">
+      <ul className="nav nav-tabs bg-warning">
+        <li className="nav-item">
+          <Link className="nav-link" style={isActive(history, '/')} to="/">
+            Home
+          </Link>
+        </li>
 
-                <li className="nav-item">
-                    <Link
-                        className="nav-link"
-                        style={isActive(history, '/admin')}
-                        to="/admin"
-                    >
-                        Admin Dashboard
-                    </Link>
-                </li>
+        <li className="nav-item">
+          <Link
+            className="nav-link"
+            style={isActive(history, '/admin')}
+            to="/admin"
+          >
+            Admin Dashboard
+          </Link>
+        </li>
 
-                <li className="nav-item">
-                    <Link
-                        className="nav-link"
-                        style={isActive(history, '/signout')}
-                        to="/signout"
-                    >
-                        Sign Out
-                    </Link>
-                </li>
-            </ul>
-        </nav>
-    );
+        <li className="nav-item">
+          <Link
+            className="nav-link"
+            style={isActive(history, '/signout')}
+            to="/signout"
+          >
+            Sign Out
+          </Link>
+        </li>
+      </ul>
+    </nav>
+  );
 };
 
 export default withRouter(Menu);
