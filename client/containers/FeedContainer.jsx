@@ -19,109 +19,96 @@ import TicketCreator from '../components/TicketCreator';
 // import { render } from 'node-sass';
 
 const mapStateToProps = state => ({
-    userId: state.user.userId,
-    messageInput: state.tickets.messageInput,
-    messageRating: state.tickets.messageRating,
-    activeTickets: state.tickets.activeTickets,
-    ticketsCount: state.tickets.ticketsCount
+  userId: state.user.userId,
+  messageInput: state.tickets.messageInput,
+  messageRating: state.tickets.messageRating,
+  activeTickets: state.tickets.activeTickets,
+  ticketsCount: state.tickets.ticketsCount
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 class FeedContainer extends Component {
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+    super(props);
+  }
 
-    componentWillMount() {
-        this.props.getTickets();
-        console.log(this.props.activeTickets);
-    }
+  componentWillMount() {
+    this.props.getTickets();
+    console.log(this.props.activeTickets);
+  }
 
-    componentDidMount() {
-        this.interval = setInterval(() => this.props.getTickets(), 5000);
-    }
+  componentDidMount() {
+    this.interval = setInterval(() => this.props.getTickets(), 5000);
+  }
 
-    componentWillUnmount() {
-        clearInterval(this.interval);
-        document.title = 'SnapDesk';
-    }
+  componentWillUnmount() {
+    clearInterval(this.interval);
+    document.title = 'SnapDesk';
+  }
 
-    componentDidUpdate() {
-        document.title = `(${this.props.ticketsCount}) SnapDesk`;
-    }
+  componentDidUpdate() {
+    document.title = `(${this.props.ticketsCount}) SnapDesk`;
+  }
 
-    render() {
-        // if there are no active tickets, display a message in the background saying nothing here
-        // do not render it when a ticket is added
+  render() {
+    // if there are no active tickets, display a message in the background saying nothing here
+    // do not render it when a ticket is added
 
-        // build activeTickets list
-        // later add conditionals to check which box should be rendered based on the posterId vs logged in user
-        let activeTickets;
-        // console.log('ACTIVE TICKETS: ', this.props.activeTickets);
-        if (
-            !this.props.activeTickets ||
-            this.props.activeTickets.length === 0
-        ) {
-            activeTickets = <p>No active tickets</p>;
+    // build activeTickets list
+    // later add conditionals to check which box should be rendered based on the posterId vs logged in user
+    let activeTickets;
+    // console.log('ACTIVE TICKETS: ', this.props.activeTickets);
+    if (!this.props.activeTickets || this.props.activeTickets.length === 0) {
+      activeTickets = <p>No active tickets</p>;
+    } else {
+      // build out an array of all tickets and track who created each ticket so we can properly accept vs resolve them
+      activeTickets = [];
+      //
+      for (let i = 0; i < this.props.activeTickets.length; i++) {
+        let ticketBox;
+        if (this.props.userId !== this.props.activeTickets[i].menteeId) {
+          //ticket should render bystanderticketbox
+          ticketBox = (
+            <BystanderTicketBox
+              cancelAccept={this.props.cancelAccept}
+              acceptTicket={this.props.acceptTicket}
+              messageInput={this.props.activeTickets[i].messageInput}
+              messageRating={this.props.activeTickets[i].messageRating}
+              ticket={this.props.activeTickets[i]}
+              key={this.props.activeTickets[i].messageId}
+            />
+          );
         } else {
-            // build out an array of all tickets and track who created each ticket so we can properly accept vs resolve them
-            activeTickets = [];
-            //
-            for (let i = 0; i < this.props.activeTickets.length; i++) {
-                let ticketBox;
-                if (
-                    this.props.userId !== this.props.activeTickets[i].menteeId
-                ) {
-                    //ticket should render bystanderticketbox
-                    ticketBox = (
-                        <BystanderTicketBox
-                            cancelAccept={this.props.cancelAccept}
-                            acceptTicket={this.props.acceptTicket}
-                            messageInput={
-                                this.props.activeTickets[i].messageInput
-                            }
-                            messageRating={
-                                this.props.activeTickets[i].messageRating
-                            }
-                            ticket={this.props.activeTickets[i]}
-                            key={this.props.activeTickets[i].messageId}
-                        />
-                    );
-                } else {
-                    ticketBox = (
-                        <MenteeTicketBox
-                            deleteTicket={this.props.deleteTicket}
-                            resolveTicket={this.props.resolveTicket}
-                            messageInput={
-                                this.props.activeTickets[i].messageInput
-                            }
-                            messageRating={
-                                this.props.activeTickets[i].messageRating
-                            }
-                            ticket={this.props.activeTickets[i]}
-                            key={this.props.activeTickets[i].messageId}
-                        />
-                    );
-                }
-
-                activeTickets.push(ticketBox);
-            }
+          ticketBox = (
+            <MenteeTicketBox
+              deleteTicket={this.props.deleteTicket}
+              resolveTicket={this.props.resolveTicket}
+              messageInput={this.props.activeTickets[i].messageInput}
+              messageRating={this.props.activeTickets[i].messageRating}
+              ticket={this.props.activeTickets[i]}
+              key={this.props.activeTickets[i].messageId}
+            />
+          );
         }
 
-        return (
-            <div>
-                <div className="ticketDisplay overflow-auto">
-                    {/* map buildFeed to tickets array */}
-                    {/* <BystanderTicketBox /> */}
-                    {activeTickets}
-                </div>
-                <div className="ticketCreator">
-                    <TicketCreator {...this.props} key={this.props.userId} />
-                </div>
-            </div>
-        );
+        activeTickets.push(ticketBox);
+      }
     }
+
+    return (
+      <div>
+        <div className="ticketDisplay overflow-auto">
+          {/* map buildFeed to tickets array */}
+          {/* <BystanderTicketBox /> */}
+          {activeTickets}
+        </div>
+        <div className="ticketCreator">
+          <TicketCreator {...this.props} key={this.props.userId} />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedContainer);
