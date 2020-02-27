@@ -13,10 +13,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/ticketActions';
+
+// import components
 import MenteeTicketBox from '../components/MenteeTicketBox';
 import BystanderTicketBox from '../components/BystanderTicketBox';
 import TicketCreator from '../components/TicketCreator';
-// import { render } from 'node-sass';
+import ResolveModal from '../components/ResolveModal';
+
 
 const mapStateToProps = state => ({
   userId: state.user.userId,
@@ -67,34 +70,36 @@ class FeedContainer extends Component {
           //ticket should render bystanderticketbox
           ticketBox = (
             <BystanderTicketBox 
-            userId={this.props.userId}
-            cancelAccept={this.props.cancelAccept}
-            acceptTicket={this.props.acceptTicket}
-            ticket={this.props.activeTickets[i]}
-            key={this.props.activeTickets[i].messageId}
-            />
-            )
-          } else {
-            ticketBox = (
-              <MenteeTicketBox
-              deleteTicket={this.props.deleteTicket}
-              resolveTicket={this.props.resolveTicket}
-              toggleModal={this.props.toggleModal}
-              updateFeedback={this.props.updateFeedback}
-              updateFinalRating={this.props.updateFinalRating}
-              resolveModal={this.props.resolveModal}
+              cancelAccept={this.props.cancelAccept}
+              acceptTicket={this.props.acceptTicket}
               ticket={this.props.activeTickets[i]}
               key={this.props.activeTickets[i].messageId}
-              />
-              )
-          }
-          
-          activeTickets.push(ticketBox);
+            />
+          )
+        } else {
+          ticketBox = (
+            <MenteeTicketBox
+              toggleModal={this.props.toggleModal}
+              deleteTicket={this.props.deleteTicket}
+              ticket={this.props.activeTickets[i]}
+              key={this.props.activeTickets[i].messageId}
+            />
+          )
         }
+          
+        activeTickets.push(ticketBox);
       }
+    }
 
     return (
       <div className="feed-container">
+        <ResolveModal 
+          resolveTicket={this.props.resolveTicket}
+          toggleModal={this.props.toggleModal}
+          updateFeedback={this.props.updateFeedback}
+          updateFinalRating={this.props.updateFinalRating}
+          resolveModal={this.props.resolveModal}
+        />
         <div className="feed-grid">
           <div className="content-wrapper">
             <div className="overflow-container">
