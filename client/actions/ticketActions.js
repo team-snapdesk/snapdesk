@@ -19,6 +19,7 @@ export const postTicket = () => (dispatch, getState) =>
     .post("/api/tickets", {
       // POST request to create a new ticket
       mentee_id: getState().user.userId,
+      room_id: 1,
       message: getState().tickets.messageInput,
       status: "active",
       snaps_given: getState().tickets.messageRating
@@ -70,9 +71,16 @@ export const updateRating = event => ({
 export const deleteTicket = id => (dispatch, getState) =>
   // don't actually delete the ticket from the DB, just set status to deleted so it isn't displayed
   axios
+<<<<<<< HEAD
     .put("/api/tickets/delete", {
       ticketId: id,
       status: "deleted"
+=======
+    .put('/api/tickets/update', {
+      ticketId: id,
+      status: 'deleted',
+      mentorId: null,
+>>>>>>> 80b7f7a15433845d64c651f9028a4b0fae4014b4
     })
     .then(({ data }) => {
       if (!data.isLoggedIn) {
@@ -83,6 +91,7 @@ export const deleteTicket = id => (dispatch, getState) =>
       } else {
         dispatch({
           type: types.DELETE_TICKET,
+<<<<<<< HEAD
           payload: id
         });
       }
@@ -103,3 +112,76 @@ export const cancelAccept = id => ({
   type: types.CANCEL_ACCEPT,
   payload: id
 });
+=======
+          payload: id,
+        })
+      }     
+    })
+    
+
+export const resolveTicket = id => (dispatch, getState) =>
+  axios
+    .put('/api/tickets/update', {
+      ticketId: id,
+      status: 'resolved',
+      mentorId: getState().user.userId,
+    })
+    .then(({ data }) => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: data,
+        })
+      }
+      else {
+        dispatch({
+          type: types.RESOLVE_TICKET,
+          payload: id,
+        })
+      }     
+    })
+
+export const acceptTicket = ticket => (dispatch, getState) =>
+  axios
+    .put('/api/tickets/update', {
+      ticketId: ticket.messageId,
+      status: 'pending',
+      mentorId: getState().user.userId,
+    })
+    .then(({ data }) => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: data,
+        })
+      }
+      else {
+        dispatch({
+          type: types.ACCEPT_TICKET,
+          payload: data.messageId,
+        })
+      }     
+    })
+
+export const cancelAccept = id => dispatch =>
+  axios
+    .put('/api/tickets/update', {
+      ticketId: id,
+      status: 'active',
+      mentorId: null,
+    })
+    .then(({ data }) => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: res,
+        })
+      }
+      else {
+        dispatch({
+          type: types.CANCEL_ACCEPT,
+          payload: id,
+        })
+      }     
+    })
+>>>>>>> 80b7f7a15433845d64c651f9028a4b0fae4014b4

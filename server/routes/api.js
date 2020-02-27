@@ -17,7 +17,7 @@ apiRouter.get(
 );
 
 apiRouter.put(
-  "/tickets/delete",
+  "/tickets/update",
   jwtsController.isLoggedIn,
   ticketsController.updateTicketStatus,
   (req, res) => res.status(200).json(res.locals)

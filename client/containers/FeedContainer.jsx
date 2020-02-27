@@ -73,6 +73,8 @@ class FeedContainer extends Component {
               messageInput={this.props.activeTickets[i].messageInput}
               messageRating={this.props.activeTickets[i].messageRating}
               ticket={this.props.activeTickets[i]}
+              //adding new userId
+              userId={this.props.userId}
               key={this.props.activeTickets[i].messageId}
             />
           );

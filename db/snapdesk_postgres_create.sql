@@ -13,6 +13,7 @@ CREATE TABLE "users" (
 
 
 
+
 CREATE TABLE "tickets" (
 	"_id" serial NOT NULL,
 	"room_id" integer NOT NULL,
@@ -34,6 +35,16 @@ CREATE TABLE "rooms" (
 	"name" varchar(255) NOT NULL,
 	"admin_id" integer NOT NULL,
 	CONSTRAINT "rooms_pk" PRIMARY KEY ("_id")
+) WITH (
+  OIDS=FALSE
+);
+
+CREATE TABLE "rooms_users" (
+	"user_id" integer NOT NULL,
+	"room_id" integer NOT NULL,
+	"banned" boolean,
+	CONSTRAINT "rooms_users_fk0" FOREIGN KEY ("user_id") REFERENCES "users"("_id"),
+	CONSTRAINT "rooms_users_fk1" FOREIGN KEY ("room_id") REFERENCES "rooms"("_id")
 ) WITH (
   OIDS=FALSE
 );

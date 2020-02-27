@@ -14,14 +14,15 @@ const db = require('../models/userModel');
 const ticketsController = {};
 
 ticketsController.getActiveTickets = (req, res, next) => {
+  //pass in active room id from front end and query from that
+  
   const getActiveTickets= `
-    SELECT t._id, t.snaps_given, t.message, t.status, t.timestamp, t.mentee_id, u.name mentee_name
-    FROM tickets t
-    INNER JOIN users u
-    ON u._id = t.mentee_id
-    WHERE status = 'active'
-    OR status = 'pending'
-    ORDER BY t._id;
+    SELECT tickets.*, users.name as mentee_name from TICKETS
+    LEFT OUTER JOIN USERS
+    ON tickets.mentee_id=users._id
+    WHERE status='pending'
+    OR status='active'
+    AND tickets.room_id=1
   `;
   db.query(getActiveTickets)
     .then(({ rows }) => {
@@ -31,7 +32,7 @@ ticketsController.getActiveTickets = (req, res, next) => {
         messageId: ticket._id,
         menteeId: ticket.mentee_id,
         menteeName: ticket.mentee_name,
-        timestamp: ticket.timpestamp,
+        timestamp: ticket.timestamp,
         status: ticket.status,
         mentorId: ticket.mentor_id || '',
        }))
@@ -44,16 +45,17 @@ ticketsController.getActiveTickets = (req, res, next) => {
 }
 
 ticketsController.addTicket = (req, res, next) => {
-  const {  snaps_given, mentee_id, status, message } = req.body;
+  console.log('ADD TICKET: ', req.body);
+  const {  snaps_given, mentee_id, status, message, room_id } = req.body;
   const addTicket = {
     text: `
       INSERT INTO tickets
-      (snaps_given, mentee_id, status, message, timestamp)
+      (snaps_given, mentee_id, status, message, timestamp, room_id)
       VALUES
-      ($1, $2, $3, $4, NOW())
+      ($1, $2, $3, $4, NOW(), $5)
       RETURNING _id, timestamp, mentee_id;
     `,
-    values: [snaps_given, mentee_id, status, message]
+    values: [snaps_given, mentee_id, status, message, room_id]
   }
   db.query(addTicket)
     .then(ticket => {
@@ -69,14 +71,15 @@ ticketsController.addTicket = (req, res, next) => {
 
 
 ticketsController.updateTicketStatus = (req, res, next) => {
-  const { ticketId, status } = req.body;
+  console.log('UPDATE REQ BODY: ', req.body);
+  const { ticketId, status, mentorId } = req.body;
   const updateTicket = {
     text: `
       UPDATE tickets
-      SET status = $1
+      SET status = $1, mentor_id = $3
       WHERE _id = $2;
     `,
-    values: [status, ticketId]
+    values: [status, ticketId, mentorId]
   }
 
   db.query(updateTicket)
