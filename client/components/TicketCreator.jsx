@@ -65,7 +65,7 @@ const TicketCreator = ({
           onChange={updateMessage}
           placeholder="What do you need help with?"
         />
-        <div className="flex-container">
+        <div className="flex-container snaps-topic-container">
           <div className="flex-container snap-buttons">
             {snapButtons}
           </div>

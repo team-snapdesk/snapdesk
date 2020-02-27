@@ -56,4 +56,11 @@ textarea::placeholder {
   opacity: .5 !important;
 }
 
-
+.topic-selector {
+  width: auto !important;
+  height: 2.2em !important;
+  &:focus {
+    border-color: $primary !important;
+    box-shadow: 0 0 0 0.2rem rgba(66, 255, 193, 0.25) !important;
+  }
+}
