@@ -44,7 +44,12 @@ class BystanderTicketBox extends Component {
       //Both button will not be active and mentee is anonymous
       buttons = (
         <span>
-          <Button disabled type="button" className="btn btn-success">
+          <Button
+            variant="warning"
+            type="button"
+            className="btn btn-success"
+            disabled
+          >
             Pending
           </Button>
           <Button
@@ -64,7 +69,12 @@ class BystanderTicketBox extends Component {
       //Cancel button is active but Accept is not. mentee userName is active
       buttons = (
         <span>
-          <Button disabled type="button" className="btn btn-success">
+          <Button
+            variant="warning"
+            type="button"
+            className="btn btn-success"
+            disabled
+          >
             Pending
           </Button>
           <Button
