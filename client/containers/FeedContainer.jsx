@@ -37,6 +37,7 @@ class FeedContainer extends Component {
 
   componentDidMount() {
     this.props.getTickets();
+    this.scrollToBottom();
     // this.interval = setInterval(() => this.props.getTickets(), 5000);
   }
 
@@ -47,6 +48,11 @@ class FeedContainer extends Component {
 
   componentDidUpdate() {
     document.title = '(' + this.props.ticketsCount + ') ' + 'SnapDesk';
+    this.scrollToBottom();
+  }
+
+  scrollToBottom() {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
   }
 
   render() {
@@ -90,12 +96,18 @@ class FeedContainer extends Component {
     return (
       <div className="feed-container">
         <div className="feed-grid">
-          <div className="ticket-display overflow-auto">
-            {/* map buildFeed to tickets array */}
-            {/* <BystanderTicketBox /> */}
-            {activeTickets}
+          <div className="content-wrapper">
+            <div className="overflow-container">
+              <div className="ticket-display">
+                {/* map buildFeed to tickets array */}
+                {/* <BystanderTicketBox /> */}
+                {activeTickets}
+                <div style={{ float:"left", clear: "both" }} ref={(el) => { this.messagesEnd = el; }}>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="ticketCreator">
+          <div className="ticket-creator">
             <TicketCreator {...this.props} key={this.props.userId} />
           </div>
         </div>
