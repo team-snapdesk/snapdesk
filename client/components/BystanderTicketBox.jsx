@@ -29,7 +29,8 @@ class BystanderTicketBox extends Component {
         menteeName,
         timestamp,
         status,
-        mentorId
+        mentorId,
+        topic
       }
     } = this.props;
 
@@ -68,6 +69,8 @@ class BystanderTicketBox extends Component {
       <div className="BystanderTicketBox ticketbox">
         <p>Request: {messageInput}</p>
         <p>Expected Snaps: {messageRating}</p>
+        <p>Topic: {topic}</p>
+        <p>User: {menteeName}</p>
         {buttons}
       </div>
     )
