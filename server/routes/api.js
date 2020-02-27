@@ -43,4 +43,11 @@ apiRouter.get(
   (req, res) => res.status(200).json(res.locals)
 );
 
+apiRouter.get(
+  '/organization/users',
+  jwtsController.isLoggedIn,
+  ticketsController.getUsersInOrganization,
+  (req, res) => res.status(200).json(res.locals)
+);
+
 module.exports = apiRouter;
