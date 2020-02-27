@@ -12,6 +12,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import LoginPage from './components/LoginPage';
 import Wrapper from './containers/Wrapper';
 import AdminDashboard from './components/admin/AdminDashboard';
 
@@ -31,7 +32,8 @@ class App extends Component {
         const { isLoggedIn } = this.props;
         if (!isLoggedIn) {
             return (
-                <div id="landing">
+                <>
+                    <LoginPage />
                     {/* /login/oauth is the route on the bakend that submit leads to */}
                     <form id="login-form" method="GET" action="/login/oauth">
                         <img id="logo" src="logo2.png" alt="" />
@@ -44,7 +46,22 @@ class App extends Component {
                             GitHub Login
                         </button>
                     </form>
-                </div>
+                </>
+                // <div id="landing">
+                //     <LoginPage />
+                //     {/* /login/oauth is the route on the bakend that submit leads to */}
+                //     <form id="login-form" method="GET" action="/login/oauth">
+                //         <img id="logo" src="logo2.png" alt="" />
+                //         {/* GitHub OAuth button */}
+                //         <button
+                //             className="btn btn-outline-primary btn-lg"
+                //             id="github-login"
+                //             type="submit"
+                //         >
+                //             GitHub Login
+                //         </button>
+                //     </form>
+                // </div>
             );
         }
 
