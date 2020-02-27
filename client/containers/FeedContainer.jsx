@@ -47,7 +47,7 @@ class FeedContainer extends Component {
     }
 
     componentDidUpdate() {
-        document.title = `(${this.props.ticketsCount}) ` + `SnapDesk`;
+        document.title = `(${this.props.ticketsCount}) SnapDesk`;
     }
 
     render() {
@@ -64,7 +64,7 @@ class FeedContainer extends Component {
         ) {
             activeTickets = <p>No active tickets</p>;
         } else {
-            // build out an array of all tickets and track who created eacg ticket so we can properly accept vs resolve them
+            // build out an array of all tickets and track who created each ticket so we can properly accept vs resolve them
             activeTickets = [];
             for (let i = 0; i < this.props.activeTickets.length; i++) {
                 let ticketBox;
