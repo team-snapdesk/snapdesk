@@ -1,3 +1,14 @@
+/**
+ * ************************************
+ *
+ * @module  AdminDashboard.jsx
+ * @author  Lance Jefferson and Brian Chiang
+ * @date
+ * @description container that renders Admin Dashboard
+ *
+ * ************************************
+ */
+
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
@@ -21,6 +32,11 @@ const mapDispatchToProps = dispatch =>
 class AdminDashboard extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    console.log(this.props);
+    // this.props.getMentors();
   }
 
   render() {
