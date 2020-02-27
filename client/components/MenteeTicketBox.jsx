@@ -62,7 +62,7 @@ class MenteeTicketBox extends Component {
       <div className="MenteeTicketBox ticketbox">
         <p>Request: {messageInput}</p>
         <p>Expected Snaps: {messageRating}</p>
-    <p>user: {userName}</p>
+        <p>user: {userName}</p>
         {buttons}
       </div>
     )
