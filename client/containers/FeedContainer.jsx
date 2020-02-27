@@ -25,7 +25,8 @@ const mapStateToProps = state => ({
   activeTickets: state.tickets.activeTickets,
   messageRating: state.tickets.messageRating,
   ticketsCount: state.tickets.ticketsCount,
-  resolveModal: state.tickets.resolveModal
+  resolveModal: state.tickets.resolveModal,
+  userName: state.user.userName
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
@@ -71,6 +72,7 @@ class FeedContainer extends Component {
           } else {
             ticketBox = (
               <MenteeTicketBox
+              userName={this.props.userName}
               deleteTicket={this.props.deleteTicket}
               resolveTicket={this.props.resolveTicket}
               toggleModal={this.props.toggleModal}

@@ -31,6 +31,7 @@ class MenteeTicketBox extends Component {
       updateFeedback,
       updateFinalRating,
       userId,
+      userName,
       ticket: { 
         messageInput,
         messageRating,
@@ -79,6 +80,7 @@ class MenteeTicketBox extends Component {
       <div className="MenteeTicketBox ticketbox">
         <p>Request: {messageInput}</p>
         <p>Expected Snaps: {messageRating}</p>
+    <p>user: {userName}</p>
         {buttons}
 
         <Modal show={show} onHide={toggleModal} >
