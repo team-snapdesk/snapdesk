@@ -75,6 +75,7 @@ class FeedContainer extends Component {
               <MenteeTicketBox
               deleteTicket={this.props.deleteTicket}
               resolveTicket={this.props.resolveTicket}
+              toggleModal={this.props.toggleModal}
               ticket={this.props.activeTickets[i]}
               key={this.props.activeTickets[i].messageId}
               />
