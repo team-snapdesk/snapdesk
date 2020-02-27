@@ -43,6 +43,7 @@ export const getTickets = () => dispatch =>
                 payload: data
             });
         } else {
+            console.log(data.activeTickets);
             dispatch({
                 type: types.GET_TICKETS,
                 payload: data.activeTickets || []
@@ -84,6 +85,7 @@ export const acceptTicket = id => ({
     type: types.ACCEPT_TICKET,
     payload: id
 });
+
 // resolve ticket action type
 export const resolveTicket = id => (dispatch, getState) =>
     // this should PATCH to whatever backend route resolves tickets -- URL NEED TO BE UPDATED LATER
@@ -92,7 +94,6 @@ export const resolveTicket = id => (dispatch, getState) =>
             status: 'resolved'
         })
         .then(({ data }) => {
-            console.log('inside of then');
             // Checks whether user is logged in -- prob unnecessary?
             if (!data.isLoggedIn) {
                 dispatch({

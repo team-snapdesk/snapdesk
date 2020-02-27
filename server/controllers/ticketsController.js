@@ -91,4 +91,25 @@ ticketsController.updateTicketStatus = (req, res, next) => {
         );
 };
 
+ticketsController.getOrganizationTickets = (req, res, next) => {
+    const { organization_id } = req.body;
+    const getOrganizationTicket = {
+        text: `
+        SELECT * FROM tickets
+        WHERE organization_id = $1
+        `,
+        values: [organization_id]
+    };
+    db.query(getOrganizationTicket)
+        .then(tickets => {
+            res.locals.tickets = tickets;
+            return next();
+        })
+        .catch(err => {
+            return next({
+                log: `Error in middleware ticketsController.getOrganizationTickets: ${err}`
+            });
+        });
+};
+
 module.exports = ticketsController;

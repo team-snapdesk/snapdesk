@@ -35,6 +35,7 @@ class FeedContainer extends Component {
 
     componentWillMount() {
         this.props.getTickets();
+        console.log(this.props.activeTickets);
     }
 
     componentDidMount() {
@@ -66,6 +67,7 @@ class FeedContainer extends Component {
         } else {
             // build out an array of all tickets and track who created each ticket so we can properly accept vs resolve them
             activeTickets = [];
+            //
             for (let i = 0; i < this.props.activeTickets.length; i++) {
                 let ticketBox;
                 if (
