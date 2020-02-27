@@ -24,9 +24,9 @@ export const updateRating = value => ({
   payload: value,
 });
 
-export const toggleModal = messageRating => ({
+export const toggleModal = messageInfo => ({
   type: types.TOGGLE_MODAL,
-  payload: messageRating
+  payload: messageInfo
 });
 
 export const updateFeedback = event => ({

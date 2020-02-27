@@ -12,10 +12,6 @@
 import React, { Component } from 'react';
 // import bootstrap
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
-// import components
-import Snap from './Snap';
 
 
 
@@ -42,11 +38,6 @@ class MenteeTicketBox extends Component {
         status,
         mentorId
       },
-      resolveModal: {
-        show,
-        feedback,
-        finalSnaps
-      }
     } = this.props;
 
     // generate buttons
@@ -61,19 +52,10 @@ class MenteeTicketBox extends Component {
     } else {
       buttons = (
         <span>
-          <Button onClick={() => toggleModal(messageRating)} type="button" className="btn btn-secondary">Resolve</Button>
+          <Button onClick={() => toggleModal({ messageRating, messageInput, messageId })} type="button" className="btn btn-secondary">Resolve</Button>
           <Button disabled={true} type="button" className="btn btn-success">Delete</Button>
         </span>
       )
-    }
-
-    // generate snap buttons
-    const snapButtons = [];
-    for (let i = 1; i <= 5; i++) {
-      let idStyle;
-      if (i <= finalSnaps) idStyle = 'fill';
-      else idStyle = 'empty';
-      snapButtons.push(<Snap key={'snap' + i} index={i} idStyle={idStyle} updateRating={updateFinalRating} />);
     }
 
     return (
@@ -82,32 +64,6 @@ class MenteeTicketBox extends Component {
         <p>Expected Snaps: {messageRating}</p>
     <p>user: {userName}</p>
         {buttons}
-
-        <Modal show={show} onHide={toggleModal} >
-          <Modal.Header closeButton>
-            <Modal.Title>Resolving</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Request: {messageInput}</Modal.Body>
-          <Form.Control 
-            as="textarea"
-            rows="3"
-            placeholder="Feedback"
-            value={feedback}
-            onChange={(e) => updateFeedback(e)}
-          />
-          <div className="flex-container">
-            {snapButtons}
-          </div>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={toggleModal}>
-              Cancel
-            </Button>
-            <Button variant="primary" onClick={() => resolveTicket(messageId)}>
-              Resolve
-            </Button>
-          </Modal.Footer>
-        </Modal>
-
       </div>
     )
   }

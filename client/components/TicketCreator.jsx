@@ -44,10 +44,9 @@ const TicketCreator = ({
       >
         <Form.Group
           controlId="exampleForm.ControlTextarea1"
-          onChange={updateMessage}
         >
           <Form.Label>What do you need help with?</Form.Label>
-          <Form.Control as="textarea" rows="3" value={messageInput} />
+          <Form.Control as="textarea" rows="3" value={messageInput} onChange={updateMessage}/>
         </Form.Group>
         <div className="flex-container">
           {snapButtons}
