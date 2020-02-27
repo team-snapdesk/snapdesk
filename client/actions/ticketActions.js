@@ -63,7 +63,7 @@ export const updateRating = event => ({
 
 export const deleteTicket = id => (dispatch, getState) =>
   axios
-    .put('/api/tickets/delete', {
+    .patch('/api/tickets', {
       ticketId: id,
       status: 'deleted'
     })
@@ -85,7 +85,7 @@ export const deleteTicket = id => (dispatch, getState) =>
 export const resolveTicket = id => (dispatch, getState) =>
   // this should PATCH to whatever backend route resolves tickets -- URL NEED TO BE UPDATED LATER
   axios
-    .patch('/api/tickets/resolve', {
+    .patch('/api/tickets', {
       ticketId: id,
       status: 'resolved'
     })
@@ -109,7 +109,7 @@ export const resolveTicket = id => (dispatch, getState) =>
 export const acceptTicket = id => (dispatch, getState) =>
   // this should patch to whatever backend route accept tickets
   axios
-    .patch('api/tickets/accept', {
+    .patch('api/tickets', {
       ticketId: id,
       status: 'pending',
       mentor_id: getState().user.userId
@@ -132,7 +132,7 @@ export const acceptTicket = id => (dispatch, getState) =>
 export const cancelAccept = id => (dispatch, getState) =>
   // this should patch to whatever backend route accept tickets
   axios
-    .patch('api/tickets/accept', {
+    .patch('api/tickets', {
       ticketId: id,
       status: 'active',
       mentor_id: getState().user.userId
@@ -151,11 +151,3 @@ export const cancelAccept = id => (dispatch, getState) =>
         });
       }
     });
-
-// export const acceptTicket = event => (dispatch, getState) => {
-//   event.preventDefault();
-//   dispatch({
-//     type: types.ACCEPT_TICKET,
-//     payload: ticket,
-//   })
-// }

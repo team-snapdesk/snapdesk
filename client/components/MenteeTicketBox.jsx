@@ -53,14 +53,10 @@ class MenteeTicketBox extends Component {
       buttons = (
         <span>
           <Button
-            disabled
-            // onClick={() =>
-            //     this.props.resolveTicket(
-            //         this.props.ticket.messageId
-            //     )
-            // }
+            variant="warning"
             type="button"
             className="btn btn-secondary"
+            disabled
           >
             Pending
           </Button>

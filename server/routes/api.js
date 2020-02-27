@@ -15,8 +15,8 @@ apiRouter.get(
   (req, res) => res.status(200).json(res.locals)
 );
 
-apiRouter.put(
-  '/tickets/delete',
+apiRouter.patch(
+  '/tickets',
   jwtsController.isLoggedIn,
   ticketsController.updateTicketStatus,
   (req, res) => res.status(200).json(res.locals)
@@ -35,24 +35,7 @@ apiRouter.post(
   ticketsController.addTicket,
   (req, res) => res.status(200).json(res.locals)
 );
-apiRouter.patch(
-  '/tickets/accept',
-  jwtsController.isLoggedIn,
-  ticketsController.updateTicketStatus,
-  (req, res) => res.status(200).json(res.locals)
-);
-apiRouter.patch(
-  '/tickets/resolve',
-  jwtsController.isLoggedIn,
-  ticketsController.updateTicketStatus,
-  (req, res) => res.status(200).json(res.locals)
-);
-apiRouter.patch(
-  '/tickets/cancel',
-  jwtsController.isLoggedIn,
-  ticketsController.updateTicketStatus,
-  (req, res) => res.status(200).json(res.locals)
-);
+
 apiRouter.get(
   '/organizations',
   jwtsController.isLoggedIn,
