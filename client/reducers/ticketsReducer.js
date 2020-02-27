@@ -100,6 +100,7 @@ const ticketsReducer = (state = ticketState, action) => {
       const resolveModal = Object.assign({}, state.resolveModal, {
         show: state.resolveModal.show ? false : true,
         feedback: '',
+        finalSnaps: action.payload ? action.payload : 0
       });
       return {
         ...state,
@@ -112,6 +113,15 @@ const ticketsReducer = (state = ticketState, action) => {
         resolveModal: {
           ...state.resolveModal,
           feedback: action.payload
+        }
+      }
+
+    case types.UPDATE_FINAL_RATING:
+      return {
+        ...state,
+        resolveModal: {
+          ...state.resolveModal,
+          finalSnaps: action.payload
         }
       }
 

@@ -12,7 +12,7 @@ import React from 'react';
 
 const Snap = ({ idStyle, updateRating, index }) => (
   <div className="snap-rating" onClick={() => updateRating(index)}>
-    <svg id={idStyle} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 108 162">
+    <svg className={idStyle} xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 108 162">
       <path d="M51.5,43.8V10.5C51.5,9.7,52.2,9,53,9s1.5,0.7,1.5,1.5v33.3c0,0.8-0.7,1.5-1.5,1.5
       C52.2,45.2,51.5,44.6,51.5,43.8z"/>
       <path d="M59.5,47.3c0.5,0,0.9-0.2,1.2-0.6l16-20.9c0.2-0.3,0.3-0.7,0.3-1.1c-0.1-0.4-0.2-0.7-0.6-1

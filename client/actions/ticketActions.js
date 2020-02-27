@@ -19,20 +19,25 @@ export const updateMessage = event => ({
   payload: event.target.value
 });
 
-export const updateRating = id => ({
+export const updateRating = value => ({
   type: types.UPDATE_RATING,
-  payload: id,
+  payload: value,
 });
 
-export const toggleModal = () => ({
+export const toggleModal = messageRating => ({
   type: types.TOGGLE_MODAL,
-  payload: null
+  payload: messageRating
 });
 
 export const updateFeedback = event => ({
   type: types.UPDATE_FEEDBACK,
   payload: event.target.value
-})
+});
+
+export const updateFinalRating = value => ({
+  type: types.UPDATE_FINAL_RATING,
+  payload: value,
+});
 
 export const getTickets = () => dispatch => {
   axios

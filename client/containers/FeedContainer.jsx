@@ -75,6 +75,7 @@ class FeedContainer extends Component {
               resolveTicket={this.props.resolveTicket}
               toggleModal={this.props.toggleModal}
               updateFeedback={this.props.updateFeedback}
+              updateFinalRating={this.props.updateFinalRating}
               resolveModal={this.props.resolveModal}
               ticket={this.props.activeTickets[i]}
               key={this.props.activeTickets[i].messageId}
