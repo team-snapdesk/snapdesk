@@ -42,7 +42,7 @@ export const updateNewRoom = input => dispatch => {
   dispatch({
     type: types.UPDATE_NEWROOM,
     payload: input
-  });
+  }).catch(err => console.log(err));
 };
 
 export const addRoom = () => (dispatch, getState) => {
@@ -69,5 +69,57 @@ export const addRoom = () => (dispatch, getState) => {
           payload: data
         });
       }
-    });
+    })
+    .catch(err => console.log(err));
+};
+
+export const updateActiveRoom = (newActiveRoomId, userId) => dispatch => {
+  axios
+    .put("/api/rooms/" + userId, {
+      roomId: newActiveRoomId,
+      userId: userId
+    })
+    .then(({ data }) => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: data
+        });
+      } else {
+        dispatch({
+          type: types.UPDATE_ACTIVEROOM,
+          payload: data
+        });
+      }
+    })
+    .catch(err => console.log(err));
+};
+
+export const joinRoom = () => (dispatch, getState) => {
+  axios
+    .post("/api/rooms/joinRoom", {
+      roomName: getState().rooms.joinRoomName,
+      userId: getState().user.userId
+    })
+    .then(({ data }) => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: data
+        });
+      } else {
+        dispatch({
+          type: types.LOAD_ROOMS,
+          payload: data
+        });
+      }
+    })
+    .catch(err => console.log(err));
+};
+
+export const updateJoinRoomName = input => dispatch => {
+  dispatch({
+    type: types.UPDATE_JOINROOMNAME,
+    payload: input
+  }).catch(err => console.log(err));
 };
