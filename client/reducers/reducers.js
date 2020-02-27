@@ -9,12 +9,12 @@
  * ************************************
  */
 
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
 // import all reducers here
-import ticketsReducer from './ticketsReducer';
-import userReducer from './userReducer';
-import roomsReducer from './roomsReducer';
+import ticketsReducer from "./ticketsReducer";
+import userReducer from "./userReducer";
+import roomsReducer from "./roomsReducer";
 
 // combine reducers
 const reducers = combineReducers({

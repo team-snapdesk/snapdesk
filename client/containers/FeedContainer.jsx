@@ -9,24 +9,26 @@
  * ************************************
  */
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as actions from '../actions/ticketActions';
-import MenteeTicketBox from '../components/MenteeTicketBox';
-import BystanderTicketBox from '../components/BystanderTicketBox';
-import TicketCreator from '../components/TicketCreator';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as ticketActions from "../actions/ticketActions";
+import MenteeTicketBox from "../components/MenteeTicketBox";
+import BystanderTicketBox from "../components/BystanderTicketBox";
+import TicketCreator from "../components/TicketCreator";
 
 const mapStateToProps = state => ({
   userId: state.user.userId,
   messageInput: state.tickets.messageInput,
   messageRating: state.tickets.messageRating,
   activeTickets: state.tickets.activeTickets,
-  messageRating: state.tickets.messageRating,
   ticketsCount: state.tickets.ticketsCount,
+  roomId: state.rooms.activeRoom.id,
+  roomName: state.rooms.activeRoom.name
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(ticketActions, dispatch);
 
 class FeedContainer extends Component {
   constructor(props) {
@@ -34,21 +36,24 @@ class FeedContainer extends Component {
   }
 
   componentWillMount() {
-    this.props.getTickets();
+    this.props.getTickets(this.props.roomId);
   }
 
   componentDidMount() {
     //set the timer for how often the ticket feed will reload active tickets
-    this.interval = setInterval(() => this.props.getTickets(), 5000);
+    this.interval = setInterval(
+      () => this.props.getTickets(this.props.roomId),
+      5000
+    );
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
-    document.title = 'SnapDesk';
+    document.title = "SnapDesk";
   }
 
   componentDidUpdate() {
-    document.title = '(' + this.props.ticketsCount + ') ' + 'SnapDesk';
+    document.title = "(" + this.props.ticketsCount + ") " + "SnapDesk";
   }
 
   render() {
@@ -65,37 +70,38 @@ class FeedContainer extends Component {
         // the boxes will have different options for resolve/delete or accept/cancel
         if (this.props.userId !== this.props.activeTickets[i].menteeId) {
           ticketBox = (
-            <BystanderTicketBox 
-            cancelAccept={this.props.cancelAccept}
-            acceptTicket={this.props.acceptTicket}
-            messageInput={this.props.activeTickets[i].messageInput}
-            messageRating={this.props.activeTickets[i].messageRating}
-            ticket={this.props.activeTickets[i]}
-            key={this.props.activeTickets[i].messageId}
+            <BystanderTicketBox
+              cancelAccept={this.props.cancelAccept}
+              acceptTicket={this.props.acceptTicket}
+              messageInput={this.props.activeTickets[i].messageInput}
+              messageRating={this.props.activeTickets[i].messageRating}
+              ticket={this.props.activeTickets[i]}
+              //adding new userId
+              userId={this.props.userId}
+              key={this.props.activeTickets[i].messageId}
             />
-            )
-            // otherwise render the mentee ticket box
-          } else {
-            ticketBox = (
-              <MenteeTicketBox
+          );
+          // otherwise render the mentee ticket box
+        } else {
+          ticketBox = (
+            <MenteeTicketBox
               deleteTicket={this.props.deleteTicket}
               resolveTicket={this.props.resolveTicket}
               messageInput={this.props.activeTickets[i].messageInput}
               messageRating={this.props.activeTickets[i].messageRating}
               ticket={this.props.activeTickets[i]}
               key={this.props.activeTickets[i].messageId}
-              />
-              )
-          }
-          activeTickets.push(ticketBox);
+            />
+          );
         }
+        activeTickets.push(ticketBox);
       }
+    }
 
     return (
       <div>
-        <div className="ticketDisplay overflow-auto">
-          {activeTickets}
-        </div>
+        <h1>{this.props.roomName}</h1>
+        <div className="ticketDisplay overflow-auto">{activeTickets}</div>
         <div className="ticketCreator">
           <TicketCreator {...this.props} key={this.props.userId} />
         </div>
@@ -104,7 +110,4 @@ class FeedContainer extends Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FeedContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(FeedContainer);
