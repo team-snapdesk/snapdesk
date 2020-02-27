@@ -13,6 +13,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as ticketActions from '../actions/ticketActions';
+import { Media } from 'react-bootstrap';
 // import { render } from 'node-sass';
 
 const mapStateToProps = state => ({
@@ -44,48 +45,71 @@ class Profile extends Component {
         feedback: 'Ty for your help!!!',
         rating: 4,
       },
+      {
+        menteeName: 'Anonymous',
+        feedback: 'THANKS',
+        rating: 3,
+      },
     ];
   
     const feedbacks = fbFetched.map((fb, idx) => {
       let stars = '';
       for (let i = 0; i < fb.rating; i++) {
-        stars += '*';
+        stars += '⭐';
       }
       return (
         <div className="profile feedback" key={`feedback${idx}`}>
-          <span>From: {fb.menteeName}</span>
-          <br/>
+          <h6>From: {fb.menteeName}</h6>
           <span>{stars}</span>
-          <br/>
           <span>{fb.feedback}</span>
         </div>
       );
     })
     
     return (
-      <section>
-        <h2>{this.props.userName} Profile</h2>
+      <section className="profileSection">
+        <h2>Profile</h2>
+
+        <Media>
+          <img
+            src={this.props.userAvatar}
+            width="64px"
+            height="64px"
+            className="d-inline-block align-top rounded-circle mx-auto"
+            alt="Snap Desk Logo">
+          </img>
+          <Media.Body>
+            <h6 className="mediaBody">{this.props.userName}HardCoded</h6>
+            <p className="mediaBody">
+              {this.props.userBio}Sample bio that should be from github
+            </p>
+          </Media.Body>
+        </Media>
 
         <article>
-          {this.props.userBio}
+          <h5>Expertise</h5>
+          <ul>
+            <li>Hardcoded</li>
+            <li>Javascript</li>
+            <li>React-Redux</li>
+          </ul>
         </article>
 
-        <article>
-          <h4>Expertise</h4>
-          {this.props.userBio}
-        </article>
-
+        <h5>Your Snaps</h5>
         <div className="profile snapsDisplay">
           {/* display snaps received + snaps given by the user 
             HARD CODED FOR NOW*/}
-            <span>Snaps Recieved: {7}</span>
-            <span>Snaps Given: {10}</span>
+            <span>
+              <h6>Snaps Received:</h6> {7}
+            </span>
+            <span>
+              <h6>Snaps Given:</h6> {10}
+            </span>
         </div>
 
-        <div className="profile feedbackDisplay overflow-auto">
-          <h4>Feedbacks</h4>
-          {/* display feedbacks user received 
-            HARD CODED FOR NOW*/}
+        <h5>Feedbacks</h5>
+        <div className="profile feedbackDisplay">
+          {/* display feedbacks user received*/}
           {feedbacks}
         </div>
       </section>

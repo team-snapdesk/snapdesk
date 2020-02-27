@@ -1,0 +1,48 @@
+$primaryColor: #42ffc1;
+$highlightedColor: #34cc9a;
+$grey: #eee;
+$dark: #6c757d;
+$darkest: #343a40;
+
+//for profile page
+.profileSection {
+  margin: 10%;
+  padding: 10%; 
+  width: 500px;
+
+  h2, h5 {
+    color: $highlightedColor;
+    margin: .5em;
+  }
+
+  span {
+    display: block;
+  }
+
+  .mediaBody {
+    margin: 0 0 0 1em;
+  }
+
+  .snapsDisplay {
+    margin-left: 1.5em;
+
+    h6 {
+      display: inline;
+    }
+  }
+
+  .feedbackDisplay {
+    height: 250px;
+    overflow: auto;
+    
+    .feedback {
+      margin: 0 1.5em 1em 1em;
+      padding: .5em;
+      border: 2px solid white;
+
+      span {
+        margin-left: 2em;
+      }
+    }
+  }
+}

@@ -13,7 +13,10 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Switch, Route } from 'react-router-dom';
 import Wrapper from './containers/Wrapper';
+
+import Profile from './components/Profile.jsx';
 
 
 const mapStateToProps = ({ user: { isLoggedIn } }) => ({
@@ -50,7 +53,12 @@ class App extends Component {
     return (
       
       <div id="mainBackground">
-        
+         <Switch>
+          <Route
+            exact path="/profile"
+            component={Profile}
+          />
+        </Switch>
         <Wrapper />
       </div>
     );
