@@ -88,8 +88,8 @@ class FeedContainer extends Component {
       }
 
     return (
-      <div>
-        <div className="ticketDisplay overflow-auto">
+      <div className="feed-container flex-container">
+        <div className="ticket-display overflow-auto">
           {/* map buildFeed to tickets array */}
           {/* <BystanderTicketBox /> */}
           {activeTickets}

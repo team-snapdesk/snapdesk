@@ -10,12 +10,7 @@ body {
 }
 
 .row {
-  height: 100vh;
+  max-height: 100vh;
+  min-height: 100vh;
   margin: 0!important;
-}
-
-.snap-rating {
-  :hover {
-    cursor: pointer;
-  }
 }
