@@ -50,7 +50,7 @@ class Wrapper extends Component {
             <LeftNav url={this.props.userAvatar} userName={this.props.userName} />
           </Col>
           <Col>
-            <FeedContainer />
+            <FeedContainer userName={this.props.userName}/>
           </Col>
           <Col className="side-nav">
             <RightNav ticketsCount={this.props.ticketsCount} />
