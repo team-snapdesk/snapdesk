@@ -88,14 +88,16 @@ class FeedContainer extends Component {
       }
 
     return (
-      <div className="feed-container flex-container">
-        <div className="ticket-display overflow-auto">
-          {/* map buildFeed to tickets array */}
-          {/* <BystanderTicketBox /> */}
-          {activeTickets}
-        </div>
-        <div className="ticketCreator">
-          <TicketCreator {...this.props} key={this.props.userId} />
+      <div className="feed-container">
+        <div className="feed-grid">
+          <div className="ticket-display overflow-auto">
+            {/* map buildFeed to tickets array */}
+            {/* <BystanderTicketBox /> */}
+            {activeTickets}
+          </div>
+          <div className="ticketCreator">
+            <TicketCreator {...this.props} key={this.props.userId} />
+          </div>
         </div>
       </div>
     );

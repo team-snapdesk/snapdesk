@@ -1,14 +1,20 @@
 
 .feed-container{
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   height: 100%;
 }
 
+.feed-grid {
+  height: 100%;
+  display: grid;
+  grid-template-columns: [main] 100%;
+  grid-template-rows: [feed] 1fr [creator] 250px;
+  align-items: end;
+  justify-content: center;
+}
+
 .ticket-display {
-  max-height: 700px;
-  min-height: 700px;
+  grid-row-start: feed;
+  grid-row-end: creator;
 }
 
 .snap-rating {
