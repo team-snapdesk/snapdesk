@@ -21,7 +21,7 @@ const LeftNav = props => {
         id="roomForm"
         type="text"
         placeholder="Room name"
-        value={props.rooms.newRoom}
+        value={props.newRoom}
         onChange={e => {
           props.updateNewRoom(e.target.value);
         }}

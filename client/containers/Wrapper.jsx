@@ -54,7 +54,7 @@ class Wrapper extends Component {
               activeRoom={this.props.activeRoom}
               rooms={this.props.rooms}
               addRoom={this.props.addRoom}
-              NewRoom={this.props.newRoom}
+              newRoom={this.props.newRoom}
               updateNewRoom={this.props.updateNewRoom}
             />
           </div>
