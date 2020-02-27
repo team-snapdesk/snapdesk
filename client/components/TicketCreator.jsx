@@ -22,7 +22,8 @@ const TicketCreator = ({
   updateMessage,
   ticketsCount,
   postTicket,
-  updateRating
+  updateRating,
+  topic
 }) => {
 
   const snapButtons = [];
