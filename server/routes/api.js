@@ -35,5 +35,17 @@ apiRouter.post(
     ticketsController.addTicket,
     (req, res) => res.status(200).json(res.locals)
 );
+apiRouter.patch(
+    '/tickets/accept',
+    jwtsController.isLoggedIn,
+    ticketsController.updateTicketStatus,
+    (req, res) => res.status(200).json(res.locals)
+);
+apiRouter.patch(
+    '/tickets/resolve',
+    jwtsController.isLoggedIn,
+    ticketsController.updateTicketStatus,
+    (req, res) => res.status(200).json(res.locals)
+);
 
 module.exports = apiRouter;
