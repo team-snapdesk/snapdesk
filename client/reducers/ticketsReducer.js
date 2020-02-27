@@ -17,9 +17,8 @@ const ticketState = {
   messageRating: 1,
   activeTickets: [],
   ticketsCount: 0,
-  modal: {
+  resolveModal: {
     show: false,
-    ticketId: null,
   }
 };
 
@@ -96,13 +95,12 @@ const ticketsReducer = (state = ticketState, action) => {
         };
 
     case types.TOGGLE_MODAL:
-      const modal = Object.assign({}, state.modal, {
-        show: state.modal.show ? false : true,
-        ticketId: action.payload || null
+      const resolveModal = Object.assign({}, state.resolveModal, {
+        show: state.resolveModal.show ? false : true,
       });
       return {
         ...state,
-        modal
+        resolveModal
       }
 
     case types.ACCEPT_TICKET:

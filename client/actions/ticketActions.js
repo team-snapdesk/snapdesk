@@ -24,9 +24,9 @@ export const updateRating = id => ({
   payload: id,
 });
 
-export const toggleModal = ticketId => ({
-  type: types.SHOW_MODAL,
-  payload: ticketId,
+export const toggleModal = () => ({
+  type: types.TOGGLE_MODAL,
+  payload: null
 });
 
 export const getTickets = () => dispatch => {

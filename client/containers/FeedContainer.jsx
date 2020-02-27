@@ -25,6 +25,7 @@ const mapStateToProps = state => ({
   activeTickets: state.tickets.activeTickets,
   messageRating: state.tickets.messageRating,
   ticketsCount: state.tickets.ticketsCount,
+  resolveModal: state.tickets.resolveModal
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
@@ -76,6 +77,7 @@ class FeedContainer extends Component {
               deleteTicket={this.props.deleteTicket}
               resolveTicket={this.props.resolveTicket}
               toggleModal={this.props.toggleModal}
+              resolveModal={this.props.resolveModal}
               ticket={this.props.activeTickets[i]}
               key={this.props.activeTickets[i].messageId}
               />
