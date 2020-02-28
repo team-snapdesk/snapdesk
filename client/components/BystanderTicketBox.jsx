@@ -52,25 +52,28 @@ class BystanderTicketBox extends Component {
     } else if (userId === mentorId && status === 'pending') {
       buttons = (
         <div className="flex-container post-button">
-          <Button variant="link" className="button-subtle" onClick={() => cancelAccept(messageId)} type="button">
+          <Button variant="link" className="button-subtle delete" onClick={() => cancelAccept(messageId)} type="button">
             {/* Icon by Bytesize https://github.com/danklammer/bytesize-icons */}
-            <svg id="i-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                <path d="M2 20 L12 28 30 4" />
+            <svg id="i-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" height="18" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+              <path d="M2 30 L30 2 M30 30 L2 2" />
             </svg>
             <span>Cancel</span>
           </Button>
         </div>
       )
-    } else {
-      <div className="flex-container post-button">
-      <Button disabled variant="link" className="button-subtle" type="button">
-        {/* Icon by Bytesize https://github.com/danklammer/bytesize-icons */}
-        <svg id="i-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-            <path d="M2 20 L12 28 30 4" />
-        </svg>
-        <span>Accept</span>
-      </Button>
-    </div>
+    } else if (userId !== mentorId && status === 'pending') {
+      buttons = (
+        <div className="flex-container post-button accepted">
+          <Button disabled={true} variant="link" className="button-subtle" type="button">
+            {/* Icon by Bytesize https://github.com/danklammer/bytesize-icons */}
+            <svg id="i-lock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+              <path d="M5 15 L5 30 27 30 27 15 Z M9 15 C9 9 9 5 16 5 23 5 23 9 23 15 M16 20 L16 23" />
+              <circle cx="16" cy="24" r="1" />
+            </svg>
+            <span>Accepted</span>
+          </Button>
+        </div>
+      )
     }
 
 
@@ -135,7 +138,7 @@ class BystanderTicketBox extends Component {
       //   {buttons}
       // </div>
 
-      <div className="ticket-box">
+      <div className="ticket-box bystander">
         <div className="request">
           <div className="flex-container name-timestamp-container">
             <div>

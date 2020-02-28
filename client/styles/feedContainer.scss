@@ -31,6 +31,9 @@
 
     .ticket-display {
       min-height: min-content;
+      display: flex;
+      flex-direction: column;
+      
     }
 
   }
