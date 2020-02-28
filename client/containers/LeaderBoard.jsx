@@ -62,7 +62,7 @@ class LeaderBoard extends Component {
         }
         return (
             <div>
-                <Table>
+                <Table striped bordered hover variant="dark">
                     <thead>
                     <tr>
                         <th>Ranking</th>
