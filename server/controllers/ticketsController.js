@@ -15,15 +15,14 @@ const ticketsController = {};
 
 ticketsController.getActiveTickets = (req, res, next) => {
   const getActiveTickets = `
-  SELECT t._id, t.snaps_given, t.message, t.status, t.timestamp, t.mentee_id, t.mentor_id, u.name as mentor_name, u2.name as mentee_name, t.topic
+    SELECT t._id, t.snaps_given, t.message, t.status, t.timestamp, t.mentee_id, t.mentor_id, u.name as mentor_name, u2.name as mentee_name, t.topic
     FROM tickets t
     FULL OUTER JOIN users u
     ON u._id = t.mentor_id
     INNER JOIN users u2
     ON u2._id = t.mentee_id
-    WHERE status = 'active'
-    OR status = 'pending'
-    ORDER BY t._id;
+    WHERE t.status = 'active' OR status = 'pending'
+    ORDER BY t._id
   `;
   db.query(getActiveTickets)
     .then(({ rows }) => {

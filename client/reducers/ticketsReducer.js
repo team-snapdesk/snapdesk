@@ -12,7 +12,7 @@
 import * as types from "../constants/actionTypes";
 
 const ticketState = {
-  topic: '',
+  topic: 'select',
   totalSnaps: 0,
   messageInput: "",
   messageRating: 1,
@@ -73,7 +73,8 @@ const ticketsReducer = (state = ticketState, action) => {
         ticketsCount: state.ticketsCount + 1,
         nextTicketId: state.nextTicketId + 1,
         messageInput: "",
-        messageRating: 1
+        messageRating: 1,
+        topic: 'select'
       };
 
       case types.DELETE_TICKET:
