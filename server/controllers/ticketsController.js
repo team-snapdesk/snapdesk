@@ -15,7 +15,7 @@ const ticketsController = {};
 
 ticketsController.getActiveTickets = (req, res, next) => {
   const getActiveTickets = `
-    SELECT t._id, t.snaps_given, t.message, t.status, t.timestamp, t.mentee_id, t.mentor_id, u.name as mentor_name, u2.name as mentee_name, t.topic
+    SELECT t._id, t.snaps_given, t.message, t.status, t.timestamp, t.mentee_id, t.mentor_id, u2.name as mentee_name, t.topic
     FROM tickets t
     FULL OUTER JOIN users u
     ON u._id = t.mentor_id

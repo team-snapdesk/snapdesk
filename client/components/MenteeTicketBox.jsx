@@ -43,7 +43,7 @@ class MenteeTicketBox extends Component {
     if (status === 'active') {
       buttons = (
         <div className="flex-container post-button">
-          <Button variant="link" className="button-subtle delete" onClick={() => deleteTicket(messageId)} type="button" type="submit">
+          <Button variant="link" className="button-subtle delete" onClick={() => deleteTicket(messageId)} type="button">
             {/* Icon by Bytesize https://github.com/danklammer/bytesize-icons */}
             <svg id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
               <path d="M28 6 L6 6 8 30 24 30 26 6 4 6 M16 12 L16 24 M21 12 L20 24 M11 12 L12 24 M12 6 L13 2 19 2 20 6" />
@@ -51,15 +51,11 @@ class MenteeTicketBox extends Component {
             <span>Delete</span>
           </Button>
         </div>
-        // <span>
-        //   <Button disabled={true} type="button" className="btn btn-secondary">Resolve</Button>
-        //   <Button onClick={() => deleteTicket(messageId)} type="button" className="btn btn-success">Delete</Button>
-        // </span>
       )
     } else {
       buttons = (
         <div className="flex-container post-button">
-          <Button variant="link" className="button-subtle" onClick={() => toggleModal({ messageRating, messageInput, messageId })} type="button" type="submit">
+          <Button variant="link" className="button-subtle" onClick={() => toggleModal({ messageRating, messageInput, messageId })} type="button">
             {/* Icon by Bytesize https://github.com/danklammer/bytesize-icons */}
             <svg id="i-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                 <path d="M2 20 L12 28 30 4" />
@@ -67,10 +63,6 @@ class MenteeTicketBox extends Component {
             <span>Resolve</span>
           </Button>
         </div>
-        // <span>
-        //   <Button onClick={() => toggleModal({ messageRating, messageInput, messageId })} type="button" className="btn btn-secondary">Resolve</Button>
-        //   <Button disabled={true} type="button" className="btn btn-success">Delete</Button>
-        // </span>
       )
     }
 
@@ -97,7 +89,7 @@ class MenteeTicketBox extends Component {
     };
 
     return (
-      <div className="ticket-box">
+      <div className="ticket-box mentee">
         <div className="request">
           <div className="flex-container name-timestamp-container">
             <div>
