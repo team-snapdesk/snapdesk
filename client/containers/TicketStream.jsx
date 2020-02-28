@@ -22,6 +22,7 @@ import BystanderTicketBox from '../components/BystanderTicketBox';
 const mapStateToProps = state => ({
   activeTickets: state.tickets.activeTickets,
   userId: state.user.userId,
+  userName: state.user.userName,
   ticketsCount: state.tickets.ticketsCount
 });
 
@@ -82,6 +83,7 @@ class TicketStream extends Component {
             ticketBox = (
               <MenteeTicketBox
                 userId={this.props.userId}
+                userName={this.props.userName}
                 deleteTicket={this.props.deleteTicket}
                 resolveTicket={this.props.resolveTicket}
                 toggleModal={this.props.toggleModal}

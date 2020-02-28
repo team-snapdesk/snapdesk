@@ -57,10 +57,17 @@ class MenteeTicketBox extends Component {
 
     return (
       <div className="ticket-box">
-        <p>Topic: {topic}</p>
+        <p>By: {userName}</p>
+        <hr />
         <p>Request: {messageInput}</p>
-        <p>user: {userName}</p>
-        <p>Expected Snaps: {messageRating}</p>
+        <div className="flex-container snaps-topic-container">
+          <div>
+            Expected Snaps: {messageRating}
+          </div>
+          <div>
+            {topic}
+          </div>
+        </div>
         {buttons}
       </div>
     )
