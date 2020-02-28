@@ -54,25 +54,56 @@ roomsController.getRooms = (req, res, next) => {
     });
 };
 
-roomsController.getActiveRoom = (req, res, next) => {
+// roomsController.getActiveRoom = (req, res, next) => {
+//   const { userId } = req.params;
+//   const getActiveRoom = {
+//     text:
+//       "SELECT rooms._id as id, rooms.name, rooms.admin_id as admin FROM users INNER JOIN rooms ON users.active_room = rooms._id WHERE users._id = $1",
+//     values: [userId]
+//   };
+//   db.query(getActiveRoom)
+//     .then(activeRoom => {
+//       res.locals.activeRoom = activeRoom.rows[0];
+//       return next();
+//     })
+//     .catch(err => {
+//       return next({
+//         log: "Error occured in roomsController.getActiveRoom",
+//         status: 400,
+//         message: { err: err }
+//       });
+//     });
+// };
+
+roomsController.getActiveRoom = async (req, res, next) => {
   const { userId } = req.params;
   const getActiveRoom = {
     text:
       "SELECT rooms._id as id, rooms.name, rooms.admin_id as admin FROM users INNER JOIN rooms ON users.active_room = rooms._id WHERE users._id = $1",
     values: [userId]
   };
-  db.query(getActiveRoom)
-    .then(activeRoom => {
-      res.locals.activeRoom = activeRoom.rows[0];
-      return next();
-    })
-    .catch(err => {
-      return next({
-        log: "Error occured in roomsController.getActiveRoom",
-        status: 400,
-        message: { err: err }
-      });
+  try {
+    await db.query(getActiveRoom)
+      .then(activeRoom => {
+        res.locals.activeRoom = activeRoom.rows[0];
+      })
+    const getActiveRoomUsers = {
+      text: "SELECT DISTINCT rooms_users.user_id AS id, rooms_users.banned AS banned, users.name AS name FROM rooms_users LEFT OUTER JOIN users ON rooms_users.user_id = users._id WHERE rooms_users.room_id = $1",
+      values: [res.locals.activeRoom.id]
+    }
+    await db.query(getActiveRoomUsers)
+      .then(activeRoomUsers => {
+        res.locals.activeRoom.users = activeRoomUsers.rows;
+        return next();
+      })
+  }
+  catch (err) {
+    return next({
+      log: "Error occured in roomsController.getActiveRoom",
+      status: 400,
+      message: { err: err }
     });
+  };
 };
 
 roomsController.updateActiveRoom = (req, res, next) => {
