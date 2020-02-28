@@ -21,6 +21,7 @@ import { chooseTopic } from '../actions/ticketActions';
 
 const TicketCreator = ({
   userId,
+  topic,
   messageInput,
   messageRating,
   activeTickets,
@@ -57,10 +58,11 @@ const TicketCreator = ({
   return (
     <div className="ticket-creator-display">
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <textarea
+        <Form.Control
           required
           onFocus={handleFocus}
           rows="3" 
+          as='textarea'
           value={messageInput}
           onChange={updateMessage}
           placeholder="What do you need help with?"
@@ -69,21 +71,22 @@ const TicketCreator = ({
           <div className="flex-container snap-buttons">
             {snapButtons}
           </div>
-          <Form.Control className="topic-selector" required as='select' onChange={chooseTopic}>
-                <option value='Javascript' >Javascript</option>
-                <option value='Data Structures'>Data Structures</option>
-                <option value='GIT/Github'>GIT/Github</option>
-                <option value='Algorithms'>Algorithms</option>
-                <option value='AJAX'>AJAX</option>
-                <option value='React'>React</option>
-                <option value='Redux'>Redux</option>
-                <option value='HTML/CSS'>HTML/CSS</option>
-                <option value='Node'>Node</option>
-                <option value='Express'>Express</option>
-                <option value='Databases'>Databases</option>
-                <option value='Authentication'>Authentication</option>
-                <option value='Other'>Other</option>
-              </Form.Control>
+          <Form.Control value={topic} className="topic-selector" required as='select' onChange={chooseTopic}>
+            <option value='select' disabled>select topic...</option>
+            <option value='Javascript' >Javascript</option>
+            <option value='Data Structures'>Data Structures</option>
+            <option value='GIT/Github'>GIT/Github</option>
+            <option value='Algorithms'>Algorithms</option>
+            <option value='AJAX'>AJAX</option>
+            <option value='React'>React</option>
+            <option value='Redux'>Redux</option>
+            <option value='HTML/CSS'>HTML/CSS</option>
+            <option value='Node'>Node</option>
+            <option value='Express'>Express</option>
+            <option value='Databases'>Databases</option>
+            <option value='Authentication'>Authentication</option>
+            <option value='Other'>Other</option>
+          </Form.Control>
         </div>
         <hr/>
         <div className="flex-container post-button">
