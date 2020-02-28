@@ -12,7 +12,7 @@
 import * as types from "../constants/actionTypes";
 
 const roomState = {
-  activeRoom: { id: null, name: "Choose a room", admin: null },
+  activeRoom: { id: null, name: "Choose a room", admin: null, users: [] },
   rooms: [],
   newRoom: "",
   joinRoomName: ""

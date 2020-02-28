@@ -54,25 +54,35 @@ roomsController.getRooms = (req, res, next) => {
     });
 };
 
-roomsController.getActiveRoom = (req, res, next) => {
+roomsController.getActiveRoom = async (req, res, next) => {
   const { userId } = req.params;
   const getActiveRoom = {
     text:
       "SELECT rooms._id as id, rooms.name, rooms.admin_id as admin FROM users INNER JOIN rooms ON users.active_room = rooms._id WHERE users._id = $1",
     values: [userId]
   };
-  db.query(getActiveRoom)
-    .then(activeRoom => {
-      res.locals.activeRoom = activeRoom.rows[0];
-      return next();
-    })
-    .catch(err => {
-      return next({
-        log: "Error occured in roomsController.getActiveRoom",
-        status: 400,
-        message: { err: err }
-      });
+  try {
+    await db.query(getActiveRoom)
+      .then(activeRoom => {
+        res.locals.activeRoom = activeRoom.rows[0];
+      })
+    const getActiveRoomUsers = {
+      text: "SELECT DISTINCT rooms_users.user_id AS id, rooms_users.banned AS banned, users.name AS name FROM rooms_users LEFT OUTER JOIN users ON rooms_users.user_id = users._id WHERE rooms_users.room_id = $1",
+      values: [res.locals.activeRoom.id]
+    }
+    await db.query(getActiveRoomUsers)
+      .then(activeRoomUsers => {
+        res.locals.activeRoom.users = activeRoomUsers.rows;
+        return next();
+      })
+  }
+  catch (err) {
+    return next({
+      log: "Error occured in roomsController.getActiveRoom",
+      status: 400,
+      message: { err: err }
     });
+  };
 };
 
 roomsController.updateActiveRoom = (req, res, next) => {
@@ -120,4 +130,42 @@ roomsController.joinRoom = async (req, res, next) => {
     });
   }
 };
+
+roomsController.adminControl = (req, res, next) => {
+  console.log('req.body:', req.body);
+  const { userId, roomId, banStatus } = req.body;
+  const userBanStatus = {
+    text: "UPDATE rooms_users SET banned=$1 WHERE user_id=$2 AND room_id=$3",
+    values: [banStatus, userId, roomId]
+  }
+  const changeActiveRoom = {
+    text: "UPDATE users SET active_room=0 WHERE user_id=$1 AND active_room=$2",
+    values: [userId, roomId]
+  }
+  db.query(userBanStatus)
+    .then(something => {
+      console.log('userBanStatus success');
+    })
+    .catch(err => {
+      return next({
+        log: "Error occured in roomsController.adminControl updating rooms_users",
+        status: 400,
+        message: { err: err }
+      })
+    });
+  db.query(changeActiveRoom)
+    .then(something => {
+      console.log('changeActiveRoom success');
+    })
+    .catch(err => {
+      return next({
+        log: "Error occured in roomsController.adminControl updating users",
+        status: 400,
+        message: { err: err }
+      })
+    });
+  req.params.userId = userId;
+  return next();
+}
+
 module.exports = roomsController;

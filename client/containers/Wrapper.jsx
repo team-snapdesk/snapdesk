@@ -73,6 +73,7 @@ class Wrapper extends Component {
               ticketsCount={this.props.ticketsCount}
               activeRoom={this.props.activeRoom}
               userId={this.props.userId}
+              banUser={this.props.banUser}
             />
           </div>
         </div>
