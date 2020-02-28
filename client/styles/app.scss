@@ -36,6 +36,10 @@ body {
   }
 }
 
+.delete:hover {
+  color: red !important;
+}
+
 textarea:focus::placeholder {
   color: transparent !important;
 }

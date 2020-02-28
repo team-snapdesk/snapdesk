@@ -2,14 +2,41 @@
 
 .ticket-box {
   margin: 1em;
-  padding: 1em 1em 1em 1em;
+  padding: .5em 1em;
   background-color: white;
   border: $border;
   box-sizing: border-box;
   border-radius: .2em;
-  box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
-  .snap-buttons {
-    margin-top: .5em;
+  // box-shadow: 0 1px 6px 0 rgba(66, 255, 193, 0.3);
+  p {
+    margin: 0px;
+  }
+  .name-timestamp-container {
+    justify-content: space-between;
+    align-items: center;
+  }
+  .request {
+    width: 100%;
+    // min-height: 5em;
+    // border: $border;
+    border-radius: .25em;
+    background-color: $tertiary;
+    padding: .5em;
+    .fade {
+      opacity: .5;
+      font-style: italic;
+      font-size: .75em;
+    }
+  }
+  .snaps-topic-container {
+    padding-right: .5em;
+  }
+  .topic {
+    border-radius: .25em;
+    background-color: $primary;
+    color: $secondary;
+    padding: 0 1em;
+    box-shadow: 0 1px 6px 0 rgba(66, 255, 193, 0.3);
   }
   .post-button {
     justify-content: end;
@@ -17,8 +44,5 @@
   hr {
     margin-top: .5em;
     margin-bottom: .5em;
-  }
-  p {
-    margin: 0px;
   }
 }
