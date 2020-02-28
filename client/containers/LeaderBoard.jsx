@@ -65,9 +65,9 @@ class LeaderBoard extends Component {
                 <Table striped bordered hover variant="dark">
                     <thead>
                     <tr>
-                        <th>Ranking</th>
-                        <th>Mentor</th>
-                        <th>Total Snaps</th>
+                        <th style={{ textAlign: 'center' }}>Ranking</th>
+                        <th style={{ textAlign: 'center' }}>Mentor</th>
+                        <th style={{ textAlign: 'center' }}>Total Snaps</th>
                     </tr>
                     </thead>
                     <tbody>
