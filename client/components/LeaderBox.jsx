@@ -7,9 +7,9 @@ const LeaderBox = ({
     ranking
 }) => (
     <tr>
-        <td>{ranking}</td>
-        <td>{username}</td>
-        <td>{totalSnaps}</td>
+        <td style={{ textAlign: 'center' }}>{ranking}</td>
+        <td style={{ textAlign: 'center' }}>{username}</td>
+        <td style={{ textAlign: 'center' }}>{totalSnaps}</td>
     </tr>
 );
 
