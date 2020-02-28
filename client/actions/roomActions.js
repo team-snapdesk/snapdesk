@@ -108,3 +108,26 @@ export const updateJoinRoomName = input => dispatch => {
     payload: input
   });
 };
+
+export const banUser = (userId, roomId, status) => dispatch => {
+  status === "ban" ? status = true : status = false;
+  axios
+    .put("/api/rooms/admin", {
+      userId: userId,
+      roomId: roomId,
+      banStatus: status
+    }).then(({ data }) => {
+      if (!data.isLoggedIn) {
+        dispatch({
+          type: types.USER_LOGOUT,
+          payload: data
+        });
+      } else {
+        dispatch({
+          type: types.UPDATE_ACTIVEROOM,
+          payload: data
+        })
+      }
+    })
+
+}

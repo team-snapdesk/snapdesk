@@ -57,6 +57,15 @@ apiRouter.get(
   }
 );
 
+apiRouter.put("/rooms/admin",
+  jwtsController.isLoggedIn,
+  roomsController.adminControl,
+  roomsController.getActiveRoom,
+  (req, res) => {
+    console.log(res.locals)
+    res.status(200).json(res.locals)
+  })
+
 apiRouter.put(
   "/rooms/:userId",
   jwtsController.isLoggedIn,
@@ -69,11 +78,12 @@ apiRouter.put(
 
 apiRouter.post(
   "/rooms/joinRoom",
-  // jwtsController.isLoggedIn,
+  jwtsController.isLoggedIn,
   roomsController.joinRoom,
   roomsController.updateActiveRoom,
   roomsController.getActiveRoom,
   roomsController.getRooms,
   (req, res) => res.status(200).json(res.locals)
 );
+
 module.exports = apiRouter;
