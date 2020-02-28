@@ -39,7 +39,7 @@ class TicketStream extends Component {
 
   componentDidMount() {
     this.props.getTickets();
-    // this.interval = setInterval(() => this.props.getTickets(), 5000);
+    this.interval = setInterval(() => this.props.getTickets(), 5000);
   }
 
   componentDidUpdate() {
@@ -50,7 +50,7 @@ class TicketStream extends Component {
   }
 
   componentWillUnmount() {
-    // clearInterval(this.interval);
+    clearInterval(this.interval);
   }
 
   scrollToBottom() {
