@@ -8,7 +8,7 @@
   min-height: 100%;
   display: grid;
   grid-template-columns: [main] minmax(450px, 850px);
-  grid-template-rows: [feed] minmax(450px, 1fr) [creator] 250px;
+  grid-template-rows: [feed] minmax(450px, 1fr) [creator] 230px;
   align-items: end;
   justify-content: center;
 }
