@@ -22,11 +22,7 @@ class MenteeTicketBox extends Component {
   render() {
     const {
       deleteTicket,
-      resolveTicket,
       toggleModal,
-      updateFeedback,
-      updateFinalRating,
-      userId,
       userName,
       ticket: { 
         messageInput,
@@ -46,7 +42,7 @@ class MenteeTicketBox extends Component {
     if (status === 'active') {
       buttons = (
         <span>
-          <Button disabled={true} type="button" className="btn btn-secondary">Resolve</Button>
+          {/* <Button disabled={true} type="button" className="btn btn-secondary">Resolve</Button> */}
           <Button onClick={() => deleteTicket(messageId)} type="button" className="btn btn-success">Delete</Button>
         </span>
       )
@@ -54,18 +50,17 @@ class MenteeTicketBox extends Component {
       buttons = (
         <span>
           <Button onClick={() => toggleModal({ messageRating, messageInput, messageId })} type="button" className="btn btn-secondary">Resolve</Button>
-          <Button disabled={true} type="button" className="btn btn-success">Delete</Button>
+          {/* <Button disabled={true} type="button" className="btn btn-success">Delete</Button> */}
         </span>
       )
     }
 
     return (
-      <div className="MenteeTicketBox ticketbox">
+      <div className="ticket-box">
         <p>Topic: {topic}</p>
         <p>Request: {messageInput}</p>
         <p>user: {userName}</p>
         <p>Expected Snaps: {messageRating}</p>
-
         {buttons}
       </div>
     )

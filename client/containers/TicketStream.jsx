@@ -53,7 +53,9 @@ class TicketStream extends Component {
   }
 
   scrollToBottom() {
-    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    this.messagesEnd.scrollIntoView({ 
+      behavior: 'smooth', 
+    });
   }
 
   render() {
@@ -101,8 +103,9 @@ class TicketStream extends Component {
             {/* map buildFeed to tickets array */}
             {/* <BystanderTicketBox /> */}
             {activeTickets}
-            <div style={{ float:"left", clear: "both" }} ref={(el) => { this.messagesEnd = el; }}>
+            
             </div>
+            <div style={{ float:"left", clear: "both" }} ref={(el) => { this.messagesEnd = el; }}>
           </div>
         </div>
       </div>

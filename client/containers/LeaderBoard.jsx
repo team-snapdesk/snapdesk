@@ -30,17 +30,18 @@ class LeaderBoard extends Component {
     }
 
     componentDidMount() {
-        this.interval = setInterval(() => this.setState(this.props.getLeaderBoard()),10000);//changed to try to get the leaderboard to refresh after a few seconds
+      this.props.getLeaderBoard();
+        // this.interval = setInterval(() => this.setState(this.props.getLeaderBoard()),10000);//changed to try to get the leaderboard to refresh after a few seconds
     }
 
     //this whole component was added to try to get the leaderboard to refresh after a few seconds
     componentWillUnmount(){
-      clearInterval(this.interval);
+      // clearInterval(this.interval);
     }
 
     render() {
         let leaderList; 
-//this.props.leaderboard = [{leader 1},{leader 2},.....]
+
         if (!this.props.leaderList || this.props.leaderList.length === 0) {
             leaderList = <p>No current Rankings</p>;
         } else {
