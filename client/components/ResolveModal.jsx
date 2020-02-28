@@ -31,7 +31,7 @@ const ResolveModal = ({
   
   return (
     <Modal show={show} onHide={toggleModal} >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton onClick={toggleModal} >
         <Modal.Title>Resolving</Modal.Title>
       </Modal.Header>
       <Modal.Body>

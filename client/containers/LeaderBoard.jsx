@@ -42,7 +42,7 @@ class LeaderBoard extends Component {
         let leaderList; 
 //this.props.leaderboard = [{leader 1},{leader 2},.....]
         if (!this.props.leaderList || this.props.leaderList.length === 0) {
-            leaderList = <p>No current Rankings </p>;
+            leaderList = <p>No current Rankings</p>;
         } else {
             leaderList = [];
             for (let i = 0; i < this.props.leaderList.length; i++) {

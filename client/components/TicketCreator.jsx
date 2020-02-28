@@ -65,9 +65,11 @@ const TicketCreator = ({
           onChange={updateMessage}
           placeholder="What do you need help with?"
         />
-        <div className="flex-container snap-buttons">
-          {snapButtons}
-          <Form.Control required as='select' onChange={chooseTopic}>
+        <div className="flex-container snaps-topic-container">
+          <div className="flex-container snap-buttons">
+            {snapButtons}
+          </div>
+          <Form.Control className="topic-selector" required as='select' onChange={chooseTopic}>
                 <option value='Javascript' >Javascript</option>
                 <option value='Data Structures'>Data Structures</option>
                 <option value='GIT/Github'>GIT/Github</option>
@@ -87,7 +89,7 @@ const TicketCreator = ({
         <div className="flex-container post-button">
           <Button variant="link" className="button-subtle" type="submit">
             {/* Icon by Bytesize https://github.com/danklammer/bytesize-icons */}
-            <svg id="i-send" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="2o" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+            <svg id="i-send" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentcolor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
               <path d="M2 16 L30 2 16 30 12 20 Z M30 2 L12 20" />
             </svg>
             <span>Post</span>

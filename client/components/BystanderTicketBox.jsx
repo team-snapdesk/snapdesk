@@ -11,12 +11,15 @@
 
 import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
-let buttons;
+
+
+
 class BystanderTicketBox extends Component {
   constructor(props) {
     super(props);
   }
   render() {
+    let buttons;
     const {
       acceptTicket,
       cancelAccept,
