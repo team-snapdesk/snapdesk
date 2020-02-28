@@ -89,7 +89,7 @@ const TicketCreator = ({
           </Form.Control>
         </div>
         <hr/>
-        <div className="flex-container post-button">
+        <div className="flex-container button-generic">
           <Button variant="link" className="button-subtle" type="submit">
             {/* Icon by Bytesize https://github.com/danklammer/bytesize-icons */}
             <svg id="i-send" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentcolor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">

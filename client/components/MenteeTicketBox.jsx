@@ -42,7 +42,7 @@ class MenteeTicketBox extends Component {
     let buttons;
     if (status === 'active') {
       buttons = (
-        <div className="flex-container post-button">
+        <div className="flex-container button-generic">
           <Button variant="link" className="button-subtle delete" onClick={() => deleteTicket(messageId)} type="button">
             {/* Icon by Bytesize https://github.com/danklammer/bytesize-icons */}
             <svg id="i-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -54,7 +54,7 @@ class MenteeTicketBox extends Component {
       )
     } else {
       buttons = (
-        <div className="flex-container post-button">
+        <div className="flex-container button-generic">
           <Button variant="link" className="button-subtle" onClick={() => toggleModal({ messageRating, messageInput, messageId })} type="button">
             {/* Icon by Bytesize https://github.com/danklammer/bytesize-icons */}
             <svg id="i-checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="20" height="20" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">

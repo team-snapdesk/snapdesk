@@ -6,7 +6,9 @@
   background-color: white;
   border: $border;
   box-sizing: border-box;
-  border-radius: .2em;
+  border-radius: .5em;
+  min-width: 500px;
+  flex-shrink: 0;
   // box-shadow: 0 1px 6px 0 rgba(66, 255, 193, 0.3);
   p {
     margin: 0px;
@@ -33,7 +35,7 @@
   }
   .topic {
     border-radius: .25em;
-    background-color: $primary;
+    background-color: rgba(66, 255, 193, 0.3);
     color: $secondary;
     padding: 0 1em;
     box-shadow: 0 1px 6px 0 rgba(66, 255, 193, 0.3);
@@ -47,6 +49,22 @@
   }
 }
 
-.mentee {
-  
+@media screen and (min-width: 421px) and (max-width: 1024px) {
+  .ticket-box {
+    min-width: 400px !important;
+  }
 }
+@media screen and (max-width: 520px) {
+  .ticket-box {
+    font-size: 2em;
+  }
+}
+
+.bystander {
+  align-self: flex-start;
+}
+
+.mentee {
+  align-self: flex-end;
+}
+
