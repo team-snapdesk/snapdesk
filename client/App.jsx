@@ -28,6 +28,7 @@ class App extends Component {
 
   render() {
     // conditional rendering of login button
+    // if user isn't logged in, send them back to the login page
     const { isLoggedIn } = this.props;
     if (!isLoggedIn) {
       return (
@@ -45,9 +46,8 @@ class App extends Component {
         </div>
       );
     }
-
+    // else load the main wrapper for redux app
     return (
-      
       <div id="mainBackground">
         <Wrapper />
       </div>
