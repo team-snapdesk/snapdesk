@@ -30,7 +30,6 @@ class Profile extends Component {
     super(props);
   }
 
-  
   render () {
     //HARD CODED FEEDBACKS FOR NOW
     //need to be fetched from database
@@ -65,6 +64,16 @@ class Profile extends Component {
         </div>
       );
     })
+
+    const snapsReceived = (
+      //some logic to get total of snaps received
+      12
+    )
+
+    const snapsGiven = (
+      //some logic to get total of snaps given
+      10
+    )
     
     return (
       <section className="profileSection">
@@ -79,7 +88,7 @@ class Profile extends Component {
             alt="Snap Desk Logo">
           </img>
           <Media.Body>
-            <h6 className="mediaBody">{this.props.userName}HardCoded</h6>
+            <h6 className="mediaBody">{this.props.userName}</h6>
             <p className="mediaBody">
               {this.props.userBio}Sample bio that should be from github
             </p>
@@ -100,10 +109,10 @@ class Profile extends Component {
           {/* display snaps received + snaps given by the user 
             HARD CODED FOR NOW*/}
             <span>
-              <h6>Snaps Received:</h6> {7}
+              <h6>Snaps Received:</h6> {snapsReceived}
             </span>
             <span>
-              <h6>Snaps Given:</h6> {10}
+              <h6>Snaps Given:</h6> {snapsGiven}
             </span>
         </div>
 
@@ -113,7 +122,7 @@ class Profile extends Component {
           {feedbacks}
         </div>
 
-        <button className="btn btnBack" onClick={() => this.props.updatePage('main')}>Back</button>
+        <button className="btn btnProfileBack" onClick={() => this.props.updatePage('main')}>Back</button>
       </section>
     )
   }

@@ -1,6 +1,4 @@
-html {
-  background-color: #eeeeee;
-}
+
 
 .primaryColor {
   color: #42ffc1;
@@ -21,85 +19,6 @@ html {
   color: #343a40;
 }
 
-#landing {
-  background-color: #eeeeee;
-}
-#login-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
 
-#logo {
-  margin-top: 200px;
-  margin-bottom: 80px;
-}
 
-.btn-outline-primary {
-  color: #6c757d !important;
-  background-color: transparent !important;
-  background-image: none !important;
-  border-color: #6c757d !important;
-}
-.btn-outline-primary:hover {
-  /* color: #42ffc1 !important; */
-  color: #6c757d !important;
-  background-color: #3beeb2 !important;
-  background-image: none !important;
-  border-color: #3beeb2 !important;
-}
-.btn-secondary {
-  color: #f5f7f6 !important;
-  background-color: #3beeb2 !important;
-  background-image: none !important;
-  border-color: #3beeb2 !important;
-}
-.btn-secondary:hover {
-  /* color: #42ffc1 !important; */
-  color: #3beeb2 !important;
-  background-color: #6c757d !important;
-  background-image: none !important;
-  border-color: #6c757d !important;
-}
-.btn-success {
-  color: #f5f7f6 !important;
-  background-color: #6c757d !important;
-  background-image: none !important;
-  border-color: #6c757d !important;
-}
-.btn-success:hover {
-  /* color: #42ffc1 !important; */
-  color: #f5f7f6 !important;
-  background-color: #3beeb2 !important;
-  background-image: none !important;
-  border-color: #3beeb2 !important;
-}
-#mainBackground {
-  background-color: #eeeeee;
-}
-#user-Name {
-  color: #6c757d;
-}
-.btn-outline-primary:focus {
-  box-shadow: none !important;
-}
 
-.ticketDisplay {
-  max-height: 700px;
-  min-height: 700px;
-}
-
-.userNameWrap{
-  word-wrap:break-word;
-}
-.leftNavMargin{
-  margin-left: 3px;
-  margin-bottom:auto;
- 
-}
-
-.ticketbox {
-  border: 2px solid white;
-  border-radius: 5px;
-}

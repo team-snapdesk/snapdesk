@@ -1,8 +1,100 @@
 $primaryColor: #42ffc1;
 $highlightedColor: #34cc9a;
-$grey: #eee;
+$grey: #eeeeee;
 $dark: #6c757d;
 $darkest: #343a40;
+
+html {
+  background-color: $grey;
+}
+
+// #landing {
+//   background-color: #eeeeee;
+// }
+
+//login page
+#login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#logo {
+  margin-top: 200px;
+  margin-bottom: 80px;
+}
+
+//buttons
+.btn-outline-primary {
+  color: #6c757d;
+  background-color: transparent !important;
+  background-image: none !important;
+  border-color: #6c757d !important;
+
+  &:hover {
+    color: #6c757d !important;
+    background-color: #3beeb2 !important;
+    background-image: none !important;
+    border-color: #3beeb2 !important;
+  }
+}
+
+.btn-secondary {
+  color: #f5f7f6 !important;
+  background-color: #3beeb2 !important;
+  background-image: none !important;
+  border-color: #3beeb2 !important;
+
+  &:hover {
+    color: #3beeb2 !important;
+    background-color: #6c757d !important;
+    background-image: none !important;
+    border-color: #6c757d !important;
+  }
+}
+
+.btn-success {
+  color: #f5f7f6 !important;
+  background-color: #6c757d !important;
+  background-image: none !important;
+  border-color: #6c757d !important;
+}
+.btn-success:hover {
+  /* color: #42ffc1 !important; */
+  color: #f5f7f6 !important;
+  background-color: #3beeb2 !important;
+  background-image: none !important;
+  border-color: #3beeb2 !important;
+}
+#mainBackground {
+  background-color: #eeeeee;
+}
+#user-Name {
+  color: #6c757d;
+}
+.btn-outline-primary:focus {
+  box-shadow: none !important;
+}
+
+.ticketDisplay {
+  max-height: 700px;
+  min-height: 700px;
+}
+
+.userNameWrap{
+  word-wrap:break-word;
+}
+.leftNavMargin{
+  margin-left: 3px;
+  margin-bottom:auto;
+ 
+}
+
+.ticketbox {
+  border: 2px solid white;
+  border-radius: 5px;
+}
 
 //for profile page
 .profileSection {
@@ -18,7 +110,7 @@ $darkest: #343a40;
     display: block;
   }
 
-  button {
+  .btnProfileBack {
     margin: 1em;
     color: $grey;
     background-color: $highlightedColor;
