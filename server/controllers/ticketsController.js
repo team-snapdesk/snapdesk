@@ -17,6 +17,8 @@ ticketsController.getActiveTickets = (req, res, next) => {
   const getActiveTickets = `
     SELECT t._id, t.snaps_given, t.message, t.status, t.timestamp, t.mentee_id, t.mentor_id, u2.name as mentee_name, t.topic
     FROM tickets t
+    FULL OUTER JOIN users u
+    ON u._id = t.mentor_id
     INNER JOIN users u2
     ON u2._id = t.mentee_id
     WHERE t.status = 'active' OR status = 'pending'
