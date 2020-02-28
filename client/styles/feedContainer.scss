@@ -8,13 +8,14 @@
   min-height: 100%;
   display: grid;
   grid-template-columns: [main] minmax(450px, 850px);
-  grid-template-rows: [feed] minmax(450px, 1fr) [creator] 300px;
+  grid-template-rows: [feed] minmax(450px, 1fr) [creator] 250px;
   align-items: end;
   justify-content: center;
 }
 
 .content-wrapper {
   height: 100%;
+  width: 100%;
   grid-row-start: feed;
   grid-row-end: creator;
   overflow: auto;

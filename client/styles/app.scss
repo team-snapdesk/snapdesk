@@ -4,6 +4,7 @@
 @import 'feedContainer';
 @import 'navbar';
 @import 'ticketCreator';
+@import 'ticketBoxes';
 
 
 body {
@@ -33,6 +34,10 @@ body {
     padding-left: .3em;
     font-size: 1em;
   }
+}
+
+.delete:hover {
+  color: red !important;
 }
 
 textarea:focus::placeholder {
