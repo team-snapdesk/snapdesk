@@ -1,0 +1,47 @@
+.ticket-creator-container {
+  grid-row-start: creator;
+  max-height: 100%;
+  width: 100%;
+  hr {
+    margin-top: .5em;
+    margin-bottom: .5em;
+  }
+  .ticket-creator-display {
+    margin-bottom: 1em;
+    padding: 1em 1em .5em 1em;
+    background-color: $tertiary;
+    border: $border;
+    box-sizing: border-box;
+    border-radius: .2em;
+    .snap-buttons {
+      margin-top: .5em;
+    }
+  }
+}
+
+.button-generic {
+  justify-content: end;
+}
+
+.snaps-topic-container {
+  margin-top: .5em;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.snap-rating {
+  :hover {
+    cursor: pointer;
+  }
+  stroke-width: .2em;
+}
+
+.fill {
+  fill: $secondary;
+  stroke: $secondary;
+}
+
+.empty{
+  fill: $tertiary;
+  stroke: $secondary;
+}

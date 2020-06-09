@@ -9,15 +9,23 @@
  * ************************************
  */
 
-// add action type constants i.e.:
-export const POST_TICKET = 'POST_TICKET';
-export const ACCEPT_TICKET = 'ACCEPT_TICKET';
+ // app actions
 export const GET_TICKETS = 'GET_TICKETS';
-export const DELETE_TICKET = 'DELETE_TICKET';
-export const RESOLVE_TICKET = 'RESOLVE_TICKET';
-export const CANCEL_ACCEPT = 'CANCEL_ACCEPT';
 export const UPDATE_MESSAGE = 'UPDATE_MESSAGE';
 export const UPDATE_RATING = 'UPDATE_RATING';
+// mentee ticket actions
+export const POST_TICKET = 'POST_TICKET';
+export const CHOOSE_TOPIC = 'CHOOSE_TOPIC';
+export const DELETE_TICKET = 'DELETE_TICKET';
+export const RESOLVE_TICKET = 'RESOLVE_TICKET';
+export const TOGGLE_MODAL = 'TOGGLE_MODAL';
+export const UPDATE_FEEDBACK = 'UPDATE_FEEDBACK';
+export const UPDATE_FINAL_RATING = 'UPDATE_FINAL_RATING';
+// bystander ticket actions
+export const ACCEPT_TICKET = 'ACCEPT_TICKET';
+export const CANCEL_ACCEPT = 'CANCEL_ACCEPT';
+// user actinos
 export const USER_LOGIN = 'USER_LOGIN';
 export const LOAD_USER = 'LOAD_USER';
 export const USER_LOGOUT = 'USER_LOGOUT';
+export const LEADER_BY_TOPIC = 'LEADER_BY_TOPIC';

@@ -1,0 +1,72 @@
+// import all scss files here
+@import 'variables';
+@import 'login';
+@import 'feedContainer';
+@import 'navbar';
+@import 'ticketCreator';
+@import 'ticketBoxes';
+
+
+body {
+  background-color: white !important;
+  font-family: 'Roboto', sans-serif;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.row {
+  max-height: 100vh;
+  min-height: 100vh;
+  margin: 0!important;
+  flex-wrap: nowrap!important;
+}
+
+.button-subtle {
+  color: $secondary !important;
+  padding: 0 !important;
+  &:hover {
+    text-decoration: none !important;
+    color: $primary !important;
+  }
+  span {
+    padding-left: .3em;
+    font-size: 1em;
+  }
+}
+
+.delete:hover {
+  color: red !important;
+}
+
+textarea:focus::placeholder {
+  color: transparent !important;
+}
+
+textarea {
+  border: $border !important;
+  resize: none !important;
+  display: block;
+  color: $font;
+  width: 100%;
+  padding: .5em;
+  &:focus {
+    box-shadow: none !important;
+    border: $border !important;
+  }
+}
+
+textarea::placeholder {
+  color: $secondary !important;
+  opacity: .5 !important;
+}
+
+.topic-selector {
+  width: auto !important;
+  height: 2.2em !important;
+  &:focus {
+    border-color: $primary !important;
+    box-shadow: 0 0 0 0.2rem rgba(66, 255, 193, 0.25) !important;
+  }
+}

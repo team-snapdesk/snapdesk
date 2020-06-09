@@ -13,18 +13,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/ticketActions';
-import MenteeTicketBox from '../components/MenteeTicketBox';
-import BystanderTicketBox from '../components/BystanderTicketBox';
+
+// import components
+// import MenteeTicketBox from '../components/MenteeTicketBox';
+// import BystanderTicketBox from '../components/BystanderTicketBox';
 import TicketCreator from '../components/TicketCreator';
-// import { render } from 'node-sass';
+import ResolveModal from '../components/ResolveModal';
+import TicketStream from './TicketStream';
+
 
 const mapStateToProps = state => ({
-  userId: state.user.userId,
   messageInput: state.tickets.messageInput,
   messageRating: state.tickets.messageRating,
-  activeTickets: state.tickets.activeTickets,
   messageRating: state.tickets.messageRating,
   ticketsCount: state.tickets.ticketsCount,
+  resolveModal: state.tickets.resolveModal,
+  topic: state.tickets.topic
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
@@ -34,82 +38,33 @@ class FeedContainer extends Component {
     super(props);
   }
 
-  componentWillMount() {
-    this.props.getTickets();
-  }
-
-  componentDidMount() {
-    this.interval = setInterval(() => this.props.getTickets(), 5000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-    document.title = 'SnapDesk';
-  }
-
   componentDidUpdate() {
     document.title = '(' + this.props.ticketsCount + ') ' + 'SnapDesk';
   }
 
+  componentWillUnmount() {
+    document.title = 'SnapDesk';
+  }
+
   render() {
-    // if there are no active tickets, display a message in the background saying nothing here
-    // do not render it when a ticket is added
-
-    // build activeTickets list
-    // later add conditionals to check which box should be rendered based on the posterId vs logged in user
-    let activeTickets;
-    // console.log('ACTIVE TICKETS: ', this.props.activeTickets);
-    if (!this.props.activeTickets || this.props.activeTickets.length === 0) {
-      activeTickets = <p>No active tickets</p>;
-    } else {
-      activeTickets = [];
-      for (let i = 0; i < this.props.activeTickets.length; i++) {
-        let ticketBox;
-        if (this.props.userId !== this.props.activeTickets[i].menteeId) {
-          //ticket should render bystanderticketbox
-          ticketBox = (
-            <BystanderTicketBox 
-            cancelAccept={this.props.cancelAccept}
-            acceptTicket={this.props.acceptTicket}
-            messageInput={this.props.activeTickets[i].messageInput}
-            messageRating={this.props.activeTickets[i].messageRating}
-            ticket={this.props.activeTickets[i]}
-            key={this.props.activeTickets[i].messageId}
-            />
-            )
-          } else {
-            ticketBox = (
-              <MenteeTicketBox
-              deleteTicket={this.props.deleteTicket}
-              resolveTicket={this.props.resolveTicket}
-              messageInput={this.props.activeTickets[i].messageInput}
-              messageRating={this.props.activeTickets[i].messageRating}
-              ticket={this.props.activeTickets[i]}
-              key={this.props.activeTickets[i].messageId}
-              />
-              )
-          }
-          
-          activeTickets.push(ticketBox);
-        }
-      }
-
     return (
-      <div>
-        <div className="ticketDisplay overflow-auto">
-          {/* map buildFeed to tickets array */}
-          {/* <BystanderTicketBox /> */}
-          {activeTickets}
-        </div>
-        <div className="ticketCreator">
-          <TicketCreator {...this.props} key={this.props.userId} />
+      <div className="feed-container">
+        <ResolveModal 
+          resolveTicket={this.props.resolveTicket}
+          toggleModal={this.props.toggleModal}
+          updateFeedback={this.props.updateFeedback}
+          updateFinalRating={this.props.updateFinalRating}
+          resolveModal={this.props.resolveModal}
+        />
+        <div className="feed-grid">
+          <TicketStream />
+          <div className="ticket-creator-container">
+            <TicketCreator {...this.props} key={this.props.userId} />
+          </div>
         </div>
       </div>
     );
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FeedContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(FeedContainer);

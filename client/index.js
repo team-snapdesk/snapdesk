@@ -14,7 +14,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './App.jsx';
 import store from './store';
-import styles from './styles/app.css';
+import './styles/app.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 render(

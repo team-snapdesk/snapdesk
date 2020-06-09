@@ -18,9 +18,14 @@ import RightNav from '../components/RightNav';
 import FeedContainer from './FeedContainer';
 import { bindActionCreators } from 'redux';
 
+// import bootstrap components
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
 const mapStateToProps = state => ({
-  totalSnaps: state.tickets.totalSnaps,
-  leaderBoard: state.tickets.leaderBoard,
+  // totalSnaps: state.tickets.totalSnaps,
+  // leaderBoard: state.tickets.leaderBoard,
   ticketsCount: state.tickets.ticketsCount,
   userAvatar: state.user.userAvatar,
   userName:state.user.userName,
@@ -40,17 +45,17 @@ class Wrapper extends Component {
   render() {
     return(
       <div className="wrapper">
-        <div className="row align-items-start">
-          <div className="col-2">
+        <Row>
+          <Col className="side-nav">
             <LeftNav url={this.props.userAvatar} userName={this.props.userName} />
-          </div>
-          <div className="col-8">
-            <FeedContainer />
-          </div>
-          <div className="col-2">
+          </Col>
+          <Col>
+            <FeedContainer userName={this.props.userName}/>
+          </Col>
+          <Col className="side-nav">
             <RightNav ticketsCount={this.props.ticketsCount} />
-          </div>
-        </div>
+          </Col>
+        </Row>
       </div>
     )
   }
